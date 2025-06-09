@@ -1,0 +1,48 @@
+# Makefile for Amelia's Kernel Module
+# Author: Amelia Enora Marceline Chavez Barroso
+
+obj-m += kernel_module.o
+
+# Kernel build directory
+KDIR := /lib/modules/$(shell uname -r)/build
+
+# Default target
+all:
+	$(MAKE) -C $(KDIR) M=$(PWD) modules
+
+# Clean target
+clean:
+	$(MAKE) -C $(KDIR) M=$(PWD) clean
+
+# Install target (requires root)
+install: all
+	sudo insmod kernel_module.ko
+
+# Remove target (requires root)
+remove:
+	sudo rmmod kernel_module
+
+# Show module info
+info:
+	modinfo kernel_module.ko
+
+# Test target
+test: install
+	@echo "=== Testing Amelia's Kernel Module ==="
+	@echo "Reading module status..."
+	@cat /proc/amelia_module
+	@echo ""
+	@echo "Setting debug level to 2..."
+	@echo "debug=2" | sudo tee /proc/amelia_module
+	@echo ""
+	@echo "Reading updated status..."
+	@cat /proc/amelia_module
+
+# Check if module is loaded
+status:
+	@lsmod | grep kernel_module || echo "Module not loaded"
+
+# Full test cycle
+fulltest: clean all install test remove
+
+.PHONY: all clean install remove info test status fulltest 
