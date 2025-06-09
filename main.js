@@ -503,7 +503,7 @@ class CVApplication {
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 
 ╔══════════════════════════════════════════════════════════════════════════════════════╗
-║                WELCOME TO AMELIA ENORA MARCELINE'S TECHNICAL CV                     ║
+║            WELCOME TO AMELIA ENORA 🌈 MARCELINE'S TECHNICAL CV                     ║
 ╠══════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                      ║
 ║  🚀 Systems Developer & Low-Level Programming Specialist                            ║
@@ -565,14 +565,110 @@ window.addEventListener('error', (event) => {
     }
 });
 
+// Theme Toggle Functionality
+class ThemeManager {
+    constructor() {
+        this.currentTheme = localStorage.getItem('theme') || 'dark';
+        this.toggleButton = null;
+        this.themeIcon = null;
+        this.init();
+    }
+
+    init() {
+        this.applyTheme(this.currentTheme);
+        this.setupToggleButton();
+    }
+
+    setupToggleButton() {
+        this.toggleButton = document.getElementById('theme-toggle');
+        this.themeIcon = this.toggleButton?.querySelector('.theme-icon');
+        
+        if (this.toggleButton) {
+            this.toggleButton.addEventListener('click', () => {
+                this.toggleTheme();
+            });
+            
+            // Update icon based on current theme
+            this.updateIcon();
+        }
+    }
+
+    toggleTheme() {
+        const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
+        
+        // Add animation effect
+        if (this.themeIcon) {
+            this.themeIcon.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                this.themeIcon.style.transform = 'rotate(0deg)';
+            }, 300);
+        }
+    }
+
+    setTheme(theme) {
+        this.currentTheme = theme;
+        this.applyTheme(theme);
+        this.updateIcon();
+        localStorage.setItem('theme', theme);
+        
+        // Dispatch custom event for other components
+        window.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme } 
+        }));
+    }
+
+    applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        
+        // Update meta theme-color for mobile browsers
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        if (metaThemeColor) {
+            const color = theme === 'dark' ? '#0d1117' : '#ffffff';
+            metaThemeColor.setAttribute('content', color);
+        } else {
+            // Create meta theme-color if it doesn't exist
+            const meta = document.createElement('meta');
+            meta.name = 'theme-color';
+            meta.content = theme === 'dark' ? '#0d1117' : '#ffffff';
+            document.head.appendChild(meta);
+        }
+    }
+
+    updateIcon() {
+        if (this.themeIcon) {
+            this.themeIcon.textContent = this.currentTheme === 'dark' ? '☀️' : '🌙';
+            this.toggleButton.title = this.currentTheme === 'dark' ? 
+                'Cambiar a modo claro' : 'Cambiar a modo oscuro';
+        }
+    }
+
+    getCurrentTheme() {
+        return this.currentTheme;
+    }
+}
+
 // Initialize application when DOM is loaded
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         window.performanceMonitor = new PerformanceMonitor();
+        
+        // Initialize theme manager first
+        window.themeManager = new ThemeManager();
+        
         window.cvApp = new CVApplication();
         await window.cvApp.init();
         
+        // Add keyboard shortcut for theme toggle (Ctrl/Cmd + Shift + T)
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                window.themeManager.toggleTheme();
+            }
+        });
+        
         console.log('📊 Performance metrics:', window.performanceMonitor.getMetrics());
+        console.log('🎨 Theme system initialized:', window.themeManager.getCurrentTheme());
     } catch (error) {
         console.error('❌ Failed to initialize CV application:', error);
     }

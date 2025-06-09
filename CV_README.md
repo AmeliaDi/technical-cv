@@ -1,4 +1,4 @@
-# 🚀 CV Técnico WebAssembly - Amelia Enora Marceline Chavez Barroso
+# 🚀 CV Técnico WebAssembly - Amelia Enora 🌈 Marceline Chavez Barroso
 
 Portfolio técnico interactivo desarrollado en WebAssembly, mostrando expertise en programación de sistemas, Assembly, ciberseguridad y algoritmos de bajo nivel.
 
@@ -192,7 +192,7 @@ cv-webassembly/
 
 ---
 
-**Desarrollado con ❤️ por Amelia Enora Marceline Chavez Barroso**  
+**Desarrollado con ❤️ por Amelia Enora 🌈 Marceline Chavez Barroso**  
 *Especialista en Sistemas y Programación de Bajo Nivel*
 
 > "La programación no es solo escribir código, es resolver problemas de manera elegante y eficiente." 
