@@ -57,24 +57,79 @@
             <!-- Skills Section -->
             <section id="skills" class="section">
                 <div class="prompt">
-                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ cat skills.asm
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ cat skills.json | jq '.'
                 </div>
                 <div class="output">
-                    <div class="code-block">
-                        <span class="comment">; Habilidades Técnicas</span><br>
-                        <span class="directive">section</span> <span class="string">.data</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">languages:</span> <span class="directive">db</span> <span class="string">'C, Assembly x86/x64/ARM'</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">assemblers:</span> <span class="directive">db</span> <span class="string">'NASM, FASM, GAS'</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">systems:</span> <span class="directive">db</span> <span class="string">'Linux, Arch Linux'</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">networks:</span> <span class="directive">db</span> <span class="string">'TCP/IP, Sockets, Protocol Analysis'</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">tools:</span> <span class="directive">db</span> <span class="string">'GDB, Valgrind, Wireshark'</span><br><br>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>💻 Programming Languages</h3>
+                            <ul class="skill-list">
+                                <li><span class="skill-level expert">C/C++</span> - Systems programming, memory management</li>
+                                <li><span class="skill-level expert">Assembly</span> - x86/x64/ARM, NASM, FASM</li>
+                                <li><span class="skill-level advanced">JavaScript</span> - WebAssembly integration</li>
+                                <li><span class="skill-level advanced">Python</span> - Automation, scripting, pentesting</li>
+                                <li><span class="skill-level intermediate">Rust</span> - Systems programming</li>
+                                <li><span class="skill-level intermediate">Go</span> - Concurrent programming</li>
+                            </ul>
+                        </div>
                         
-                        <span class="directive">section</span> <span class="string">.text</span><br>
-                        <span class="label">_start:</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="instruction">mov</span> <span class="register">rax</span>, <span class="number">1</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="instruction">mov</span> <span class="register">rdi</span>, <span class="number">1</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="instruction">mov</span> <span class="register">rsi</span>, <span class="label">skills_loaded</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="instruction">syscall</span>
+                        <div class="skill-category">
+                            <h3>🐧 Linux Distributions</h3>
+                            <ul class="skill-list">
+                                <li><span class="skill-level expert">Arch Linux</span> - AUR, pacman, custom builds</li>
+                                <li><span class="skill-level expert">Debian/Ubuntu</span> - apt, systemd, server config</li>
+                                <li><span class="skill-level expert">Red Hat/CentOS</span> - yum/dnf, enterprise systems</li>
+                                <li><span class="skill-level advanced">Fedora</span> - Latest kernel features</li>
+                                <li><span class="skill-level advanced">Gentoo</span> - Source-based compilation</li>
+                                <li><span class="skill-level intermediate">Alpine Linux</span> - Container optimization</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h3>🔐 Cybersecurity</h3>
+                            <ul class="skill-list">
+                                <li><span class="skill-level expert">Penetration Testing</span> - Kali Linux, Metasploit</li>
+                                <li><span class="skill-level expert">Network Security</span> - Wireshark, Nmap, Burp Suite</li>
+                                <li><span class="skill-level advanced">Vulnerability Assessment</span> - OWASP Top 10</li>
+                                <li><span class="skill-level advanced">Cryptanalysis</span> - Hash cracking, encryption</li>
+                                <li><span class="skill-level advanced">Forensics</span> - Digital evidence analysis</li>
+                                <li><span class="skill-level intermediate">Malware Analysis</span> - Reverse engineering</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h3>🌐 Cisco CCNA</h3>
+                            <ul class="skill-list">
+                                <li><span class="skill-level expert">Routing & Switching</span> - OSPF, EIGRP, BGP</li>
+                                <li><span class="skill-level expert">Network Fundamentals</span> - OSI model, subnetting</li>
+                                <li><span class="skill-level advanced">VLANs & Trunking</span> - 802.1Q, STP</li>
+                                <li><span class="skill-level advanced">Network Security</span> - ACLs, NAT, PAT</li>
+                                <li><span class="skill-level advanced">Wireless Networks</span> - 802.11, WPA/WPA2</li>
+                                <li><span class="skill-level intermediate">Network Automation</span> - Python, REST APIs</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h3>🔧 Systems & Tools</h3>
+                            <ul class="skill-list">
+                                <li><span class="skill-level expert">Linux Kernel</span> - Module development, drivers</li>
+                                <li><span class="skill-level expert">Git/GitHub</span> - Version control, CI/CD</li>
+                                <li><span class="skill-level advanced">Docker/Kubernetes</span> - Container orchestration</li>
+                                <li><span class="skill-level advanced">Ansible/Terraform</span> - Infrastructure as Code</li>
+                                <li><span class="skill-level intermediate">LLVM/GCC</span> - Compiler toolchain</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h3>🧮 Algorithms & Math</h3>
+                            <ul class="skill-list">
+                                <li><span class="skill-level expert">Data Structures</span> - Trees, graphs, heaps</li>
+                                <li><span class="skill-level expert">Sorting Algorithms</span> - Including BogoSort! 😄</li>
+                                <li><span class="skill-level advanced">Graph Theory</span> - Pathfinding, networks</li>
+                                <li><span class="skill-level advanced">Cryptography</span> - Hash functions, encryption</li>
+                                <li><span class="skill-level intermediate">Machine Learning</span> - Neural networks</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -88,14 +143,33 @@
                     <h3>Algoritmos Implementados en WebAssembly</h3>
                     <div class="algorithm-demos">
                         <div class="demo-card">
-                            <h4>Sorting Algorithms</h4>
+                            <h4>🔥 Sorting Algorithms Showcase</h4>
                             <div class="controls">
-                                <button id="quick-sort" class="btn-demo">QuickSort</button>
-                                <button id="merge-sort" class="btn-demo">MergeSort</button>
-                                <button id="heap-sort" class="btn-demo">HeapSort</button>
+                                <select id="algorithm-selector" class="algorithm-select">
+                                    <option value="quicksort">QuickSort (O(n log n))</option>
+                                    <option value="mergesort">MergeSort (O(n log n))</option>
+                                    <option value="heapsort">HeapSort (O(n log n))</option>
+                                    <option value="radixsort">RadixSort (O(kn))</option>
+                                    <option value="countingsort">CountingSort (O(n+k))</option>
+                                    <option value="shellsort">ShellSort (O(n²))</option>
+                                    <option value="cocktailsort">CocktailSort (O(n²))</option>
+                                    <option value="gnomesort">GnomeSort (O(n²))</option>
+                                    <option value="pancakesort">PancakeSort (O(n²))</option>
+                                    <option value="bogosort">🎲 BogoSort (O(∞)) - ¡La locura!</option>
+                                </select>
+                                <div class="control-buttons">
+                                    <button id="start-btn" class="btn-demo primary">▶️ Start</button>
+                                    <button id="pause-btn" class="btn-demo">⏸️ Pause</button>
+                                    <button id="reset-btn" class="btn-demo">🔄 Reset</button>
+                                    <button id="random-btn" class="btn-demo">🎲 Random</button>
+                                </div>
+                                <div class="speed-controls">
+                                    <label>Speed: <input type="range" id="speed-control" min="1" max="100" value="50"></label>
+                                    <label>Size: <input type="range" id="size-control" min="10" max="100" value="50"></label>
+                                </div>
                             </div>
-                            <canvas id="sort-canvas" width="600" height="200"></canvas>
-                            <div id="sort-stats" class="stats"></div>
+                            <canvas id="algorithm-canvas" width="800" height="400"></canvas>
+                            <div id="algorithm-stats" class="stats"></div>
                         </div>
                         
                         <div class="demo-card">
