@@ -144,5 +144,5 @@
 
 ---
 
-**Desarrollado con ❤️ por Enoa Marceline Chavez Battoso**  
+**Desarrollado con ❤️ por Amelia Enora Marceline Chavez Barroso**  
 *Especialista en Sistemas y Programación de Bajo Nivel* 

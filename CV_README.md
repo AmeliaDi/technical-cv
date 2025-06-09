@@ -1,8 +1,8 @@
-# 🚀 CV Técnico WebAssembly - Enoa Marceline Chavez Battoso
+# 🚀 CV Técnico WebAssembly - Amelia Enora Marceline Chavez Barroso
 
 Portfolio técnico interactivo desarrollado en WebAssembly, mostrando expertise en programación de sistemas, Assembly, ciberseguridad y algoritmos de bajo nivel.
 
-## 👩‍💻 Sobre Enoa
+## 👩‍💻 Sobre Amelia
 
 **Desarrolladora de Sistemas y Low-Level Programming Specialist**
 
@@ -192,7 +192,7 @@ cv-webassembly/
 
 ---
 
-**Desarrollado con ❤️ por Enoa Marceline Chavez Battoso**  
+**Desarrollado con ❤️ por Amelia Enora Marceline Chavez Barroso**  
 *Especialista en Sistemas y Programación de Bajo Nivel*
 
 > "La programación no es solo escribir código, es resolver problemas de manera elegante y eficiente." 
