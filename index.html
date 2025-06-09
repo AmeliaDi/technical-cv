@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcy - CV Técnico | Systems & Assembly Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <header class="terminal-header">
+            <div class="terminal-buttons">
+                <span class="btn close"></span>
+                <span class="btn minimize"></span>
+                <span class="btn maximize"></span>
+            </div>
+            <div class="terminal-title">marcy@systems:~/cv$</div>
+        </header>
+        
+        <main class="terminal-content">
+            <!-- Navigation -->
+            <nav class="terminal-nav">
+                <div class="prompt">
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ ls -la
+                </div>
+                <ul class="nav-list">
+                    <li><a href="#about" class="nav-link">./about.sh</a></li>
+                    <li><a href="#skills" class="nav-link">./skills.asm</a></li>
+                    <li><a href="#algorithms" class="nav-link">./algorithms.c</a></li>
+                    <li><a href="#visualizations" class="nav-link">./math_viz.wasm</a></li>
+                    <li><a href="#projects" class="nav-link">./projects/</a></li>
+                    <li><a href="#network" class="nav-link">./network_tools.py</a></li>
+                </ul>
+            </nav>
+
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="prompt">
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ ./about.sh
+                </div>
+                <div class="output">
+                    <h1>#!/bin/bash</h1>
+                    <div class="code-block">
+                        <span class="comment"># Desarrollador de Sistemas y Assembly</span><br>
+                        <span class="variable">NAME</span>=<span class="string">"Marcy"</span><br>
+                        <span class="variable">ROLE</span>=<span class="string">"Systems Developer & Low-Level Programmer"</span><br>
+                        <span class="variable">EXPERTISE</span>=(<span class="string">"C"</span> <span class="string">"Assembly"</span> <span class="string">"WebAssembly"</span> <span class="string">"Linux"</span> <span class="string">"Networks"</span>)<br><br>
+                        
+                        <span class="function">echo</span> <span class="string">"Especializado en programación de bajo nivel,"</span><br>
+                        <span class="function">echo</span> <span class="string">"optimización de algoritmos y sistemas embebidos."</span><br>
+                        <span class="function">echo</span> <span class="string">"Experiencia en x86, x64, ARM con NASM y FASM."</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="section">
+                <div class="prompt">
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ cat skills.asm
+                </div>
+                <div class="output">
+                    <div class="code-block">
+                        <span class="comment">; Habilidades Técnicas</span><br>
+                        <span class="directive">section</span> <span class="string">.data</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">languages:</span> <span class="directive">db</span> <span class="string">'C, Assembly x86/x64/ARM'</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">assemblers:</span> <span class="directive">db</span> <span class="string">'NASM, FASM, GAS'</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">systems:</span> <span class="directive">db</span> <span class="string">'Linux, Arch Linux'</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">networks:</span> <span class="directive">db</span> <span class="string">'TCP/IP, Sockets, Protocol Analysis'</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="label">tools:</span> <span class="directive">db</span> <span class="string">'GDB, Valgrind, Wireshark'</span><br><br>
+                        
+                        <span class="directive">section</span> <span class="string">.text</span><br>
+                        <span class="label">_start:</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="instruction">mov</span> <span class="register">rax</span>, <span class="number">1</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="instruction">mov</span> <span class="register">rdi</span>, <span class="number">1</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="instruction">mov</span> <span class="register">rsi</span>, <span class="label">skills_loaded</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="instruction">syscall</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Algorithms Section -->
+            <section id="algorithms" class="section">
+                <div class="prompt">
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ gcc -O3 algorithms.c -o algorithms.wasm --target=wasm32
+                </div>
+                <div class="output">
+                    <h3>Algoritmos Implementados en WebAssembly</h3>
+                    <div class="algorithm-demos">
+                        <div class="demo-card">
+                            <h4>Sorting Algorithms</h4>
+                            <div class="controls">
+                                <button id="quick-sort" class="btn-demo">QuickSort</button>
+                                <button id="merge-sort" class="btn-demo">MergeSort</button>
+                                <button id="heap-sort" class="btn-demo">HeapSort</button>
+                            </div>
+                            <canvas id="sort-canvas" width="600" height="200"></canvas>
+                            <div id="sort-stats" class="stats"></div>
+                        </div>
+                        
+                        <div class="demo-card">
+                            <h4>Prime Number Sieve</h4>
+                            <div class="controls">
+                                <input type="number" id="sieve-input" placeholder="Número límite" value="1000">
+                                <button id="sieve-btn" class="btn-demo">Ejecutar Criba</button>
+                            </div>
+                            <canvas id="sieve-canvas" width="600" height="200"></canvas>
+                            <div id="sieve-stats" class="stats"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Math Visualizations Section -->
+            <section id="visualizations" class="section">
+                <div class="prompt">
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ ./math_viz.wasm --interactive
+                </div>
+                <div class="output">
+                    <h3>Visualizaciones Matemáticas</h3>
+                    <div class="viz-container">
+                        <div class="demo-card">
+                            <h4>Fractales de Mandelbrot</h4>
+                            <div class="controls">
+                                <label>Zoom: <input type="range" id="mandel-zoom" min="1" max="100" value="1"></label>
+                                <label>Iteraciones: <input type="range" id="mandel-iter" min="50" max="500" value="100"></label>
+                            </div>
+                            <canvas id="mandel-canvas" width="400" height="400"></canvas>
+                            <div id="mandel-stats" class="stats"></div>
+                        </div>
+                        
+                        <div class="demo-card">
+                            <h4>Transformada de Fourier</h4>
+                            <div class="controls">
+                                <button id="sine-wave" class="btn-demo">Onda Seno</button>
+                                <button id="square-wave" class="btn-demo">Onda Cuadrada</button>
+                                <button id="sawtooth-wave" class="btn-demo">Diente de Sierra</button>
+                            </div>
+                            <canvas id="fft-canvas" width="600" height="300"></canvas>
+                            <div id="fft-stats" class="stats"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="section">
+                <div class="prompt">
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ ls -la projects/
+                </div>
+                <div class="output">
+                    <div class="project-list">
+                        <div class="project-item">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2024-01-15</span>
+                            <span class="file-name">kernel_module.ko</span>
+                            <span class="file-desc">Módulo personalizado del kernel Linux</span>
+                        </div>
+                        <div class="project-item">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2024-01-10</span>
+                            <span class="file-name">crypto_asm.s</span>
+                            <span class="file-desc">Implementación AES en Assembly puro</span>
+                        </div>
+                        <div class="project-item">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2024-01-05</span>
+                            <span class="file-name">network_scanner.c</span>
+                            <span class="file-desc">Escáner de red de alto rendimiento</span>
+                        </div>
+                        <div class="project-item">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2023-12-20</span>
+                            <span class="file-name">bootloader.asm</span>
+                            <span class="file-desc">Bootloader personalizado x86</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Network Tools Section -->
+            <section id="network" class="section">
+                <div class="prompt">
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ python3 network_tools.py --demo
+                </div>
+                <div class="output">
+                    <h3>Herramientas de Red</h3>
+                    <div class="network-demos">
+                        <div class="demo-card">
+                            <h4>Analizador de Paquetes</h4>
+                            <div class="controls">
+                                <button id="packet-capture" class="btn-demo">Iniciar Captura</button>
+                                <button id="packet-stop" class="btn-demo">Detener</button>
+                            </div>
+                            <div id="packet-display" class="packet-output"></div>
+                        </div>
+                        
+                        <div class="demo-card">
+                            <h4>Port Scanner</h4>
+                            <div class="controls">
+                                <input type="text" id="scan-target" placeholder="127.0.0.1" value="127.0.0.1">
+                                <input type="text" id="port-range" placeholder="1-1000" value="1-100">
+                                <button id="port-scan" class="btn-demo">Escanear</button>
+                            </div>
+                            <div id="scan-results" class="scan-output"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="terminal-footer">
+                <div class="prompt">
+                    <span class="user">marcy@systems</span>:<span class="path">~/cv</span>$ whoami
+                </div>
+                <div class="output">
+                    <p>Desarrollador de sistemas con pasión por la programación de bajo nivel.</p>
+                    <p>Contacto: <a href="mailto:enorastrokes@gmail.com">enorastrokes@gmail.com</a></p>
+                    <p>GitHub: <a href="https://github.com/AmeliaDi">github.com/AmeliaDi</a></p>
+                    <p>LinkedIn: <a href="https://linkedin.com/in/bogosort">linkedin.com/in/bogosort</a></p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- WebAssembly and JavaScript -->
+    <script src="wasm-loader.js"></script>
+    <script src="algorithms.js"></script>
+    <script src="visualizations.js"></script>
+    <script src="network-tools.js"></script>
+    <script src="main.js"></script>
+</body>
+</html> 
