@@ -88,7 +88,7 @@ class CVApplication {
         // Update terminal title
         const terminalTitle = document.querySelector('.terminal-title');
         if (terminalTitle) {
-            terminalTitle.textContent = `marcy@systems:~/cv/${sectionId}$`;
+            terminalTitle.textContent = `enoa@systems:~/cv/${sectionId}$`;
         }
     }
 
@@ -503,7 +503,7 @@ class CVApplication {
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 
 ╔══════════════════════════════════════════════════════════════════════════════════════╗
-║                        WELCOME TO AMELIADI'S TECHNICAL CV                           ║
+║                    WELCOME TO ENOA MARCELINE'S TECHNICAL CV                         ║
 ╠══════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                      ║
 ║  🚀 Systems Developer & Low-Level Programming Specialist                            ║
