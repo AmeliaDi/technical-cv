@@ -15,6 +15,7 @@ class CVApplication {
         this.setupNavigationHighlighting();
         this.setupTerminalEffects();
         this.setupKeyboardShortcuts();
+        this.setupAlgorithmDescriptions();
         
         // Wait for all modules to load
         await this.waitForModulesLoad();
@@ -240,6 +241,129 @@ class CVApplication {
             element.classList.add('glitch');
             element.setAttribute('data-text', element.textContent);
         });
+    }
+
+    setupAlgorithmDescriptions() {
+        const algorithmSelector = document.getElementById('algorithm-selector');
+        const algorithmDescription = document.getElementById('algorithm-description');
+        
+        if (!algorithmSelector || !algorithmDescription) return;
+        
+        const descriptions = {
+            quicksort: {
+                title: "⚡ QuickSort - Divide y Vencerás",
+                description: "Algoritmo de ordenamiento que utiliza la estrategia divide y vencerás. Selecciona un pivote y particiona el array, luego recursivamente ordena las sublistas. Muy eficiente en promedio con O(n log n), pero puede degradarse a O(n²) en el peor caso.",
+                complexity: "Promedio: O(n log n), Peor caso: O(n²)",
+                space: "O(log n)",
+                stable: "No",
+                inplace: "Sí"
+            },
+            mergesort: {
+                title: "🔀 MergeSort - Estable y Eficiente",
+                description: "Algoritmo de ordenamiento estable que divide el array en mitades, las ordena recursivamente y las combina. Garantiza O(n log n) en todos los casos, ideal para datos grandes donde la estabilidad es importante.",
+                complexity: "Siempre: O(n log n)",
+                space: "O(n)",
+                stable: "Sí",
+                inplace: "No"
+            },
+            heapsort: {
+                title: "🏔️ HeapSort - In-place Garantizado",
+                description: "Utiliza la estructura de datos heap para ordenar. Construye un max-heap y extrae repetidamente el máximo. Garantiza O(n log n) en todos los casos y es in-place.",
+                complexity: "Siempre: O(n log n)",
+                space: "O(1)",
+                stable: "No",
+                inplace: "Sí"
+            },
+            radixsort: {
+                title: "📊 RadixSort - No Comparativo",
+                description: "Algoritmo de ordenamiento no comparativo que procesa dígitos individuales. Muy eficiente para números enteros con rango limitado, con complejidad lineal en el número de elementos.",
+                complexity: "O(d × (n + k))",
+                space: "O(n + k)",
+                stable: "Sí",
+                inplace: "No"
+            },
+            countingsort: {
+                title: "📈 CountingSort - Rango Limitado",
+                description: "Algoritmo de ordenamiento no comparativo que cuenta las ocurrencias de cada elemento. Muy eficiente cuando el rango de valores es pequeño comparado con el número de elementos.",
+                complexity: "O(n + k)",
+                space: "O(k)",
+                stable: "Sí",
+                inplace: "No"
+            },
+            shellsort: {
+                title: "🐚 ShellSort - Gap Sequence",
+                description: "Generalización del insertion sort que permite intercambios de elementos distantes. Utiliza una secuencia de gaps que disminuye, mejorando significativamente el rendimiento.",
+                complexity: "O(n log n) - O(n²)",
+                space: "O(1)",
+                stable: "No",
+                inplace: "Sí"
+            },
+            cocktailsort: {
+                title: "🍸 CocktailSort - Bidireccional",
+                description: "Variación del bubble sort que ordena en ambas direcciones alternadamente. Funciona mejor que bubble sort cuando los elementos pequeños están al final del array.",
+                complexity: "O(n²)",
+                space: "O(1)",
+                stable: "Sí",
+                inplace: "Sí"
+            },
+            gnomesort: {
+                title: "🧙 GnomeSort - Gnomo del Jardín",
+                description: "Algoritmo simple conceptualmente similar al insertion sort. Un gnomo de jardín ordena macetas moviendose hacia adelante si están en orden, hacia atrás si no lo están.",
+                complexity: "O(n²)",
+                space: "O(1)",
+                stable: "Sí",
+                inplace: "Sí"
+            },
+            pancakesort: {
+                title: "🥞 PancakeSort - Voltear Panqueques",
+                description: "Algoritmo que solo puede 'voltear' el array desde el inicio hasta cierta posición, como voltear una pila de panqueques. Interesante desde el punto de vista teórico y divertido de visualizar.",
+                complexity: "O(n²)",
+                space: "O(1)",
+                stable: "No",
+                inplace: "Sí"
+            },
+            bogosort: {
+                title: "🎲 BogoSort - ¡La Locura Pura!",
+                description: "El algoritmo de ordenamiento más ineficiente: mezcla aleatoriamente el array hasta que esté ordenado. Complejidad promedio O(n×n!) y peor caso O(∞). ¡Solo para demostración educativa!",
+                complexity: "Promedio: O(n×n!), Peor: O(∞)",
+                space: "O(1)",
+                stable: "No",
+                inplace: "Sí",
+                warning: "⚠️ Advertencia: Este algoritmo puede nunca terminar. Limitado a 100,000 intentos para la demo."
+            }
+        };
+        
+        const updateDescription = () => {
+            const selected = algorithmSelector.value;
+            const info = descriptions[selected];
+            
+            if (info) {
+                algorithmDescription.innerHTML = `
+                    <h4>${info.title}</h4>
+                    <p>${info.description}</p>
+                    <div class="algorithm-details">
+                        <div class="detail-row">
+                            <strong>Complejidad temporal:</strong> ${info.complexity}
+                        </div>
+                        <div class="detail-row">
+                            <strong>Complejidad espacial:</strong> ${info.space}
+                        </div>
+                        <div class="detail-row">
+                            <strong>Estable:</strong> ${info.stable}
+                        </div>
+                        <div class="detail-row">
+                            <strong>In-place:</strong> ${info.inplace}
+                        </div>
+                    </div>
+                    ${info.warning ? `<div class="bogosort-warning">${info.warning}</div>` : ''}
+                `;
+            }
+        };
+        
+        algorithmSelector.addEventListener('change', updateDescription);
+        
+        // Initialize with first algorithm
+        updateDescription();
     }
 
     setupKeyboardShortcuts() {

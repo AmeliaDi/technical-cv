@@ -1,122 +1,127 @@
-# Makefile for WebAssembly CV Project
-# Requires Emscripten SDK for compilation
+# Advanced Web Vulnerability Scanner Makefile
+# Author: AmeliaDi <enorastrokes@gmail.com>
 
-CC = emcc
-CFLAGS = -O3 -s WASM=1 -s EXPORTED_FUNCTIONS='["_quicksort","_mergesort","_heapsort","_sieve_of_eratosthenes","_mandelbrot_point","_fft_real","_generate_sine_wave","_generate_square_wave","_generate_sawtooth_wave","_init_memory","_get_memory_ptr","_fill_random_array","_is_array_sorted"]' -s EXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' -s ALLOW_MEMORY_GROWTH=1
-
-# Source and output files
-SOURCES = algorithms.c
-OUTPUT = algorithms.wasm
-OUTPUT_JS = algorithms.js
+CC = gcc
+CFLAGS = -Wall -Wextra -O2 -std=c99 -D_GNU_SOURCE
+LDFLAGS = -lcurl -ljson-c -lxml2 -lpthread -lpcre -lm
+TARGET = webvulnscan
+SOURCES = web_vulnerability_scanner.c crawler.c vulnerability_tests.c http_utils.c payloads.c utils.c
+OBJECTS = $(SOURCES:.c=.o)
+TEST_TARGET = test_webvulnscan
+HEADERS = web_vulnerability_scanner.h
 
 # Default target
-all: $(OUTPUT)
+all: $(TARGET)
 
-# Compile C to WebAssembly
-$(OUTPUT): $(SOURCES)
-	@echo "🔧 Compiling C algorithms to WebAssembly..."
-	$(CC) $(CFLAGS) $(SOURCES) -o $(OUTPUT_JS)
-	@echo "✅ WebAssembly compilation complete!"
-	@echo "📁 Generated files: $(OUTPUT_JS), $(OUTPUT)"
+# Main executable
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
 
-# Clean build artifacts
-clean:
-	@echo "🧹 Cleaning build artifacts..."
-	rm -f $(OUTPUT) $(OUTPUT_JS)
-	@echo "✅ Clean complete!"
+# Object files
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Install Emscripten (Linux/macOS)
-install-emscripten:
-	@echo "📦 Installing Emscripten SDK..."
-	git clone https://github.com/emscripten-core/emsdk.git
-	cd emsdk && ./emsdk install latest && ./emsdk activate latest
-	@echo "✅ Emscripten installed! Run: source emsdk/emsdk_env.sh"
+# Test suite
+$(TEST_TARGET): test_webvulnscan.c $(OBJECTS)
+	$(CC) $(CFLAGS) test_webvulnscan.c $(filter-out web_vulnerability_scanner.o,$(OBJECTS)) -o $(TEST_TARGET) $(LDFLAGS)
 
-# Development server
-serve:
-	@echo "🌐 Starting development server on port 8000..."
-	@which python3 > /dev/null && python3 -m http.server 8000 || python -m SimpleHTTPServer 8000
+# Static analysis
+static-analysis:
+	cppcheck --enable=all --std=c99 $(SOURCES)
+	@echo "Static analysis complete"
 
-# Alternative server using Node.js
-serve-node:
-	@echo "🌐 Starting Node.js server on port 8000..."
-	npx http-server -p 8000 -c-1
-
-# Test compilation without Emscripten (fallback)
-test-gcc:
-	@echo "🧪 Testing compilation with GCC..."
-	gcc -Wall -Wextra -std=c99 -lm algorithms.c -o algorithms_test
-	@echo "✅ GCC compilation test passed!"
-	rm -f algorithms_test
-
-# Performance benchmark
-benchmark: $(OUTPUT)
-	@echo "📊 Running performance benchmark..."
-	@echo "Open the web page and run: performanceBenchmark.benchmarkSortingAlgorithms()"
-
-# Lint C code
-lint:
-	@echo "🔍 Linting C code..."
-	@which cppcheck > /dev/null && cppcheck --enable=all algorithms.c || echo "⚠️  cppcheck not found"
-
-# Format C code
+# Code formatting
 format:
-	@echo "🎨 Formatting C code..."
-	@which clang-format > /dev/null && clang-format -i algorithms.c || echo "⚠️  clang-format not found"
+	@which clang-format > /dev/null && clang-format -i $(SOURCES) $(HEADERS) || echo "clang-format not found"
 
-# Create production build
-production: clean $(OUTPUT)
-	@echo "🚀 Creating production build..."
-	@echo "📦 Optimizing files..."
-	# Minify JavaScript files (requires uglify-js)
-	@which uglifyjs > /dev/null && \
-		uglifyjs main.js -o main.min.js && \
-		uglifyjs algorithms.js -o algorithms.min.js && \
-		uglifyjs visualizations.js -o visualizations.min.js && \
-		uglifyjs network-tools.js -o network-tools.min.js && \
-		uglifyjs wasm-loader.js -o wasm-loader.min.js && \
-		echo "✅ JavaScript files minified!" || \
-		echo "⚠️  uglifyjs not found, skipping JS minification"
-	# Minify CSS (requires cleancss)
-	@which cleancss > /dev/null && \
-		cleancss -o styles.min.css styles.css && \
-		echo "✅ CSS files minified!" || \
-		echo "⚠️  cleancss not found, skipping CSS minification"
-	@echo "🎉 Production build complete!"
+# Install
+install: $(TARGET)
+	sudo cp $(TARGET) /usr/local/bin/
+	sudo chmod +x /usr/local/bin/$(TARGET)
+	@echo "Installed to /usr/local/bin/$(TARGET)"
 
-# Development setup
-setup:
-	@echo "🛠️  Setting up development environment..."
-	@echo "📋 Installing dependencies..."
-	# Check for required tools
-	@which gcc > /dev/null || echo "❌ GCC not found - install build tools"
-	@which python3 > /dev/null || echo "❌ Python3 not found"
-	@which node > /dev/null || echo "❌ Node.js not found"
-	@echo "💡 To compile to WebAssembly, install Emscripten: make install-emscripten"
-	@echo "✅ Setup information displayed!"
+# Uninstall
+uninstall:
+	sudo rm -f /usr/local/bin/$(TARGET)
 
-# Show help
+# Clean
+clean:
+	rm -f $(OBJECTS) $(TARGET) $(TEST_TARGET)
+	rm -f *.log scan_results.* vulnerability_report.*
+
+# Development build with debug symbols
+debug: CFLAGS += -g -DDEBUG -fsanitize=address
+debug: LDFLAGS += -fsanitize=address
+debug: $(TARGET)
+
+# Performance build
+performance: CFLAGS += -O3 -march=native -DNDEBUG
+performance: $(TARGET)
+
+# Test
+test: $(TEST_TARGET)
+	@echo "Running web vulnerability scanner tests..."
+	./$(TEST_TARGET)
+
+# Integration test
+integration-test: $(TARGET)
+	@echo "Running integration tests..."
+	./$(TARGET) -u http://testphp.vulnweb.com -d 2 -t 5 -f text -o test_results.txt
+
+# Valgrind memory check
+memcheck: debug
+	valgrind --tool=memcheck --leak-check=full --track-origins=yes ./$(TARGET) -u http://example.com -d 1
+
+# Create test targets file
+create-test-targets:
+	echo "http://testphp.vulnweb.com" > test_targets.txt
+	echo "http://demo.testfire.net" >> test_targets.txt
+	echo "http://zero.webappsecurity.com" >> test_targets.txt
+
+# Benchmark
+benchmark: $(TARGET)
+	@echo "Running performance benchmark..."
+	time ./$(TARGET) -u http://testphp.vulnweb.com -d 3 -t 10 -a
+
+# Security scan of binary
+security-scan: $(TARGET)
+	@which checksec > /dev/null && checksec --file=$(TARGET) || echo "checksec not found"
+
+# Generate documentation
+docs:
+	@which doxygen > /dev/null && doxygen Doxyfile || echo "doxygen not found"
+
+# Package for distribution
+package: clean all
+	tar -czf web-vulnerability-scanner.tar.gz $(SOURCES) $(HEADERS) Makefile README.md test_*.c payloads/ docs/
+
+# Docker build
+docker-build:
+	docker build -t webvulnscan .
+
+# Docker run
+docker-run:
+	docker run -it --rm webvulnscan -u http://testphp.vulnweb.com
+
+# Help
 help:
-	@echo "🆘 Available commands:"
-	@echo "  make all          - Compile C to WebAssembly"
-	@echo "  make clean        - Clean build artifacts"
-	@echo "  make serve        - Start development server"
-	@echo "  make setup        - Setup development environment"
-	@echo "  make lint         - Lint C code"
-	@echo "  make format       - Format C code"
-	@echo "  make production   - Create production build"
-	@echo "  make help         - Show this help"
+	@echo "Available targets:"
+	@echo "  all              - Build the web vulnerability scanner"
+	@echo "  debug            - Build with debug symbols and AddressSanitizer"
+	@echo "  performance      - Build optimized version"
+	@echo "  test             - Run unit tests"
+	@echo "  integration-test - Run integration tests"
+	@echo "  install          - Install to system (requires sudo)"
+	@echo "  uninstall        - Remove from system (requires sudo)"
+	@echo "  clean            - Remove build artifacts"
+	@echo "  format           - Format source code"
+	@echo "  static-analysis  - Run static code analysis"
+	@echo "  memcheck         - Run memory leak detection"
+	@echo "  benchmark        - Run performance benchmark"
+	@echo "  security-scan    - Scan binary for security issues"
+	@echo "  package          - Create distribution package"
+	@echo "  docker-build     - Build Docker image"
+	@echo "  docker-run       - Run in Docker container"
+	@echo "  help             - Show this help"
 
-# Debug build with symbols
-debug:
-	@echo "🐛 Creating debug build..."
-	$(CC) -g -s WASM=1 -s EXPORTED_FUNCTIONS='["_quicksort","_mergesort","_heapsort","_sieve_of_eratosthenes","_mandelbrot_point"]' -s EXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' $(SOURCES) -o debug_$(OUTPUT_JS)
-	@echo "✅ Debug build complete: debug_$(OUTPUT_JS)"
-
-# Assembly output for inspection
-assembly:
-	@echo "🔍 Generating assembly output..."
-	$(CC) -S $(CFLAGS) $(SOURCES) -o algorithms.s
-	@echo "✅ Assembly generated: algorithms.s"
-
-.PHONY: all clean serve serve-node test-gcc benchmark lint format production setup help debug assembly install-emscripten 
+.PHONY: all clean debug performance test integration-test install uninstall static-analysis format memcheck benchmark package help docs security-scan create-test-targets docker-build docker-run 

@@ -1,309 +1,439 @@
-# 🚀 Marcy's Technical CV - WebAssembly Portfolio
+# Advanced Web Vulnerability Scanner
 
-Una página web interactiva que funciona como CV técnico, desarrollada con **WebAssembly**, **C**, **JavaScript** y diseñada con un estilo terminal profesional. Demuestra habilidades en programación de bajo nivel, algoritmos, matemáticas computacionales y análisis de redes.
+A comprehensive web application security testing tool written in C. Designed to identify common web vulnerabilities including SQL injection, XSS, CSRF, directory traversal, and various other security flaws.
 
-## 🎯 Características Principales
+## Features
 
-### 💻 **Algoritmos en WebAssembly**
-- **Algoritmos de ordenamiento**: QuickSort, MergeSort, HeapSort
-- **Criba de Eratóstenes** para números primos
-- **Visualización en tiempo real** con estadísticas de rendimiento
-- **Benchmarking automático** de complejidad temporal
+- **Comprehensive Vulnerability Detection**: SQL injection, XSS (reflected, stored, DOM), CSRF, directory traversal, file inclusion, command injection, XXE, SSRF, and more
+- **Multi-threaded Architecture**: Configurable thread pool for high-speed scanning
+- **Advanced Web Crawling**: Intelligent link extraction and form discovery
+- **Multiple Output Formats**: Human-readable text, JSON, and XML reports
+- **Security Header Analysis**: Detection of missing or misconfigured security headers
+- **Authentication Testing**: Weak password detection, session fixation, and session hijacking tests
+- **Information Disclosure Detection**: Sensitive data exposure and debug information leakage
+- **Configurable Scanning**: Adjustable depth, threading, timeouts, and aggressive mode
+- **Real-time Statistics**: Comprehensive scan metrics and progress tracking
 
-### 🔢 **Visualizaciones Matemáticas**
-- **Conjunto de Mandelbrot** interactivo con zoom
-- **Transformada Rápida de Fourier (FFT)** en tiempo real
-- **Generación de ondas**: seno, cuadrada, diente de sierra
-- **Renderizado optimizado** en Canvas
+## Building
 
-### 🌐 **Herramientas de Red**
-- **Simulador de captura de paquetes** en tiempo real
-- **Escáner de puertos** con análisis de servicios
-- **Análisis de tráfico** con estadísticas detalladas
-- **Calculadora de subredes** y utilidades de red
-
-### 🎨 **Interfaz Terminal**
-- **Tema dark profesional** con sintaxis highlighting
-- **Efectos Matrix** sutiles en el fondo
-- **Navegación por teclado** (Ctrl+1-6)
-- **Animaciones de terminal** realistas
-
-## 🛠️ Instalación y Configuración
-
-### Prerrequisitos
+### Prerequisites
 
 ```bash
-# Linux (Ubuntu/Debian)
-sudo apt update
-sudo apt install build-essential python3 nodejs npm git
-
-# macOS (con Homebrew)
-brew install gcc python3 node git
+# Ubuntu/Debian
+sudo apt-get install build-essential libcurl4-openssl-dev libjson-c-dev libxml2-dev libpcre3-dev
 
 # Arch Linux
-sudo pacman -S base-devel python nodejs npm git
+sudo pacman -S base-devel curl json-c libxml2 pcre
+
+# CentOS/RHEL
+sudo yum install gcc curl-devel json-c-devel libxml2-devel pcre-devel
 ```
 
-### Configuración Rápida
+### Compilation
 
 ```bash
-# 1. Clonar el repositorio
-git clone <tu-repositorio>
-cd caloa
+# Build the scanner
+make
 
-# 2. Verificar dependencias
-make setup
+# Build with debug symbols
+make debug
 
-# 3. Iniciar servidor de desarrollo
-make serve
+# Build optimized version
+make performance
 ```
 
-La página estará disponible en `http://localhost:8000`
-
-### Compilación a WebAssembly (Opcional)
-
-Para compilar el código C a WebAssembly real:
+### Installation
 
 ```bash
-# Instalar Emscripten SDK
-make install-emscripten
-source emsdk/emsdk_env.sh
-
-# Compilar algoritmos a WASM
-make all
-
-# Verificar compilación
-ls -la algorithms.wasm algorithms.js
+# Install system-wide (requires sudo)
+sudo make install
 ```
 
-## 📁 Estructura del Proyecto
+## Usage
 
-```
-├── index.html              # Página principal con estructura HTML
-├── styles.css              # Estilos CSS con tema terminal
-├── main.js                 # Controlador principal de la aplicación
-├── algorithms.js           # Visualización de algoritmos
-├── visualizations.js       # Visualizaciones matemáticas
-├── network-tools.js        # Herramientas de red
-├── wasm-loader.js          # Cargador de WebAssembly
-├── algorithms.c            # Algoritmos en C para WASM
-├── Makefile               # Scripts de compilación
-└── README.md              # Esta documentación
-```
+### Basic Scanning
 
-## 🔧 Comandos Disponibles
-
-### Desarrollo
 ```bash
-make serve          # Servidor de desarrollo (Python)
-make serve-node     # Servidor alternativo (Node.js)
-make setup          # Verificar configuración
+# Scan single website
+./webvulnscan -u http://example.com
+
+# Scan with custom depth and threads
+./webvulnscan -u http://example.com -d 3 -t 10
+
+# Aggressive scanning mode
+./webvulnscan -u http://example.com -a -v
+
+# Skip SSL verification for testing
+./webvulnscan -u https://example.com -s
 ```
 
-### Compilación
+### Advanced Scanning
+
 ```bash
-make all            # Compilar C a WebAssembly
-make clean          # Limpiar archivos generados
-make debug          # Build de debug con símbolos
-make test-gcc       # Verificar compilación C
+# Comprehensive scan with all options
+./webvulnscan -u http://target.com -d 5 -t 15 -a -v -i -f json -o results.json
+
+# Quick scan with minimal depth
+./webvulnscan -u http://target.com -d 1 -t 5
+
+# Scan with custom timeout
+./webvulnscan -u http://target.com -T 60 -v
 ```
 
-### Calidad de Código
+### Output Formats
+
 ```bash
-make lint           # Análisis estático del código C
-make format         # Formatear código C
-make production     # Build optimizado para producción
+# JSON output
+./webvulnscan -u http://example.com -f json -o vulnerability_report.json
+
+# XML output
+./webvulnscan -u http://example.com -f xml -o vulnerability_report.xml
+
+# Verbose text output
+./webvulnscan -u http://example.com -v -i
 ```
 
-### Utilidades
-```bash
-make benchmark      # Ejecutar benchmarks de rendimiento
-make assembly       # Generar código ensamblador
-make help           # Mostrar ayuda completa
+## Command Line Options
+
+| Option | Description | Example |
+|--------|-------------|---------|
+| `-u <url>` | Target URL (required) | `-u http://example.com` |
+| `-d <depth>` | Maximum crawl depth | `-d 3` |
+| `-t <threads>` | Number of threads | `-t 10` |
+| `-T <timeout>` | Request timeout in seconds | `-T 30` |
+| `-o <file>` | Output file | `-o results.json` |
+| `-f <format>` | Output format (text/json/xml) | `-f json` |
+| `-a` | Enable aggressive scanning | `-a` |
+| `-v` | Verbose output | `-v` |
+| `-i` | Include informational findings | `-i` |
+| `-s` | Skip SSL certificate verification | `-s` |
+| `-k` | Don't follow redirects | `-k` |
+| `-h` | Show help message | `-h` |
+
+## Vulnerability Categories
+
+### Injection Vulnerabilities
+- **SQL Injection**: Database query manipulation
+- **Command Injection**: Operating system command execution
+- **LDAP Injection**: LDAP query manipulation
+- **XPath Injection**: XML database query manipulation
+
+### Cross-Site Scripting (XSS)
+- **Reflected XSS**: Non-persistent script injection
+- **Stored XSS**: Persistent script injection
+- **DOM XSS**: Client-side DOM manipulation
+
+### Access Control
+- **Insecure Direct Object References**: Unauthorized resource access
+- **Missing Function Level Access Control**: Privilege escalation
+- **Cross-Site Request Forgery (CSRF)**: Unauthorized action execution
+
+### Security Misconfiguration
+- **Missing Security Headers**: X-Frame-Options, CSP, HSTS, etc.
+- **Information Disclosure**: Sensitive data exposure
+- **Debug Information**: Development artifacts in production
+
+### File System Attacks
+- **Directory Traversal**: Path traversal vulnerabilities
+- **File Inclusion**: Local and remote file inclusion
+- **Unrestricted File Upload**: Dangerous file upload functionality
+
+### Advanced Attacks
+- **XML External Entity (XXE)**: XML parser exploitation
+- **Server-Side Request Forgery (SSRF)**: Internal system access
+- **Session Management Flaws**: Session fixation, hijacking
+
+## Testing Payloads
+
+The scanner includes comprehensive payload databases for:
+
+### SQL Injection
+```sql
+' OR '1'='1
+'; DROP TABLE users; --
+' UNION SELECT null,null,version()--
 ```
 
-## 🎮 Uso Interactivo
-
-### Navegación por Teclado
-- **Ctrl + 1-6**: Navegación rápida entre secciones
-- **F12**: Consola de desarrollador
-- **ESC**: Limpiar animaciones
-
-### Consola de Desarrollador
-Presiona **F12** y ejecuta:
-
+### XSS Payloads
 ```javascript
-// Benchmark de algoritmos
-performanceBenchmark.benchmarkSortingAlgorithms()
-
-// Matemáticas
-MathUtils.factorial(10)
-MathUtils.generateFibonacci(20)
-
-// Análisis de red
-NetworkAnalyzer.calculateSubnet('192.168.1.0', 24)
-NetworkAnalyzer.generateMACAddress()
-
-// WebAssembly directo
-wasmLoader.callFunction('sieve_of_eratosthenes', 1000)
+<script>alert('XSS')</script>
+"><script>alert(document.cookie)</script>
+javascript:alert('XSS')
 ```
 
-## ⚡ Optimizaciones de Rendimiento
-
-### WebAssembly
-- **Compilación optimizada** con `-O3`
-- **Gestión de memoria** eficiente
-- **Funciones exportadas** específicas
-- **Fallback JavaScript** automático
-
-### Visualizaciones
-- **RequestAnimationFrame** para animaciones fluidas
-- **Canvas optimizado** para renderizado
-- **Throttling inteligente** de actualizaciones
-- **Worker threads** para cálculos pesados (futuro)
-
-### Interfaz
-- **CSS Grid** y **Flexbox** modernos
-- **Smooth scrolling** nativo
-- **Intersection Observer** para navegación
-- **Event delegation** eficiente
-
-## 🔍 Detalles Técnicos
-
-### Algoritmos Implementados
-
-#### Ordenamiento
-```c
-// QuickSort con optimizaciones
-int32_t quicksort(int32_t* arr, int32_t size);
-
-// MergeSort estable
-int32_t mergesort(int32_t* arr, int32_t size);
-
-// HeapSort in-place
-int32_t heapsort(int32_t* arr, int32_t size);
+### Directory Traversal
+```
+../../../etc/passwd
+..\..\..\..\windows\system32\drivers\etc\hosts
 ```
 
-#### Matemáticas
-```c
-// Mandelbrot con iteraciones variables
-int32_t mandelbrot_point(double x, double y, int32_t max_iter);
-
-// FFT optimizada Cooley-Tukey
-void fft_real(double* real, double* imag, int32_t n);
-
-// Criba de Eratóstenes
-int32_t sieve_of_eratosthenes(int32_t limit);
-```
-
-### Arquitectura del Código
-
-```javascript
-// Patrón de módulos ES6
-class AlgorithmVisualizer {
-    constructor() { /* ... */ }
-    async runSortingAlgorithm(algorithm) { /* ... */ }
-}
-
-// Sistema de eventos reactivo
-document.addEventListener('DOMContentLoaded', async () => {
-    await wasmLoader.loadModule('algorithms.wasm');
-    algorithmVisualizer.init();
-});
-```
-
-## 🎨 Personalización
-
-### Temas de Color
-Modifica las variables CSS en `styles.css`:
-
-```css
-:root {
-    --bg-dark: #0a0a0a;
-    --text-primary: #00ff00;
-    --accent-blue: #00aaff;
-    /* ... más variables */
-}
-```
-
-### Algoritmos Personalizados
-Añade funciones en `algorithms.c`:
-
-```c
-WASM_EXPORT
-int32_t mi_algoritmo(int32_t* data, int32_t size) {
-    // Tu implementación aquí
-    return resultado;
-}
-```
-
-## 🚀 Despliegue
-
-### GitHub Pages
+### Command Injection
 ```bash
-# Build de producción
-make production
-
-# Configurar GitHub Pages
-# Usar branch gh-pages o carpeta docs/
+; ls -la
+| whoami
+`cat /etc/passwd`
 ```
 
-### Servidor Propio
+## Configuration
+
+### Environment Variables
+
 ```bash
-# Nginx config
-server {
-    listen 80;
-    server_name tu-dominio.com;
-    root /path/to/caloa;
-    
-    # MIME types para WASM
-    location ~* \.wasm$ {
-        add_header Content-Type application/wasm;
+export WEBVULNSCAN_THREADS=10
+export WEBVULNSCAN_TIMEOUT=30
+export WEBVULNSCAN_USER_AGENT="Custom Scanner 1.0"
+```
+
+### Custom Payloads
+
+Create custom payload files in the `payloads/` directory:
+
+```
+payloads/
+├── sql_injection.txt
+├── xss_payloads.txt
+├── directory_traversal.txt
+└── command_injection.txt
+```
+
+## Output Examples
+
+### Text Report
+```
+Web Vulnerability Scan Report
+=============================
+
+Target URL: http://example.com
+Scan Time: Mon Jan 15 10:30:00 2025
+Total Vulnerabilities Found: 3
+
+Severity Summary:
+- Critical: 1
+- High:     1
+- Medium:   1
+- Low:      0
+
+Detailed Findings:
+==================
+
+[1] SQL Injection in Login Form
+Severity: Critical
+Type: SQL Injection
+URL: http://example.com/login.php
+Parameter: username
+Description: The application is vulnerable to SQL injection attacks
+Evidence: MySQL error: "You have an error in your SQL syntax"
+Recommendation: Use parameterized queries and input validation
+```
+
+### JSON Report
+```json
+{
+  "scan_info": {
+    "target_url": "http://example.com",
+    "scan_time": 1705314600,
+    "duration": 45.32,
+    "total_vulnerabilities": 3
+  },
+  "vulnerabilities": [
+    {
+      "id": 1,
+      "title": "SQL Injection in Login Form",
+      "severity": "Critical",
+      "type": "SQL Injection",
+      "url": "http://example.com/login.php",
+      "parameter": "username",
+      "description": "The application is vulnerable to SQL injection attacks",
+      "evidence": "MySQL error: \"You have an error in your SQL syntax\"",
+      "recommendation": "Use parameterized queries and input validation"
     }
+  ]
 }
 ```
 
-## 🤝 Contribuciones
+## Performance
 
-¡Las contribuciones son bienvenidas! Por favor:
+### Optimization Features
 
-1. **Fork** el proyecto
-2. **Crea** una rama feature (`git checkout -b feature/nueva-funcionalidad`)
-3. **Commit** tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)
-4. **Push** a la rama (`git push origin feature/nueva-funcionalidad`)
-5. **Crea** un Pull Request
+- **Multi-threading**: Parallel vulnerability testing
+- **Connection pooling**: Efficient HTTP connection reuse
+- **Smart crawling**: Duplicate URL detection and filtering
+- **Rate limiting**: Configurable request throttling
+- **Memory management**: Efficient payload and response handling
 
-### Áreas de Mejora
-- [ ] **Más algoritmos**: A*, Dijkstra, algoritmos de grafos
-- [ ] **Web Workers**: Para cálculos paralelos
-- [ ] **WebGL**: Renderizado acelerado por GPU
-- [ ] **PWA**: Service workers y funcionamiento offline
-- [ ] **Tests**: Suite de testing automatizado
+### Benchmarks
 
-## 📝 Licencia
+Typical performance on modern hardware:
 
-Este proyecto está bajo la **Licencia MIT**. Ver `LICENSE` para más detalles.
+| Scenario | Speed | Notes |
+|----------|-------|-------|
+| Small website (< 100 pages) | 2-5 minutes | Standard scan |
+| Medium website (100-500 pages) | 10-15 minutes | Depth 3, 10 threads |
+| Large website (500+ pages) | 30+ minutes | Aggressive mode |
 
-## 👨‍💻 Autor
+## Security Features
 
-**AmeliaDi** - Desarrollador de Sistemas y Programación de Bajo Nivel
+### Safe Scanning Practices
 
-- **Email**: enorastrokes@gmail.com
-- **GitHub**: [github.com/AmeliaDi](https://github.com/AmeliaDi)
-- **LinkedIn**: [linkedin.com/in/bogosort](https://linkedin.com/in/bogosort)
+- **Request rate limiting**: Prevents server overload
+- **User-Agent rotation**: Reduces detection probability
+- **Timeout handling**: Prevents hanging requests
+- **SSL verification**: Optional certificate validation
+- **Redirect following**: Configurable redirect behavior
 
-## 🙏 Agradecimientos
+### Ethical Considerations
 
-- **Emscripten Project** - Por hacer WebAssembly accesible
-- **Mozilla MDN** - Documentación excelente de Web APIs
-- **Community** - Por las librerías y herramientas open source
+- Only scan systems you own or have explicit permission to test
+- Use responsible disclosure for any vulnerabilities found
+- Respect rate limits and avoid causing service disruption
+- Follow local laws and regulations regarding security testing
 
----
+## Development
 
-<div align="center">
+### Building Tests
 
-**⭐ Si te gusta este proyecto, dale una estrella en GitHub ⭐**
+```bash
+# Build and run unit tests
+make test
 
-**💡 ¿Preguntas o sugerencias? Abre un issue**
+# Run integration tests
+make integration-test
 
-</div> 
+# Memory leak detection
+make memcheck
+
+# Static code analysis
+make static-analysis
+```
+
+### Code Quality
+
+```bash
+# Format code
+make format
+
+# Security scan of binary
+make security-scan
+
+# Performance benchmark
+make benchmark
+```
+
+### Docker Support
+
+```bash
+# Build Docker image
+make docker-build
+
+# Run in container
+make docker-run
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Ensure all tests pass
+5. Submit a pull request
+
+## Configuration Files
+
+### Scanner Configuration
+
+Create `~/.webvulnscan.conf`:
+
+```ini
+[default]
+threads = 10
+timeout = 30
+max_depth = 3
+output_format = json
+user_agent = WebVulnScanner/1.0
+
+[payloads]
+sql_injection_file = payloads/sql_injection.txt
+xss_payloads_file = payloads/xss_payloads.txt
+command_injection_file = payloads/command_injection.txt
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **SSL certificate errors**
+   ```bash
+   ./webvulnscan -u https://example.com -s
+   ```
+
+2. **Slow scanning**
+   ```bash
+   # Increase threads and reduce timeout
+   ./webvulnscan -u http://example.com -t 20 -T 10
+   ```
+
+3. **Memory usage**
+   ```bash
+   # Reduce thread count and depth
+   ./webvulnscan -u http://example.com -t 5 -d 2
+   ```
+
+4. **Connection timeouts**
+   ```bash
+   # Increase timeout
+   ./webvulnscan -u http://example.com -T 60
+   ```
+
+### Debugging
+
+```bash
+# Enable verbose output
+./webvulnscan -u http://example.com -v
+
+# Enable debug build
+make debug
+./webvulnscan -u http://example.com -v
+```
+
+## Legal Notice
+
+This tool is intended for authorized security testing and vulnerability assessment only. Users are responsible for ensuring they have proper authorization before scanning any systems. Unauthorized scanning may be illegal in your jurisdiction.
+
+## Dependencies
+
+- **libcurl**: HTTP client functionality
+- **json-c**: JSON report generation
+- **libxml2**: HTML parsing and XML reports
+- **libpcre**: Regular expression matching
+- **pthread**: Multi-threading support
+
+## License
+
+GPL v2
+
+## Author
+
+AmeliaDi <enorastrokes@gmail.com>
+
+## Changelog
+
+### v1.0.0
+- Initial release
+- SQL injection detection
+- XSS vulnerability testing
+- CSRF detection
+- Directory traversal testing
+- Security header analysis
+- Multi-threaded scanning
+- Multiple output formats
+- Comprehensive vulnerability database
+
+## Roadmap
+
+### Upcoming Features
+- **OWASP Top 10 2021 Coverage**: Complete implementation
+- **API Security Testing**: REST/GraphQL endpoint testing
+- **Mobile Application Testing**: Android/iOS app analysis
+- **Cloud Security Scanning**: AWS/Azure/GCP configuration testing
+- **AI-Powered Detection**: Machine learning vulnerability identification
+- **Plugin Architecture**: Custom vulnerability test modules 

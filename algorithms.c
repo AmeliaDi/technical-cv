@@ -319,4 +319,127 @@ int32_t is_array_sorted(int32_t* arr, int32_t size) {
         if (arr[i] < arr[i-1]) return 0;
     }
     return 1;
+}
+
+// BogoSort implementation (for fun!)
+static void shuffle_array(int32_t* arr, int32_t size) {
+    for (int32_t i = size - 1; i > 0; i--) {
+        int32_t j = rand() % (i + 1);
+        swap(&arr[i], &arr[j]);
+    }
+}
+
+WASM_EXPORT
+int32_t bogosort(int32_t* arr, int32_t size) {
+    int32_t attempts = 0;
+    
+    // Limit attempts to prevent infinite loops in demos
+    while (!is_array_sorted(arr, size) && attempts < 100000) {
+        shuffle_array(arr, size);
+        attempts++;
+    }
+    
+    return attempts;
+}
+
+// Cocktail Shaker Sort (bidirectional bubble sort)
+WASM_EXPORT
+int32_t cocktail_sort(int32_t* arr, int32_t size) {
+    int32_t comparisons = 0;
+    int32_t start = 0;
+    int32_t end = size - 1;
+    int32_t swapped = 1;
+    
+    while (swapped) {
+        swapped = 0;
+        
+        // Forward pass
+        for (int32_t i = start; i < end; i++) {
+            comparisons++;
+            if (arr[i] > arr[i + 1]) {
+                swap(&arr[i], &arr[i + 1]);
+                swapped = 1;
+            }
+        }
+        
+        if (!swapped) break;
+        
+        end--;
+        swapped = 0;
+        
+        // Backward pass
+        for (int32_t i = end; i > start; i--) {
+            comparisons++;
+            if (arr[i] < arr[i - 1]) {
+                swap(&arr[i], &arr[i - 1]);
+                swapped = 1;
+            }
+        }
+        
+        start++;
+    }
+    
+    return comparisons;
+}
+
+// Pancake Sort (flip-based sorting)
+static void flip_array(int32_t* arr, int32_t i) {
+    int32_t start = 0;
+    while (start < i) {
+        swap(&arr[start], &arr[i]);
+        start++;
+        i--;
+    }
+}
+
+static int32_t find_max_index(int32_t* arr, int32_t n) {
+    int32_t max_idx = 0;
+    for (int32_t i = 1; i < n; i++) {
+        if (arr[i] > arr[max_idx]) {
+            max_idx = i;
+        }
+    }
+    return max_idx;
+}
+
+WASM_EXPORT
+int32_t pancake_sort(int32_t* arr, int32_t size) {
+    int32_t flips = 0;
+    
+    for (int32_t curr_size = size; curr_size > 1; curr_size--) {
+        int32_t max_idx = find_max_index(arr, curr_size);
+        
+        if (max_idx != curr_size - 1) {
+            // First flip to bring max to front
+            if (max_idx != 0) {
+                flip_array(arr, max_idx);
+                flips++;
+            }
+            
+            // Second flip to bring max to correct position
+            flip_array(arr, curr_size - 1);
+            flips++;
+        }
+    }
+    
+    return flips;
+}
+
+// Gnome Sort (garden gnome sort)
+WASM_EXPORT
+int32_t gnome_sort(int32_t* arr, int32_t size) {
+    int32_t comparisons = 0;
+    int32_t index = 0;
+    
+    while (index < size) {
+        if (index == 0 || arr[index] >= arr[index - 1]) {
+            index++;
+        } else {
+            comparisons++;
+            swap(&arr[index], &arr[index - 1]);
+            index--;
+        }
+    }
+    
+    return comparisons;
 } 
