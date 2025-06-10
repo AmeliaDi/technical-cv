@@ -25,7 +25,7 @@
 - **Cryptographic Algorithms**: Demos interactivos de cifrado/descifrado
 - **Network Algorithms**: Visualización de routing y consenso distribuido
 
-#### 🏗️ Proyectos Hardcore Añadidos
+#### 🏗️ Proyectos Avanzados Añadidos
 - **Distributed Consensus**: Raft con Byzantine fault tolerance
 - **Quantum Cryptography**: Post-quantum lattice-based schemes
 - **ML Accelerator**: FPGA systolic arrays en Verilog
@@ -42,7 +42,7 @@
 
 ### 📊 Métricas Actualizadas
 - **25+ algoritmos** implementados (vs. 10 anteriores)
-- **20+ proyectos** hardcore (vs. 12 anteriores)
+- **20+ proyectos** avanzados (vs. 12 anteriores)
 - **304KB** de assets totales optimizados
 - **601 líneas** de HTML puro (vs. 195 anteriores)
 
