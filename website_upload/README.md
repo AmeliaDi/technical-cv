@@ -244,7 +244,7 @@ void modify_code(void *addr, uint8_t *new_code, size_t len) {
 
 ## 🌟 **Cómo Explorar**
 
-1. **🌐 Visita el CV interactivo:** [enorastrokes.gilect.net](http://enorastrokes.gilect.net/?i=1)
+1. **🌐 Visita el CV interactivo:** [ameliadi.github.io/technical-cv](https://ameliadi.github.io/technical-cv/)
 2. **🔍 Explora los algoritmos** - Demos en WebAssembly funcionando en tiempo real
 3. **🖥️ Prueba el terminal** - Navegación estilo Linux shell
 4. **📊 Ve las visualizaciones** - Fractales, FFT, y análisis matemático

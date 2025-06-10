@@ -379,7 +379,7 @@
                     <span class="user">amelia@archlinux</span>:<span class="path">~/cv</span>$ gcc -O3 algorithms.c -o algorithms.wasm --target=wasm32
                 </div>
                 <div class="output">
-                    <h3>Algoritmos de Ordenamiento en WebAssembly</h3>
+                    <h3>Algoritmos Implementados en WebAssembly</h3>
                     <div class="algorithm-demos">
                         <div class="demo-card">
                             <h4>🔥 Sorting Algorithms Showcase</h4>
@@ -399,6 +399,21 @@
                                     <option value="gnomesort">🧙 GnomeSort (O(n²)) - Gnomo del jardín</option>
                                     <option value="pancakesort">🥞 PancakeSort (O(n²)) - Voltear panqueques</option>
                                     <option value="bogosort">🎲 BogoSort (O(∞)) - ¡La locura pura!</option>
+                                    <option value="jitcompiler">🔥 JIT Compiler - SSA Optimization</option>
+                                    <option value="memoryalloc">🧠 Memory Allocator - SLUB Algorithm</option>
+                                    <option value="scheduling">⚙️ CFS Scheduler - Completely Fair</option>
+                                    <option value="btree">🌳 B+ Tree - Database Indexing</option>
+                                    <option value="lru">💾 LRU Cache - Least Recently Used</option>
+                                    <option value="aes">🔐 AES Encryption - Advanced Encryption</option>
+                                    <option value="rsa">🔑 RSA Algorithm - Public Key Crypto</option>
+                                    <option value="sha256">#️⃣ SHA-256 Hash - Cryptographic Hash</option>
+                                    <option value="dijkstra">🗺️ Dijkstra - Shortest Path</option>
+                                    <option value="astar">⭐ A* Algorithm - Heuristic Search</option>
+                                    <option value="redblack">🔴 Red-Black Tree - Balanced BST</option>
+                                    <option value="huffman">📦 Huffman Coding - Data Compression</option>
+                                    <option value="bloom">🌸 Bloom Filter - Probabilistic Set</option>
+                                    <option value="consistent">🔄 Consistent Hashing - Distributed Systems</option>
+                                    <option value="raft">🏛️ Raft Consensus - Distributed Consensus</option>
                                 </select>
                                 <div class="control-buttons">
                                     <button id="start-btn" class="btn-demo primary">▶️ Start</button>
@@ -413,6 +428,63 @@
                             </div>
                             <canvas id="algorithm-canvas" width="800" height="400"></canvas>
                             <div id="algorithm-stats" class="stats"></div>
+                        </div>
+                        
+                        <div class="demo-card">
+                            <h4>Prime Number Sieve</h4>
+                            <div class="controls">
+                                <input type="number" id="sieve-input" placeholder="Número límite" value="1000">
+                                <button id="sieve-btn" class="btn-demo">Ejecutar Criba</button>
+                            </div>
+                            <canvas id="sieve-canvas" width="600" height="200"></canvas>
+                            <div id="sieve-stats" class="stats"></div>
+                        </div>
+                        
+                        <div class="demo-card">
+                            <h4>🧠 Memory Management Simulator</h4>
+                            <div class="controls">
+                                <select id="alloc-algorithm">
+                                    <option value="slub">SLUB Allocator</option>
+                                    <option value="buddy">Buddy System</option>
+                                    <option value="slab">SLAB Allocator</option>
+                                </select>
+                                <button id="alloc-demo" class="btn-demo">Simular Allocación</button>
+                                <button id="gc-demo" class="btn-demo">Garbage Collection</button>
+                            </div>
+                            <canvas id="memory-canvas" width="800" height="300"></canvas>
+                            <div id="memory-stats" class="stats"></div>
+                        </div>
+                        
+                        <div class="demo-card">
+                            <h4>🔐 Cryptographic Algorithms</h4>
+                            <div class="controls">
+                                <input type="text" id="crypto-input" placeholder="Texto a cifrar" value="Hello Amelia!">
+                                <select id="crypto-algorithm">
+                                    <option value="aes">AES-256-GCM</option>
+                                    <option value="chacha20">ChaCha20-Poly1305</option>
+                                    <option value="rsa">RSA-2048</option>
+                                </select>
+                                <button id="encrypt-demo" class="btn-demo">Cifrar</button>
+                                <button id="decrypt-demo" class="btn-demo">Descifrar</button>
+                            </div>
+                            <div id="crypto-output" class="crypto-result"></div>
+                            <canvas id="crypto-canvas" width="700" height="250"></canvas>
+                        </div>
+                        
+                        <div class="demo-card">
+                            <h4>⚙️ Process Scheduler Visualization</h4>
+                            <div class="controls">
+                                <select id="scheduler-type">
+                                    <option value="cfs">CFS (Completely Fair Scheduler)</option>
+                                    <option value="rr">Round Robin</option>
+                                    <option value="fifo">FIFO</option>
+                                    <option value="srtf">SRTF (Shortest Remaining Time First)</option>
+                                </select>
+                                <button id="scheduler-demo" class="btn-demo">Iniciar Scheduling</button>
+                                <button id="add-process" class="btn-demo">Agregar Proceso</button>
+                            </div>
+                            <canvas id="scheduler-canvas" width="800" height="400"></canvas>
+                            <div id="scheduler-stats" class="stats"></div>
                         </div>
                     </div>
                 </div>
