@@ -1,0 +1,24 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[user]
+	email = enorastrokes@gmail.com
+	name = AmeliaDi
+[remote "origin"]
+	url = https://github.com/AmeliaDi/technical-cv.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+[branch "gh-pages"]
+	vscode-merge-base = origin/main
+[branch "project/kernel-module"]
+	vscode-merge-base = origin/main
+[branch "project/crypto-asm"]
+	vscode-merge-base = origin/main
+[branch "project/network-scanner"]
+	vscode-merge-base = origin/main
+[branch "project/bootloader"]
+	vscode-merge-base = origin/main
