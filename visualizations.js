@@ -17,63 +17,142 @@ class MathVisualizer {
         this.sampleRate = 44100;
         this.frequency = 440;
         this.bufferSize = 1024;
+        
+        console.log('🔢 MathVisualizer constructor called');
     }
 
     init() {
+        console.log('🔢 MathVisualizer init() called');
+        
         // Initialize Mandelbrot visualization
-        this.mandelCanvas = document.getElementById('mandel-canvas');
-        this.mandelCtx = this.mandelCanvas.getContext('2d');
-        this.mandelStats = document.getElementById('mandel-stats');
+        this.mandelCanvas = document.getElementById('mandelbrot-canvas');
+        if (this.mandelCanvas) {
+            this.mandelCtx = this.mandelCanvas.getContext('2d');
+            this.mandelStats = document.getElementById('mandelbrot-stats');
+            console.log('✅ Mandelbrot canvas initialized:', this.mandelCanvas.width + 'x' + this.mandelCanvas.height);
+        } else {
+            console.warn('⚠️ Mandelbrot canvas not found');
+        }
         
         // Initialize FFT visualization
         this.fftCanvas = document.getElementById('fft-canvas');
-        this.fftCtx = this.fftCanvas.getContext('2d');
-        this.fftStats = document.getElementById('fft-stats');
+        if (this.fftCanvas) {
+            this.fftCtx = this.fftCanvas.getContext('2d');
+            this.fftStats = document.getElementById('fft-stats');
+            console.log('✅ FFT canvas initialized:', this.fftCanvas.width + 'x' + this.fftCanvas.height);
+        } else {
+            console.warn('⚠️ FFT canvas not found');
+        }
         
         // Setup event listeners
         this.setupEventListeners();
         
-        // Initial render
-        this.renderMandelbrot();
-        this.renderFFT();
+        // Initial render only if canvases exist
+        if (this.mandelCanvas && this.mandelCtx) {
+            console.log('🎨 Starting initial Mandelbrot render...');
+            setTimeout(() => this.renderMandelbrot(), 500);
+        }
+        if (this.fftCanvas && this.fftCtx) {
+            console.log('🎵 Starting initial FFT render...');
+            setTimeout(() => this.renderFFT(), 1000);
+        }
     }
 
     setupEventListeners() {
-        // Mandelbrot controls
-        document.getElementById('mandel-zoom').addEventListener('input', (e) => {
-            this.mandelZoom = parseFloat(e.target.value);
-            this.renderMandelbrot();
-        });
+        console.log('🔗 Setting up event listeners...');
         
-        document.getElementById('mandel-iter').addEventListener('input', (e) => {
-            this.mandelIterations = parseInt(e.target.value);
-            this.renderMandelbrot();
-        });
+        // Mandelbrot controls
+        const mandelZoom = document.getElementById('mandel-zoom');
+        if (mandelZoom) {
+            mandelZoom.addEventListener('input', (e) => {
+                this.mandelZoom = parseFloat(e.target.value);
+                console.log('🔍 Zoom changed to:', this.mandelZoom);
+                this.renderMandelbrot();
+            });
+            console.log('✅ Mandelbrot zoom control connected');
+        }
+        
+        const mandelIter = document.getElementById('mandel-iter');
+        if (mandelIter) {
+            mandelIter.addEventListener('input', (e) => {
+                this.mandelIterations = parseInt(e.target.value);
+                console.log('🔢 Iterations changed to:', this.mandelIterations);
+                this.renderMandelbrot();
+            });
+            console.log('✅ Mandelbrot iterations control connected');
+        }
         
         // FFT waveform controls
-        document.getElementById('sine-wave').addEventListener('click', () => {
-            this.currentWaveform = 'sine';
-            this.renderFFT();
-        });
+        const sineWave = document.getElementById('sine-wave');
+        if (sineWave) {
+            sineWave.addEventListener('click', () => {
+                this.currentWaveform = 'sine';
+                console.log('🎵 Waveform changed to: sine');
+                this.updateActiveButton('sine-wave');
+                this.renderFFT();
+            });
+            console.log('✅ Sine wave button connected');
+        }
         
-        document.getElementById('square-wave').addEventListener('click', () => {
-            this.currentWaveform = 'square';
-            this.renderFFT();
-        });
+        const squareWave = document.getElementById('square-wave');
+        if (squareWave) {
+            squareWave.addEventListener('click', () => {
+                this.currentWaveform = 'square';
+                console.log('🎵 Waveform changed to: square');
+                this.updateActiveButton('square-wave');
+                this.renderFFT();
+            });
+            console.log('✅ Square wave button connected');
+        }
         
-        document.getElementById('sawtooth-wave').addEventListener('click', () => {
-            this.currentWaveform = 'sawtooth';
-            this.renderFFT();
-        });
+        const sawtoothWave = document.getElementById('sawtooth-wave');
+        if (sawtoothWave) {
+            sawtoothWave.addEventListener('click', () => {
+                this.currentWaveform = 'sawtooth';
+                console.log('🎵 Waveform changed to: sawtooth');
+                this.updateActiveButton('sawtooth-wave');
+                this.renderFFT();
+            });
+            console.log('✅ Sawtooth wave button connected');
+        }
         
         // Canvas click for Mandelbrot zoom
-        this.mandelCanvas.addEventListener('click', (e) => {
-            this.handleMandelClick(e);
+        if (this.mandelCanvas) {
+            this.mandelCanvas.addEventListener('click', (e) => {
+                this.handleMandelClick(e);
+            });
+            console.log('✅ Mandelbrot canvas click handler connected');
+        }
+    }
+
+    updateActiveButton(activeId) {
+        // Remove active class from all wave buttons
+        ['sine-wave', 'square-wave', 'sawtooth-wave'].forEach(id => {
+            const btn = document.getElementById(id);
+            if (btn) {
+                btn.classList.remove('active');
+            }
         });
+        
+        // Add active class to clicked button
+        const activeBtn = document.getElementById(activeId);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+        }
     }
 
     async renderMandelbrot() {
-        if (this.isRendering) return;
+        if (this.isRendering) {
+            console.log('⚠️ Mandelbrot render already in progress');
+            return;
+        }
+        
+        if (!this.mandelCanvas || !this.mandelCtx) {
+            console.error('❌ Mandelbrot canvas not available');
+            return;
+        }
+        
+        console.log('🎨 Starting Mandelbrot render, zoom:', this.mandelZoom, 'iterations:', this.mandelIterations);
         
         this.isRendering = true;
         const startTime = performance.now();
@@ -82,6 +161,10 @@ class MathVisualizer {
         const canvas = this.mandelCanvas;
         const width = canvas.width;
         const height = canvas.height;
+        
+        // Clear canvas first
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, width, height);
         
         const imageData = ctx.createImageData(width, height);
         const data = imageData.data;
@@ -102,7 +185,12 @@ class MathVisualizer {
                 
                 let iterations;
                 try {
-                    iterations = wasmLoader.callFunction('mandelbrot_point', x, y, this.mandelIterations);
+                    // Try WebAssembly first if available
+                    if (window.wasmLoader && window.wasmLoader.callFunction) {
+                        iterations = window.wasmLoader.callFunction('mandelbrot_point', x, y, this.mandelIterations);
+                    } else {
+                        iterations = this.mandelbrotJS(x, y, this.mandelIterations);
+                    }
                 } catch (error) {
                     // Fallback JavaScript implementation
                     iterations = this.mandelbrotJS(x, y, this.mandelIterations);
@@ -121,8 +209,8 @@ class MathVisualizer {
                 data[index + 3] = 255;     // Alpha
             }
             
-            // Update progress every few rows
-            if (py % 10 === 0) {
+            // Update progress every 20 rows for smoother rendering
+            if (py % 20 === 0) {
                 ctx.putImageData(imageData, 0, 0);
                 await this.sleep(1);
             }
@@ -132,6 +220,8 @@ class MathVisualizer {
         
         const endTime = performance.now();
         const renderTime = endTime - startTime;
+        
+        console.log('✅ Mandelbrot render completed in', renderTime.toFixed(2), 'ms');
         
         // Update statistics
         this.updateMandelStats(renderTime, totalIterations, pixelsCalculated);
@@ -158,10 +248,11 @@ class MathVisualizer {
             return { r: 0, g: 0, b: 0 }; // Black for points in the set
         }
         
-        // HSV to RGB color mapping
-        const hue = (iterations / maxIter) * 360;
-        const saturation = 1.0;
-        const value = iterations < maxIter ? 1.0 : 0.0;
+        // Enhanced color mapping
+        const t = iterations / maxIter;
+        const hue = (t * 360) % 360;
+        const saturation = 0.8 + (t * 0.2);
+        const value = t < 1 ? 0.6 + (t * 0.4) : 0.0;
         
         return this.hsvToRgb(hue, saturation, value);
     }
@@ -199,21 +290,31 @@ class MathVisualizer {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         
-        // Convert to complex coordinates and zoom in
-        const centerX = -0.5;
-        const centerY = 0;
+        console.log('🖱️ Mandelbrot canvas clicked at:', x, y);
+        
+        // Convert click coordinates to complex plane
+        const width = this.mandelCanvas.width;
+        const height = this.mandelCanvas.height;
         const scale = 3 / this.mandelZoom;
         
-        const newCenterX = centerX + (x - this.mandelCanvas.width / 2) * scale / this.mandelCanvas.width * 2;
-        const newCenterY = centerY + (y - this.mandelCanvas.height / 2) * scale / this.mandelCanvas.height * 2;
+        const complexX = -0.5 + (x - width / 2) * scale / width * 2;
+        const complexY = 0 + (y - height / 2) * scale / height * 2;
         
+        console.log('🔍 Zooming into complex point:', complexX.toFixed(4), complexY.toFixed(4));
+        
+        // Increase zoom
         this.mandelZoom *= 2;
-        document.getElementById('mandel-zoom').value = this.mandelZoom;
+        const zoomSlider = document.getElementById('mandel-zoom');
+        if (zoomSlider && this.mandelZoom <= 100) {
+            zoomSlider.value = this.mandelZoom;
+        }
         
         this.renderMandelbrot();
     }
 
     updateMandelStats(renderTime, totalIterations, pixelsCalculated) {
+        if (!this.mandelStats) return;
+        
         const avgIterations = totalIterations / pixelsCalculated;
         this.mandelStats.innerHTML = `
             <div><span class="variable">ZOOM</span>: ${this.mandelZoom.toFixed(1)}x</div>
@@ -225,45 +326,47 @@ class MathVisualizer {
     }
 
     async renderFFT() {
+        if (!this.fftCanvas || !this.fftCtx) {
+            console.error('❌ FFT canvas not available');
+            return;
+        }
+        
+        console.log('🎵 Starting FFT render for waveform:', this.currentWaveform);
+        
         const startTime = performance.now();
         
-        // Generate waveform data
-        const buffer = wasmLoader.allocateArray(this.bufferSize, 'f64');
-        const realBuffer = wasmLoader.allocateArray(this.bufferSize, 'f64');
-        const imagBuffer = wasmLoader.allocateArray(this.bufferSize, 'f64');
-        
         try {
-            // Generate waveform
-            switch (this.currentWaveform) {
-                case 'sine':
-                    wasmLoader.callFunction('generate_sine_wave', buffer, this.bufferSize, this.frequency, this.sampleRate);
-                    break;
-                case 'square':
-                    wasmLoader.callFunction('generate_square_wave', buffer, this.bufferSize, this.frequency, this.sampleRate);
-                    break;
-                case 'sawtooth':
-                    wasmLoader.callFunction('generate_sawtooth_wave', buffer, this.bufferSize, this.frequency, this.sampleRate);
-                    break;
-            }
+            // Generate time domain signal
+            const timeData = new Float32Array(this.bufferSize);
             
-            // Copy to real buffer, zero imaginary
-            const bufferView = wasmLoader.getArrayView(buffer, this.bufferSize, 'f64');
-            const realView = wasmLoader.getArrayView(realBuffer, this.bufferSize, 'f64');
-            const imagView = wasmLoader.getArrayView(imagBuffer, this.bufferSize, 'f64');
-            
+            // Generate waveform in JavaScript
             for (let i = 0; i < this.bufferSize; i++) {
-                realView[i] = bufferView[i];
-                imagView[i] = 0;
+                const t = i / this.sampleRate;
+                switch (this.currentWaveform) {
+                    case 'sine':
+                        timeData[i] = Math.sin(2 * Math.PI * this.frequency * t);
+                        break;
+                    case 'square':
+                        timeData[i] = Math.sign(Math.sin(2 * Math.PI * this.frequency * t));
+                        break;
+                    case 'sawtooth':
+                        timeData[i] = 2 * (this.frequency * t - Math.floor(this.frequency * t + 0.5));
+                        break;
+                    default:
+                        timeData[i] = Math.sin(2 * Math.PI * this.frequency * t);
+                }
             }
             
-            // Perform FFT
-            wasmLoader.callFunction('fft_real', realBuffer, imagBuffer, this.bufferSize);
+            // Compute FFT using JavaScript
+            const fftResult = this.computeFFTJS(timeData);
             
             // Visualize results
-            this.drawFFT(bufferView, realView, imagView);
+            this.drawFFT(timeData, fftResult.real, fftResult.imag);
+            
+            console.log('✅ FFT render completed');
             
         } catch (error) {
-            console.error('Error in FFT calculation:', error);
+            console.error('❌ Error in FFT calculation:', error);
             this.drawFFTFallback();
         }
         
@@ -273,13 +376,89 @@ class MathVisualizer {
         this.updateFFTStats(processingTime);
     }
 
+    computeFFTJS(data) {
+        const N = data.length;
+        
+        // Ensure N is a power of 2
+        const logN = Math.log2(N);
+        if (Math.floor(logN) !== logN) {
+            console.warn('⚠️ Buffer size is not a power of 2, padding with zeros');
+            // Pad to next power of 2
+            const newSize = Math.pow(2, Math.ceil(logN));
+            const paddedData = new Float32Array(newSize);
+            paddedData.set(data);
+            return this.computeFFTJS(paddedData);
+        }
+        
+        const real = new Float32Array(N);
+        const imag = new Float32Array(N);
+        
+        // Copy input data
+        for (let i = 0; i < N; i++) {
+            real[i] = data[i];
+            imag[i] = 0;
+        }
+        
+        // Bit reversal
+        for (let i = 0; i < N; i++) {
+            const j = this.reverseBits(i, logN);
+            if (j > i) {
+                [real[i], real[j]] = [real[j], real[i]];
+                [imag[i], imag[j]] = [imag[j], imag[i]];
+            }
+        }
+        
+        // FFT computation
+        for (let len = 2; len <= N; len *= 2) {
+            const angle = -2 * Math.PI / len;
+            const wlenReal = Math.cos(angle);
+            const wlenImag = Math.sin(angle);
+            
+            for (let i = 0; i < N; i += len) {
+                let wReal = 1;
+                let wImag = 0;
+                
+                for (let j = 0; j < len / 2; j++) {
+                    const u = i + j;
+                    const v = i + j + len / 2;
+                    
+                    const tReal = real[v] * wReal - imag[v] * wImag;
+                    const tImag = real[v] * wImag + imag[v] * wReal;
+                    
+                    real[v] = real[u] - tReal;
+                    imag[v] = imag[u] - tImag;
+                    real[u] += tReal;
+                    imag[u] += tImag;
+                    
+                    const nextWReal = wReal * wlenReal - wImag * wlenImag;
+                    const nextWImag = wReal * wlenImag + wImag * wlenReal;
+                    wReal = nextWReal;
+                    wImag = nextWImag;
+                }
+            }
+        }
+        
+        return { real, imag };
+    }
+
+    reverseBits(n, bits) {
+        let result = 0;
+        for (let i = 0; i < bits; i++) {
+            result = (result << 1) | (n & 1);
+            n >>= 1;
+        }
+        return result;
+    }
+
     drawFFT(timeData, freqReal, freqImag) {
         const ctx = this.fftCtx;
         const canvas = this.fftCanvas;
         const width = canvas.width;
         const height = canvas.height;
         
-        ctx.clearRect(0, 0, width, height);
+        // Clear canvas with dark background
+        ctx.fillStyle = '#0a0a0a';
+        ctx.fillRect(0, 0, width, height);
         
         // Draw time domain (top half)
         ctx.strokeStyle = '#00aaff';
@@ -303,7 +482,7 @@ class MathVisualizer {
         
         // Draw frequency domain (bottom half)
         ctx.strokeStyle = '#00ff00';
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 2;
         ctx.beginPath();
         
         const freqHeight = height * 0.4;
@@ -313,7 +492,7 @@ class MathVisualizer {
         for (let i = 0; i < this.bufferSize / 2; i++) {
             const magnitude = Math.sqrt(freqReal[i] * freqReal[i] + freqImag[i] * freqImag[i]);
             const x = i * freqScale;
-            const y = freqStart + freqHeight - (magnitude * freqHeight / this.bufferSize);
+            const y = freqStart + freqHeight - (magnitude * freqHeight / this.bufferSize * 4);
             
             if (i === 0) {
                 ctx.moveTo(x, y);
@@ -325,8 +504,8 @@ class MathVisualizer {
         
         // Draw labels
         ctx.fillStyle = '#ffffff';
-        ctx.font = '12px JetBrains Mono';
-        ctx.fillText('Time Domain', 10, 20);
+        ctx.font = '14px "Courier New", monospace';
+        ctx.fillText('Time Domain - ' + this.currentWaveform.toUpperCase(), 10, 25);
         ctx.fillText('Frequency Domain', 10, freqStart - 10);
         
         // Draw grid lines
@@ -356,14 +535,19 @@ class MathVisualizer {
         const ctx = this.fftCtx;
         const canvas = this.fftCanvas;
         
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
         ctx.fillStyle = '#ff4444';
-        ctx.font = '16px JetBrains Mono';
+        ctx.font = '16px "Courier New", monospace';
         ctx.textAlign = 'center';
         ctx.fillText('FFT Calculation Error', canvas.width / 2, canvas.height / 2);
+        ctx.fillText('Check console for details', canvas.width / 2, canvas.height / 2 + 25);
     }
 
     updateFFTStats(processingTime) {
+        if (!this.fftStats) return;
+        
         const nyquist = this.sampleRate / 2;
         const resolution = nyquist / (this.bufferSize / 2);
         
@@ -431,10 +615,20 @@ class MathUtils {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    window.mathVisualizer = new MathVisualizer();
-    window.mathVisualizer.init();
-    window.MathUtils = MathUtils;
-    
-    console.log('🔢 Mathematical visualization system ready!');
-    console.log('🧮 MathUtils available with: fibonacci, isPerfectNumber, gcd, lcm, factorial, combinations');
+    // Add a small delay to ensure all DOM elements are fully loaded
+    setTimeout(() => {
+        console.log('🔢 Initializing mathematical visualization system...');
+        window.mathVisualizer = new MathVisualizer();
+        window.mathVisualizer.init();
+        window.MathUtils = MathUtils;
+        
+        // Set initial active button
+        const sineBtn = document.getElementById('sine-wave');
+        if (sineBtn) {
+            sineBtn.classList.add('active');
+        }
+        
+        console.log('🎉 Mathematical visualization system ready!');
+        console.log('🧮 MathUtils available with: fibonacci, isPerfectNumber, gcd, lcm, factorial, combinations');
+    }, 100);
 }); 

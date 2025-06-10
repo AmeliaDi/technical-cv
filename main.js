@@ -1,682 +1,434 @@
-// Main application controller and terminal effects
+/**
+ * Ultra-Clean CV Application Controller
+ * @description Hyper-optimized main application with modern ES6+ practices
+ * @author Amelia Enora 🌈 Marceline Chavez Barroso
+ * @version 2.0.0 - Ultra Performance Edition
+ */
+
 class CVApplication {
+    // Static configuration
+    static CONFIG = {
+        TYPEWRITER_SPEED: 30,
+        MATRIX_OPACITY: 0.03,
+        MATRIX_INTERVAL: 120,
+        ANIMATION_DURATION: 300,
+        INTERSECTION_THRESHOLD: 0.3
+    };
+
     constructor() {
-        this.terminalContainer = null;
-        this.currentSection = 'about';
-        this.isLoaded = false;
-        this.typewriterSpeed = 30;
+        this.state = {
+            isLoaded: false,
+            currentSection: 'about',
+            activeAnimations: new Set(),
+            observers: new Map()
+        };
+        
+        this.elements = {
+            container: null,
+            title: null,
+            navLinks: null,
+            sections: null
+        };
+
+        this.init();
     }
 
+    // Main initialization with error handling
     async init() {
-        console.log('🚀 Initializing CV Application...');
-        
-        this.terminalContainer = document.querySelector('.terminal-container');
+        try {
+            console.log('🚀 Inicializando CV Application v2.0...');
+            
+            this.cacheElements();
+            this.setupNavigationSystem();
+            this.setupTerminalEffects();
+            this.setupKeyboardShortcuts();
+            this.setupPerformanceMonitoring();
+            this.registerServiceWorker();
+            
+            await this.initializeModules();
+            
+            this.state.isLoaded = true;
+            console.log('✅ CV Application listo!');
+            
+            this.displayWelcomeMessage();
+        } catch (error) {
+            console.error('❌ Error al inicializar aplicación:', error);
+        }
+    }
+
+    // Register Service Worker for offline functionality
+    async registerServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            try {
+                const registration = await navigator.serviceWorker.register('/service-worker.js');
+                console.log('✅ Service Worker registrado:', registration.scope);
+                
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            console.log('🔄 Nueva versión disponible, actualizando...');
+                            newWorker.postMessage({ action: 'skipWaiting' });
+                        }
+                    });
+                });
+            } catch (error) {
+                console.warn('⚠️ Error registrando Service Worker:', error);
+            }
+        }
+    }
+
+    // Cache DOM elements for performance
+    cacheElements() {
+        this.elements = {
+            container: document.querySelector('.terminal-container'),
+            title: document.querySelector('.terminal-title'),
+            navLinks: document.querySelectorAll('.nav-link'),
+            sections: document.querySelectorAll('.section')
+        };
+    }
+
+    // Setup navigation with smooth scrolling and highlighting
+    setupNavigationSystem() {
         this.setupSmoothScrolling();
-        this.setupNavigationHighlighting();
-        this.setupTerminalEffects();
-        this.setupKeyboardShortcuts();
-        this.setupAlgorithmDescriptions();
-        
-        // Wait for all modules to load
-        await this.waitForModulesLoad();
-        
-        // Add loading animation
-        this.addTerminalStartupAnimation();
-        
-        this.isLoaded = true;
-        console.log('✅ CV Application ready!');
-        
-        // Display welcome message in console
-        this.displayWelcomeMessage();
+        this.setupSectionObserver();
     }
 
     setupSmoothScrolling() {
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    this.updateCurrentSection(targetId);
-                    this.addTerminalCommand(targetId);
-                }
-            });
+        this.elements.navLinks.forEach(link => {
+            link.addEventListener('click', this.handleNavClick.bind(this), { passive: false });
         });
     }
 
-    setupNavigationHighlighting() {
-        // Intersection Observer for section highlighting
-        const options = {
-            rootMargin: '-50px 0px -50px 0px',
-            threshold: 0.3
+    handleNavClick(e) {
+        e.preventDefault();
+        
+        const targetId = e.currentTarget.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        
+        if (!targetSection) return;
+
+        // Smooth scroll with modern API
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+        });
+
+        this.updateActiveSection(targetId);
+        this.addTerminalCommand(targetId);
+    }
+
+    setupSectionObserver() {
+        const observerOptions = {
+            rootMargin: '-10% 0px -10% 0px',
+            threshold: CVApplication.CONFIG.INTERSECTION_THRESHOLD
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.updateCurrentSection(entry.target.id);
-                }
-            });
-        }, options);
+        const observer = new IntersectionObserver(
+            this.handleSectionIntersection.bind(this),
+            observerOptions
+        );
 
-        // Observe all sections
-        document.querySelectorAll('.section').forEach(section => {
+        this.elements.sections.forEach(section => {
             observer.observe(section);
         });
+
+        this.state.observers.set('sections', observer);
     }
 
-    updateCurrentSection(sectionId) {
-        // Update active navigation link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
+    handleSectionIntersection(entries) {
+        const visibleEntry = entries.find(entry => entry.isIntersecting);
+        if (visibleEntry) {
+            this.updateActiveSection(visibleEntry.target.id);
+        }
+    }
+
+    updateActiveSection(sectionId) {
+        // Update navigation highlighting
+        this.elements.navLinks.forEach(link => {
+            link.classList.toggle('active', 
+                link.getAttribute('href') === `#${sectionId}`
+            );
         });
-        
-        const activeLink = document.querySelector(`a[href="#${sectionId}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
-        }
-        
-        this.currentSection = sectionId;
-        
+
         // Update terminal title
-        const terminalTitle = document.querySelector('.terminal-title');
-        if (terminalTitle) {
-            terminalTitle.textContent = `amelia@systems:~/cv/${sectionId}$`;
+        if (this.elements.title) {
+            this.elements.title.textContent = `amelia@systems:~/cv/${sectionId}$`;
         }
+
+        this.state.currentSection = sectionId;
     }
 
+    // Terminal visual effects
     setupTerminalEffects() {
-        // Add cursor blink effect
-        this.addCursorBlink();
-        
-        // Add matrix rain effect (subtle)
-        this.addMatrixEffect();
-        
-        // Add glitch effect on hover for special elements
+        this.addMatrixBackground();
+        this.addTerminalCursor();
         this.setupGlitchEffects();
     }
 
-    addCursorBlink() {
-        const style = document.createElement('style');
-        style.textContent = `
-            .terminal-cursor {
-                display: inline-block;
-                background-color: var(--text-primary);
-                animation: blink 1s infinite;
-                width: 8px;
-                height: 16px;
-                margin-left: 2px;
-            }
-            
-            @keyframes blink {
-                0%, 50% { opacity: 1; }
-                51%, 100% { opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    addMatrixEffect() {
-        // Subtle matrix rain in the background
-        const canvas = document.createElement('canvas');
-        canvas.style.position = 'fixed';
-        canvas.style.top = '0';
-        canvas.style.left = '0';
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
-        canvas.style.zIndex = '-1';
-        canvas.style.opacity = '0.05';
-        canvas.style.pointerEvents = 'none';
-        
-        document.body.appendChild(canvas);
-        
+    addMatrixBackground() {
+        const canvas = this.createCanvas();
         const ctx = canvas.getContext('2d');
         
+        const matrixConfig = {
+            chars: '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'.split(''),
+            fontSize: 10,
+            drops: []
+        };
+
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            
+            const columns = Math.floor(canvas.width / matrixConfig.fontSize);
+            matrixConfig.drops = Array.from({ length: columns }, 
+                () => Math.random() * canvas.height
+            );
         };
-        
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        
-        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        const charArray = chars.split('');
-        
-        const fontSize = 10;
-        const columns = Math.floor(canvas.width / fontSize);
-        const drops = [];
-        
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.random() * canvas.height;
-        }
-        
-        const draw = () => {
+
+        const drawMatrix = () => {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             ctx.fillStyle = '#00ff00';
-            ctx.font = `${fontSize}px monospace`;
+            ctx.font = `${matrixConfig.fontSize}px JetBrains Mono, monospace`;
             
-            for (let i = 0; i < drops.length; i++) {
-                const text = charArray[Math.floor(Math.random() * charArray.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            matrixConfig.drops.forEach((drop, i) => {
+                const char = matrixConfig.chars[Math.floor(Math.random() * matrixConfig.chars.length)];
+                ctx.fillText(char, i * matrixConfig.fontSize, drop * matrixConfig.fontSize);
                 
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
+                if (drop * matrixConfig.fontSize > canvas.height && Math.random() > 0.975) {
+                    matrixConfig.drops[i] = 0;
+                } else {
+                    matrixConfig.drops[i]++;
                 }
-                drops[i]++;
-            }
+            });
         };
+
+        // Optimize with requestAnimationFrame
+        let lastTime = 0;
+        const animate = (currentTime) => {
+            if (currentTime - lastTime >= CVApplication.CONFIG.MATRIX_INTERVAL) {
+                drawMatrix();
+                lastTime = currentTime;
+            }
+            requestAnimationFrame(animate);
+        };
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas, { passive: true });
+        requestAnimationFrame(animate);
+    }
+
+    createCanvas() {
+        const canvas = document.createElement('canvas');
+        Object.assign(canvas.style, {
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            zIndex: '-1',
+            opacity: CVApplication.CONFIG.MATRIX_OPACITY,
+            pointerEvents: 'none'
+        });
         
-        setInterval(draw, 100);
+        document.body.appendChild(canvas);
+        return canvas;
+    }
+
+    addTerminalCursor() {
+        if (document.getElementById('cursor-styles')) return;
+
+        const style = document.createElement('style');
+        style.id = 'cursor-styles';
+        style.textContent = `
+            .terminal-cursor {
+                display: inline-block;
+                background: var(--text-primary);
+                width: 8px;
+                height: 16px;
+                margin-left: 2px;
+                animation: cursorBlink 1s infinite;
+            }
+            
+            @keyframes cursorBlink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+            
+            .glitch-effect:hover {
+                animation: glitchEffect 0.3s ease-in-out;
+            }
+            
+            @keyframes glitchEffect {
+                0%, 100% { transform: translateX(0); }
+                20% { transform: translateX(-2px); }
+                40% { transform: translateX(2px); }
+                60% { transform: translateX(-1px); }
+                80% { transform: translateX(1px); }
+            }
+        `;
+        
+        document.head.appendChild(style);
     }
 
     setupGlitchEffects() {
-        const style = document.createElement('style');
-        style.textContent = `
-            .glitch {
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .glitch:hover::before,
-            .glitch:hover::after {
-                content: attr(data-text);
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: var(--bg-terminal);
-            }
-            
-            .glitch:hover::before {
-                animation: glitch-1 0.5s infinite;
-                color: #ff0000;
-                z-index: -1;
-            }
-            
-            .glitch:hover::after {
-                animation: glitch-2 0.5s infinite;
-                color: #00ffff;
-                z-index: -2;
-            }
-            
-            @keyframes glitch-1 {
-                0%, 14%, 15%, 49%, 50%, 99%, 100% {
-                    transform: translateX(0);
-                }
-                1%, 13% {
-                    transform: translateX(-2px);
-                }
-                16%, 48% {
-                    transform: translateX(2px);
-                }
-            }
-            
-            @keyframes glitch-2 {
-                0%, 20%, 21%, 62%, 63%, 99%, 100% {
-                    transform: translateY(0);
-                }
-                2%, 19% {
-                    transform: translateY(-1px);
-                }
-                22%, 61% {
-                    transform: translateY(1px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Add glitch effect to file names
-        document.querySelectorAll('.file-name').forEach(element => {
-            element.classList.add('glitch');
-            element.setAttribute('data-text', element.textContent);
+        // Add glitch effect to special elements
+        document.querySelectorAll('.nav-link, .cert-name, .skill-level').forEach(element => {
+            element.classList.add('glitch-effect');
         });
     }
 
-    setupAlgorithmDescriptions() {
-        const algorithmSelector = document.getElementById('algorithm-selector');
-        const algorithmDescription = document.getElementById('algorithm-description');
-        
-        if (!algorithmSelector || !algorithmDescription) return;
-        
-        const descriptions = {
-            quicksort: {
-                title: "⚡ QuickSort - Divide y Vencerás",
-                description: "Algoritmo de ordenamiento que utiliza la estrategia divide y vencerás. Selecciona un pivote y particiona el array, luego recursivamente ordena las sublistas. Muy eficiente en promedio con O(n log n), pero puede degradarse a O(n²) en el peor caso.",
-                complexity: "Promedio: O(n log n), Peor caso: O(n²)",
-                space: "O(log n)",
-                stable: "No",
-                inplace: "Sí"
-            },
-            mergesort: {
-                title: "🔀 MergeSort - Estable y Eficiente",
-                description: "Algoritmo de ordenamiento estable que divide el array en mitades, las ordena recursivamente y las combina. Garantiza O(n log n) en todos los casos, ideal para datos grandes donde la estabilidad es importante.",
-                complexity: "Siempre: O(n log n)",
-                space: "O(n)",
-                stable: "Sí",
-                inplace: "No"
-            },
-            heapsort: {
-                title: "🏔️ HeapSort - In-place Garantizado",
-                description: "Utiliza la estructura de datos heap para ordenar. Construye un max-heap y extrae repetidamente el máximo. Garantiza O(n log n) en todos los casos y es in-place.",
-                complexity: "Siempre: O(n log n)",
-                space: "O(1)",
-                stable: "No",
-                inplace: "Sí"
-            },
-            radixsort: {
-                title: "📊 RadixSort - No Comparativo",
-                description: "Algoritmo de ordenamiento no comparativo que procesa dígitos individuales. Muy eficiente para números enteros con rango limitado, con complejidad lineal en el número de elementos.",
-                complexity: "O(d × (n + k))",
-                space: "O(n + k)",
-                stable: "Sí",
-                inplace: "No"
-            },
-            countingsort: {
-                title: "📈 CountingSort - Rango Limitado",
-                description: "Algoritmo de ordenamiento no comparativo que cuenta las ocurrencias de cada elemento. Muy eficiente cuando el rango de valores es pequeño comparado con el número de elementos.",
-                complexity: "O(n + k)",
-                space: "O(k)",
-                stable: "Sí",
-                inplace: "No"
-            },
-            shellsort: {
-                title: "🐚 ShellSort - Gap Sequence",
-                description: "Generalización del insertion sort que permite intercambios de elementos distantes. Utiliza una secuencia de gaps que disminuye, mejorando significativamente el rendimiento.",
-                complexity: "O(n log n) - O(n²)",
-                space: "O(1)",
-                stable: "No",
-                inplace: "Sí"
-            },
-            cocktailsort: {
-                title: "🍸 CocktailSort - Bidireccional",
-                description: "Variación del bubble sort que ordena en ambas direcciones alternadamente. Funciona mejor que bubble sort cuando los elementos pequeños están al final del array.",
-                complexity: "O(n²)",
-                space: "O(1)",
-                stable: "Sí",
-                inplace: "Sí"
-            },
-            gnomesort: {
-                title: "🧙 GnomeSort - Gnomo del Jardín",
-                description: "Algoritmo simple conceptualmente similar al insertion sort. Un gnomo de jardín ordena macetas moviendose hacia adelante si están en orden, hacia atrás si no lo están.",
-                complexity: "O(n²)",
-                space: "O(1)",
-                stable: "Sí",
-                inplace: "Sí"
-            },
-            pancakesort: {
-                title: "🥞 PancakeSort - Voltear Panqueques",
-                description: "Algoritmo que solo puede 'voltear' el array desde el inicio hasta cierta posición, como voltear una pila de panqueques. Interesante desde el punto de vista teórico y divertido de visualizar.",
-                complexity: "O(n²)",
-                space: "O(1)",
-                stable: "No",
-                inplace: "Sí"
-            },
-            bogosort: {
-                title: "🎲 BogoSort - ¡La Locura Pura!",
-                description: "El algoritmo de ordenamiento más ineficiente: mezcla aleatoriamente el array hasta que esté ordenado. Complejidad promedio O(n×n!) y peor caso O(∞). ¡Solo para demostración educativa!",
-                complexity: "Promedio: O(n×n!), Peor: O(∞)",
-                space: "O(1)",
-                stable: "No",
-                inplace: "Sí",
-                warning: "⚠️ Advertencia: Este algoritmo puede nunca terminar. Limitado a 100,000 intentos para la demo."
-            }
-        };
-        
-        const updateDescription = () => {
-            const selected = algorithmSelector.value;
-            const info = descriptions[selected];
-            
-            if (info) {
-                algorithmDescription.innerHTML = `
-                    <h4>${info.title}</h4>
-                    <p>${info.description}</p>
-                    <div class="algorithm-details">
-                        <div class="detail-row">
-                            <strong>Complejidad temporal:</strong> ${info.complexity}
-                        </div>
-                        <div class="detail-row">
-                            <strong>Complejidad espacial:</strong> ${info.space}
-                        </div>
-                        <div class="detail-row">
-                            <strong>Estable:</strong> ${info.stable}
-                        </div>
-                        <div class="detail-row">
-                            <strong>In-place:</strong> ${info.inplace}
-                        </div>
-                    </div>
-                    ${info.warning ? `<div class="bogosort-warning">${info.warning}</div>` : ''}
-                `;
-            }
-        };
-        
-        algorithmSelector.addEventListener('change', updateDescription);
-        
-        // Initialize with first algorithm
-        updateDescription();
-    }
-
+    // Keyboard shortcuts for navigation
     setupKeyboardShortcuts() {
+        const shortcuts = {
+            'KeyA': 'about',
+            'KeyS': 'skills', 
+            'KeyV': 'visualizations',
+            'KeyP': 'projects',
+            'KeyN': 'network',
+            'KeyC': 'certifications'
+        };
+
         document.addEventListener('keydown', (e) => {
-            // Ctrl + number keys for quick navigation
-            if (e.ctrlKey && e.key >= '1' && e.key <= '6') {
+            if (e.ctrlKey && shortcuts[e.code]) {
                 e.preventDefault();
-                const sections = ['about', 'skills', 'algorithms', 'visualizations', 'projects', 'network'];
-                const sectionIndex = parseInt(e.key) - 1;
-                
-                if (sections[sectionIndex]) {
-                    const section = document.getElementById(sections[sectionIndex]);
-                    if (section) {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                        this.addTerminalCommand(sections[sectionIndex]);
-                    }
+                const section = document.getElementById(shortcuts[e.code]);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
                 }
             }
-            
-            // F12 for developer console
-            if (e.key === 'F12') {
-                e.preventDefault();
-                this.showDeveloperConsole();
-            }
-            
-            // Escape to clear terminal animations
-            if (e.key === 'Escape') {
-                this.clearTerminalAnimations();
-            }
-        });
+        }, { passive: false });
     }
 
+    // Performance monitoring
+    setupPerformanceMonitoring() {
+        if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver((list) => {
+                list.getEntries().forEach(entry => {
+                    if (entry.entryType === 'navigation') {
+                        console.log(`⚡ Page Load: ${entry.loadEventEnd - entry.loadEventStart}ms`);
+                    }
+                });
+            });
+            
+            observer.observe({ entryTypes: ['navigation'] });
+        }
+    }
+
+    // Add terminal command simulation
     addTerminalCommand(section) {
-        // Simulate terminal command execution
-        const commands = {
-            'about': './about.sh',
-            'skills': 'cat skills.asm',
-            'algorithms': 'gcc -O3 algorithms.c -o algorithms.wasm',
-            'visualizations': './math_viz.wasm --interactive',
-            'projects': 'ls -la projects/',
-            'network': 'python3 network_tools.py --demo'
-        };
-        
-        console.log(`🔧 Executing: ${commands[section] || section}`);
+        const command = `cd ~/cv/${section} && ls -la`;
+        console.log(`%c$ ${command}`, 'color: #00ff00; font-family: JetBrains Mono;');
     }
 
-    async addTerminalStartupAnimation() {
-        const startupMessages = [
-            '🖥️  Booting CV Terminal...',
-            '⚡ Loading WebAssembly modules...',
-            '🔧 Initializing algorithm visualizers...',
-            '🌐 Starting network tools...',
-            '🎨 Rendering mathematical visualizations...',
-            '✅ System ready. Welcome to Marcy\'s technical portfolio!'
+    // Module initialization
+    async initializeModules() {
+        const modules = [
+            () => window.algorithmRunner?.init(),
+            () => window.mathVisualizer?.init(),
+            () => window.networkTools?.init(),
+            () => window.i18nManager?.init()
         ];
-        
-        for (const message of startupMessages) {
-            console.log(message);
-            await this.sleep(300);
-        }
+
+        const results = await Promise.allSettled(
+            modules.map(module => {
+                try {
+                    return module?.() || Promise.resolve();
+                } catch (error) {
+                    console.warn('Module init error:', error);
+                    return Promise.resolve();
+                }
+            })
+        );
+
+        const successful = results.filter(r => r.status === 'fulfilled').length;
+        console.log(`📦 Módulos inicializados: ${successful}/${modules.length}`);
     }
 
-    async waitForModulesLoad() {
-        // Wait for WebAssembly module
-        let attempts = 0;
-        while (!window.wasmLoader?.isLoaded && attempts < 50) {
-            await this.sleep(100);
-            attempts++;
-        }
-        
-        // Wait for other modules
-        const modules = ['algorithmVisualizer', 'mathVisualizer', 'networkTools'];
-        for (const module of modules) {
-            attempts = 0;
-            while (!window[module] && attempts < 50) {
-                await this.sleep(100);
-                attempts++;
-            }
-        }
-    }
-
-    showDeveloperConsole() {
-        const consoleContent = `
-╔══════════════════════════════════════════════════════════════════════════════════════╗
-║                                  DEVELOPER CONSOLE                                   ║
-╠══════════════════════════════════════════════════════════════════════════════════════╣
-║ Available Commands:                                                                  ║
-║                                                                                      ║
-║ 🔧 wasmLoader.callFunction(name, ...args)    - Call WebAssembly functions           ║
-║ 📊 performanceBenchmark.benchmarkSortingAlgorithms() - Run performance tests        ║
-║ 🔢 MathUtils.factorial(n)                    - Calculate factorial                   ║
-║ 🌐 NetworkAnalyzer.calculateSubnet(ip, cidr) - Network subnet calculation           ║
-║ 🎨 mathVisualizer.renderMandelbrot()         - Render Mandelbrot set               ║
-║                                                                                      ║
-║ Keyboard Shortcuts:                                                                  ║
-║ • Ctrl+1-6: Quick navigation to sections                                            ║
-║ • ESC: Clear terminal animations                                                    ║
-║ • F12: Show this console                                                            ║
-║                                                                                      ║
-║ System Status:                                                                       ║
-║ • WebAssembly: ${window.wasmLoader?.isLoaded ? '✅ Loaded' : '❌ Loading...'}                                              ║
-║ • Algorithms: ${window.algorithmVisualizer ? '✅ Ready' : '❌ Loading...'}                                               ║
-║ • Math Viz:   ${window.mathVisualizer ? '✅ Ready' : '❌ Loading...'}                                               ║
-║ • Network:    ${window.networkTools ? '✅ Ready' : '❌ Loading...'}                                               ║
-╚══════════════════════════════════════════════════════════════════════════════════════╝
-        `;
-        
-        console.log(consoleContent);
-    }
-
-    clearTerminalAnimations() {
-        // Stop any running animations
-        document.querySelectorAll('.loading').forEach(el => {
-            el.classList.remove('loading');
-        });
-        
-        console.log('🧹 Terminal animations cleared');
-    }
-
+    // Welcome message with style
     displayWelcomeMessage() {
-                 console.log(`
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣴⣶⣶⣿⣿⣿⣿⣿⣿⣿⣶⣶⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⡀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀⠀⠀
-⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀
-⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀
-⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀
-⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
-⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
-⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀
-⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀
-⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        const styles = {
+            title: 'color: #00ff00; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00ff00;',
+            info: 'color: #00aaff; font-size: 12px;',
+            warning: 'color: #ffaa00; font-size: 11px;',
+            success: 'color: #00ff00; font-size: 11px;'
+        };
 
-╔══════════════════════════════════════════════════════════════════════════════════════╗
-║            WELCOME TO AMELIA ENORA 🌈 MARCELINE'S TECHNICAL CV                     ║
-╠══════════════════════════════════════════════════════════════════════════════════════╣
-║                                                                                      ║
-║  🚀 Systems Developer & Low-Level Programming Specialist                            ║
-║  💻 Expert in C, Assembly (x86/x64/ARM), WebAssembly                               ║
-║  🌐 Network Analysis & Protocol Implementation                                       ║
-║  🔧 Linux Systems Programming & Kernel Development                                   ║
-║  🧮 Mathematical Algorithms & Performance Optimization                              ║
-║                                                                                      ║
-║  This interactive CV showcases my technical skills through:                          ║
-║  • Live algorithm visualizations compiled to WebAssembly                            ║
-║  • Real-time mathematical computations and fractals                                 ║
-║  • Network analysis tools and packet capture simulation                             ║
-║  • Assembly syntax highlighting and low-level code examples                         ║
-║                                                                                      ║
-║  Navigate using the terminal-style interface above or use keyboard shortcuts!       ║
-║                                                                                      ║
-╚══════════════════════════════════════════════════════════════════════════════════════╝
-
-🎯 Ready to explore my technical portfolio!
-💡 Press F12 for developer console and available commands.
-        `);
+        console.clear();
+        console.log('%c🌈 AMELIA ENORA CV SYSTEM v2.0', styles.title);
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', styles.info);
+        console.log('%c📧 enorastrokes@gmail.com', styles.info);
+        console.log('%c🐙 github.com/AmeliaDi', styles.info);
+        console.log('%c💼 linkedin.com/in/bogosort', styles.info);
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', styles.info);
+        console.log('%c⚡ Sistema optimizado y listo', styles.success);
+        console.log('%c🎮 Usa Ctrl+A/S/V/P/N/C para navegación rápida', styles.warning);
+        console.log('%c🔍 Panel de seguridad activo en el lado derecho', styles.warning);
     }
 
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    // Cleanup method
+    destroy() {
+        this.state.observers.forEach(observer => observer.disconnect());
+        this.state.activeAnimations.forEach(animation => animation.cancel?.());
+        console.log('🧹 CV Application limpiado');
     }
 }
 
-// Performance monitoring
+
+
+/**
+ * Performance Monitor
+ */
 class PerformanceMonitor {
     constructor() {
-        this.startTime = performance.now();
         this.metrics = {
             loadTime: 0,
-            interactionCount: 0,
-            errorCount: 0
+            interactions: 0,
+            errors: 0
         };
+        this.startTime = performance.now();
     }
 
     recordInteraction() {
-        this.metrics.interactionCount++;
+        this.metrics.interactions++;
     }
 
     recordError(error) {
-        this.metrics.errorCount++;
-        console.error('🚨 Application Error:', error);
+        this.metrics.errors++;
+        console.warn('📊 Error registrado:', error);
     }
 
-    getMetrics() {
-        this.metrics.loadTime = performance.now() - this.startTime;
-        return this.metrics;
-    }
-}
-
-// Global error handler
-window.addEventListener('error', (event) => {
-    if (window.performanceMonitor) {
-        window.performanceMonitor.recordError(event.error);
-    }
-});
-
-// Theme Toggle Functionality
-class ThemeManager {
-    constructor() {
-        this.currentTheme = localStorage.getItem('theme') || 'dark';
-        this.toggleButton = null;
-        this.themeIcon = null;
-        this.init();
-    }
-
-    init() {
-        this.applyTheme(this.currentTheme);
-        this.setupToggleButton();
-    }
-
-    setupToggleButton() {
-        this.toggleButton = document.getElementById('theme-toggle');
-        this.themeIcon = this.toggleButton?.querySelector('.theme-icon');
-        
-        if (this.toggleButton) {
-            this.toggleButton.addEventListener('click', () => {
-                this.toggleTheme();
-            });
-            
-            // Update icon based on current theme
-            this.updateIcon();
-        }
-    }
-
-    toggleTheme() {
-        const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
-        this.setTheme(newTheme);
-        
-        // Add animation effect
-        if (this.themeIcon) {
-            this.themeIcon.style.transform = 'rotate(360deg)';
-            setTimeout(() => {
-                this.themeIcon.style.transform = 'rotate(0deg)';
-            }, 300);
-        }
-    }
-
-    setTheme(theme) {
-        this.currentTheme = theme;
-        this.applyTheme(theme);
-        this.updateIcon();
-        localStorage.setItem('theme', theme);
-        
-        // Dispatch custom event for other components
-        window.dispatchEvent(new CustomEvent('themeChanged', { 
-            detail: { theme } 
-        }));
-    }
-
-    applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        
-        // Update meta theme-color for mobile browsers
-        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-        if (metaThemeColor) {
-            const color = theme === 'dark' ? '#0d1117' : '#ffffff';
-            metaThemeColor.setAttribute('content', color);
-        } else {
-            // Create meta theme-color if it doesn't exist
-            const meta = document.createElement('meta');
-            meta.name = 'theme-color';
-            meta.content = theme === 'dark' ? '#0d1117' : '#ffffff';
-            document.head.appendChild(meta);
-        }
-    }
-
-    updateIcon() {
-        if (this.themeIcon) {
-            this.themeIcon.textContent = this.currentTheme === 'dark' ? '☀️' : '🌙';
-            this.toggleButton.title = this.currentTheme === 'dark' ? 
-                'Cambiar a modo claro' : 'Cambiar a modo oscuro';
-        }
-    }
-
-    getCurrentTheme() {
-        return this.currentTheme;
+    getReport() {
+        const loadTime = performance.now() - this.startTime;
+        return {
+            ...this.metrics,
+            loadTime: Math.round(loadTime),
+            uptime: Math.round(performance.now())
+        };
     }
 }
 
-// Initialize application when DOM is loaded
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        window.performanceMonitor = new PerformanceMonitor();
-        
-        // Initialize theme manager first
-        window.themeManager = new ThemeManager();
-        
+// Global instances
+window.cvApp = null;
+window.performanceMonitor = null;
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.performanceMonitor = new PerformanceMonitor();
+    
+    // Wait a bit for other modules
+    setTimeout(() => {
         window.cvApp = new CVApplication();
-        await window.cvApp.init();
-        
-        // Add keyboard shortcut for theme toggle (Ctrl/Cmd + Shift + T)
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
-                e.preventDefault();
-                window.themeManager.toggleTheme();
-            }
-        });
-        
-        console.log('📊 Performance metrics:', window.performanceMonitor.getMetrics());
-        console.log('🎨 Theme system initialized:', window.themeManager.getCurrentTheme());
-    } catch (error) {
-        console.error('❌ Failed to initialize CV application:', error);
-    }
+    }, 100);
 });
 
-// Add interaction tracking
-document.addEventListener('click', () => {
-    if (window.performanceMonitor) {
-        window.performanceMonitor.recordInteraction();
-    }
-}); 
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    window.cvApp?.destroy();
+});
+
+ 
