@@ -446,6 +446,47 @@
                             <canvas id="fft-canvas" width="600" height="300"></canvas>
                             <div id="fft-stats" class="stats"></div>
                         </div>
+                        
+                        <div class="demo-card">
+                            <h4>🧠 Red Neuronal Interactiva</h4>
+                            <div class="controls">
+                                <label>Arquitectura: 
+                                    <select id="nn-architecture" class="nn-select">
+                                        <option value="4-3-2">Clasificación (4→3→2)</option>
+                                        <option value="8-6-4-2">Deep Network (8→6→4→2)</option>
+                                        <option value="10-8-6-3">Perceptrón Multicapa (10→8→6→3)</option>
+                                        <option value="6-12-8-4">Wide Network (6→12→8→4)</option>
+                                    </select>
+                                </label>
+                                <label>Función de Activación:
+                                    <select id="activation-function" class="nn-select">
+                                        <option value="relu">ReLU</option>
+                                        <option value="sigmoid">Sigmoid</option>
+                                        <option value="tanh">Tanh</option>
+                                        <option value="leaky_relu">Leaky ReLU</option>
+                                    </select>
+                                </label>
+                                <label>Velocidad de Aprendizaje: 
+                                    <input type="range" id="learning-rate" min="0.01" max="0.5" step="0.01" value="0.1">
+                                    <span id="lr-value">0.1</span>
+                                </label>
+                                <div class="control-buttons">
+                                    <button id="nn-train" class="btn-demo primary">🎯 Entrenar</button>
+                                    <button id="nn-predict" class="btn-demo">🔮 Predecir</button>
+                                    <button id="nn-reset" class="btn-demo">🔄 Reset</button>
+                                    <button id="nn-animate" class="btn-demo">⚡ Animar</button>
+                                </div>
+                            </div>
+                            <canvas id="neural-network-canvas" width="800" height="500"></canvas>
+                            <div id="nn-stats" class="stats">
+                                <div class="stat-row">
+                                    <span>Épocas: <strong id="epochs">0</strong></span>
+                                    <span>Error: <strong id="loss">0.0000</strong></span>
+                                    <span>Precisión: <strong id="accuracy">0%</strong></span>
+                                    <span>Tiempo: <strong id="training-time">0ms</strong></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -461,7 +502,7 @@
                         <!-- Featured Project: ARM Neural Network -->
                         <div class="portfolio-category featured">
                             <h4>🏆 Proyecto Destacado: Machine Learning en ARM Assembly</h4>
-                            <div class="project-item expert featured-project">
+                            <div class="project-item expert featured-project" onclick="window.open('https://github.com/AmeliaDi/caloa/tree/main/projects/arm-neural-network', '_blank')">
                                 <span class="file-perms">-rwxr-xr-x</span>
                                 <span class="file-date">2024-01-25</span>
                                 <span class="file-name">arm_neural_network.s</span>
@@ -481,7 +522,7 @@
                         <!-- Systems Programming -->
                         <div class="portfolio-category">
                             <h4>🔧 Systems Programming & Low-Level</h4>
-                            <div class="project-item expert">
+                            <div class="project-item expert" onclick="window.open('https://github.com/AmeliaDi/caloa/tree/main/projects/hypervisor', '_blank')">
                                 <span class="file-perms">-rwxr-xr-x</span>
                                 <span class="file-date">2024-01-20</span>
                                 <span class="file-name">hypervisor.c</span>
@@ -492,7 +533,7 @@
                                     <span class="tech-tag">Virtualization</span>
                                 </div>
                             </div>
-                            <div class="project-item expert">
+                            <div class="project-item expert" onclick="window.open('https://github.com/AmeliaDi/caloa/tree/main/projects/jit-compiler', '_blank')">
                                 <span class="file-perms">-rwxr-xr-x</span>
                                 <span class="file-date">2024-01-18</span>
                                 <span class="file-name">jit_compiler.c</span>
@@ -793,6 +834,7 @@
     <script src="wasm-loader.js"></script>
     <script src="algorithms.js"></script>
     <script src="visualizations.js"></script>
+    <script src="neural-network.js"></script>
     <script src="network-tools.js"></script>
     <script src="security-scanner.js"></script>
     <script src="i18n.js"></script>
