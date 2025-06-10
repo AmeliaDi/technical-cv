@@ -1,20 +1,28 @@
-/* Terminal-style CV CSS */
+/* Arch Linux Terminal CV CSS */
 :root {
+    /* Arch Linux Color Palette */
+    --arch-blue: #1793d1;
+    --arch-dark-blue: #0088cc;
+    --arch-light-blue: #00aaff;
+    --arch-gray: #333333;
+    --arch-dark-gray: #1a1a1a;
+    
+    /* Applied Colors */
     --bg-dark: #0a0a0a;
     --bg-terminal: #111111;
-    --border-color: #333333;
-    --text-primary: #00ff00;
-    --text-secondary: #ffffff;
+    --border-color: var(--arch-gray);
+    --text-primary: var(--arch-blue);
+    --text-secondary: #f6f6f6;
     --text-muted: #888888;
-    --accent-blue: #00aaff;
+    --accent-blue: var(--arch-light-blue);
     --accent-yellow: #ffaa00;
     --accent-red: #ff4444;
     --accent-purple: #aa00ff;
-    --accent-cyan: #00ffaa;
+    --accent-cyan: var(--arch-light-blue);
     --comment-color: #666666;
     --string-color: #ffaa00;
-    --keyword-color: #ff6666;
-    --function-color: #00aaff;
+    --keyword-color: var(--arch-blue);
+    --function-color: var(--arch-light-blue);
     --variable-color: #aa88ff;
 }
 
@@ -1668,4 +1676,237 @@ canvas {
         padding: 10px;
         font-size: clamp(0.55rem, 2vw, 0.7rem);
     }
+}
+
+/* Arch Linux Donut Styles */
+.arch-donut-container {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.arch-donut-wrapper {
+    position: relative;
+    padding: 8px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    border: 1px solid var(--arch-blue);
+    border-radius: 8px;
+    box-shadow: 
+        0 0 15px rgba(23, 147, 209, 0.3),
+        inset 0 0 10px rgba(23, 147, 209, 0.1);
+}
+
+.arch-donut-ascii {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    color: var(--arch-blue);
+    text-shadow: 0 0 3px currentColor;
+}
+
+.arch-donut-label {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: var(--arch-light-blue);
+    white-space: nowrap;
+    text-shadow: 0 0 5px currentColor;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Project item styling with difficulty indicators */
+.project-item.expert {
+    border-left: 3px solid #ff4444;
+}
+
+.project-item.advanced {
+    border-left: 3px solid #ffaa00;
+}
+
+.project-item:hover {
+    background: rgba(23, 147, 209, 0.05);
+    border-color: var(--arch-blue);
+}
+
+.project-item.expert .file-name {
+    color: #ff4444;
+}
+
+.project-item.advanced .file-name {
+    color: #ffaa00;
+}
+
+/* Improved responsive design with smaller sizes */
+@media (max-width: 1200px) {
+    .terminal-container {
+        max-width: 95%;
+        margin: 15px auto;
+    }
+    
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.3rem; }
+    h3 { font-size: 1.1rem; }
+    h4 { font-size: 1rem; }
+    
+    .terminal-header {
+        padding: 10px 15px;
+    }
+    
+    .terminal-content {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .arch-donut-container {
+        display: none; /* Hide donut on mobile for space */
+    }
+    
+    .terminal-container {
+        margin: 10px;
+        border-radius: 5px;
+    }
+    
+    .terminal-header {
+        padding: 8px 12px;
+    }
+    
+    .terminal-content {
+        padding: 12px;
+        min-height: auto;
+    }
+    
+    .section {
+        margin: 20px 0;
+        padding: 15px 0;
+    }
+    
+    .demo-card {
+        padding: 15px;
+    }
+    
+    canvas {
+        max-height: 200px;
+    }
+    
+    .retro-pc-section {
+        margin: 10px auto 15px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 0.85rem;
+    }
+    
+    .terminal-title {
+        font-size: 0.75rem;
+    }
+    
+    .nav-list {
+        margin-left: 10px;
+    }
+    
+    .output {
+        margin-left: 10px;
+    }
+    
+    .code-block {
+        padding: 10px;
+        font-size: 0.75rem;
+    }
+    
+    .project-item {
+        grid-template-columns: 1fr;
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .certifications-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Global size adjustments for more compact design */
+body {
+    font-size: 0.9rem;
+}
+
+.terminal-container {
+    max-width: 1100px;
+}
+
+.section {
+    margin: 30px 0;
+}
+
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1rem; }
+
+/* Arch Linux theme enhancements */
+a {
+    color: var(--arch-blue);
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--arch-light-blue);
+    text-shadow: 0 0 5px currentColor;
+}
+
+.terminal-container {
+    box-shadow: 
+        0 0 30px rgba(23, 147, 209, 0.2),
+        0 0 60px rgba(23, 147, 209, 0.1);
+}
+
+.terminal-header {
+    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    border-bottom: 1px solid var(--arch-blue);
+}
+
+/* Update buttons to Arch theme */
+.btn-demo {
+    background: linear-gradient(135deg, var(--arch-blue), var(--arch-dark-blue));
+    color: white;
+}
+
+.btn-demo:hover {
+    background: linear-gradient(135deg, var(--arch-light-blue), var(--arch-blue));
+    box-shadow: 0 0 15px rgba(23, 147, 209, 0.5);
+}
+
+.nav-link {
+    color: var(--arch-light-blue);
+}
+
+.nav-link:hover {
+    background: rgba(23, 147, 209, 0.1);
+    color: white;
+}
+
+/* Update skill levels with Arch colors */
+.skill-level.expert {
+    background: linear-gradient(135deg, var(--arch-blue), var(--arch-dark-blue));
+}
+
+.skill-level.advanced {
+    background: linear-gradient(135deg, var(--arch-dark-blue), #005588);
+}
+
+.skill-level.intermediate {
+    background: linear-gradient(135deg, #005588, #003366);
 } 

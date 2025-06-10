@@ -468,29 +468,77 @@
                 </div>
                 <div class="output">
                     <div class="project-list">
-                        <div class="project-item">
+                        <div class="project-item expert">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2024-01-20</span>
+                            <span class="file-name">hypervisor.c</span>
+                            <span class="file-desc">Type-1 Bare Metal Hypervisor con Intel VT-x</span>
+                        </div>
+                        <div class="project-item expert">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2024-01-18</span>
+                            <span class="file-name">jit_compiler.c</span>
+                            <span class="file-desc">JIT Compiler x86-64 con optimización SSA</span>
+                        </div>
+                        <div class="project-item expert">
                             <span class="file-perms">-rwxr-xr-x</span>
                             <span class="file-date">2024-01-15</span>
-                            <span class="file-name">kernel_module.ko</span>
-                            <span class="file-desc">Módulo personalizado del kernel Linux</span>
+                            <span class="file-name">kernel_rootkit.ko</span>
+                            <span class="file-desc">Rootkit LKM con syscall hooking y DKOM</span>
                         </div>
-                        <div class="project-item">
+                        <div class="project-item advanced">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2024-01-12</span>
+                            <span class="file-name">ebpf_firewall.c</span>
+                            <span class="file-desc">Firewall XDP/eBPF con 10Gbps throughput</span>
+                        </div>
+                        <div class="project-item expert">
                             <span class="file-perms">-rwxr-xr-x</span>
                             <span class="file-date">2024-01-10</span>
-                            <span class="file-name">crypto_asm.s</span>
-                            <span class="file-desc">Implementación AES en Assembly puro</span>
+                            <span class="file-name">crypto_engine.s</span>
+                            <span class="file-desc">ChaCha20-Poly1305 en ASM con AES-NI</span>
                         </div>
-                        <div class="project-item">
+                        <div class="project-item advanced">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2024-01-08</span>
+                            <span class="file-name">memory_allocator.c</span>
+                            <span class="file-desc">Allocator con SLUB y cache-coloring</span>
+                        </div>
+                        <div class="project-item expert">
                             <span class="file-perms">-rwxr-xr-x</span>
                             <span class="file-date">2024-01-05</span>
-                            <span class="file-name">network_scanner.c</span>
-                            <span class="file-desc">Escáner de red de alto rendimiento</span>
+                            <span class="file-name">network_stack.c</span>
+                            <span class="file-desc">TCP/IP stack userspace con DPDK</span>
                         </div>
-                        <div class="project-item">
+                        <div class="project-item expert">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2024-01-02</span>
+                            <span class="file-name">uefi_bootkit.efi</span>
+                            <span class="file-desc">UEFI bootkit con secure boot bypass</span>
+                        </div>
+                        <div class="project-item advanced">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2023-12-28</span>
+                            <span class="file-name">gpu_driver.ko</span>
+                            <span class="file-desc">Driver GPU minimalista con DRM/KMS</span>
+                        </div>
+                        <div class="project-item expert">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2023-12-25</span>
+                            <span class="file-name">os_kernel.bin</span>
+                            <span class="file-desc">Microkernel con IPC y scheduling CFS</span>
+                        </div>
+                        <div class="project-item advanced">
                             <span class="file-perms">-rwxr-xr-x</span>
                             <span class="file-date">2023-12-20</span>
-                            <span class="file-name">bootloader.asm</span>
-                            <span class="file-desc">Bootloader personalizado x86</span>
+                            <span class="file-name">debugger.c</span>
+                            <span class="file-desc">Debugger con ptrace y disassembler</span>
+                        </div>
+                        <div class="project-item expert">
+                            <span class="file-perms">-rwxr-xr-x</span>
+                            <span class="file-date">2023-12-15</span>
+                            <span class="file-name">smc_patcher.c</span>
+                            <span class="file-desc">Self-modifying code engine con anti-debug</span>
                         </div>
                     </div>
                 </div>
@@ -551,6 +599,7 @@
     <script src="security-scanner.js"></script>
     <script src="i18n.js"></script>
     <script src="vulnerability-scanner.js"></script>
+    <script src="donut-arch.js"></script>
     <script src="main.js"></script>
 </body>
 </html> 
