@@ -436,4 +436,34 @@ AmeliaDi <enorastrokes@gmail.com>
 - **Mobile Application Testing**: Android/iOS app analysis
 - **Cloud Security Scanning**: AWS/Azure/GCP configuration testing
 - **AI-Powered Detection**: Machine learning vulnerability identification
-- **Plugin Architecture**: Custom vulnerability test modules 
+- **Plugin Architecture**: Custom vulnerability test modules
+
+# AmeliaHV - Type-1 Bare Metal Hypervisor
+
+🚀 **Advanced Type-1 Bare Metal Hypervisor with Intel VT-x Support**
+
+*Created by Amelia Enora Marceline Chavez Barroso*
+
+## Features
+
+- Intel VT-x (VMX) hardware virtualization
+- Multi-CPU support with per-CPU VMCS management
+- Direct hardware access for minimal overhead
+- Professional kernel module architecture
+
+## Build & Install
+
+```bash
+make all
+sudo make install
+```
+
+## Requirements
+
+- Intel CPU with VT-x support
+- Linux kernel headers
+- Root privileges
+
+## License
+
+MIT License - See LICENSE file 
