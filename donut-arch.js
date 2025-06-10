@@ -1,6 +1,6 @@
 /**
- * ASCII Donut Animation - Arch Linux Edition
- * Based on donut.c by a1k0n with Arch Linux theme
+ * ASCII Donut Animation - Neon Green Edition
+ * Based on donut.c by a1k0n with neon green theme
  * @author Amelia Enora 🌈 Marceline Chavez Barroso
  */
 
@@ -8,21 +8,29 @@ class ArchDonut {
     constructor() {
         this.A = 0;
         this.B = 0;
-        this.screenWidth = 40;  // Smaller for better integration
-        this.screenHeight = 16;  // Compact size
+        this.screenWidth = 24;  // Much smaller for better integration
+        this.screenHeight = 12;  // Compact size
         this.R1 = 1;
-        this.R2 = 2;
-        this.K2 = 5;
+        this.R2 = 1.8;
+        this.K2 = 4;
         this.K1 = this.screenWidth * this.K2 * 3 / (8 * (this.R1 + this.R2));
         
         this.output = null;
         this.container = null;
         this.running = true;
-        this.frameDelay = 60; // Smooth animation
+        this.frameDelay = 80; // Smooth animation
         
-        // Arch Linux themed characters
+        // Neon green themed characters
         this.chars = '.,-~:;=!*#$@';
-        this.archColors = ['#1793d1', '#333333', '#00aaff', '#0088cc'];
+        
+        // Neon green color palette
+        this.neonColors = [
+            '#00ff00',    // Bright neon green
+            '#00ff41',    // Light neon green
+            '#39ff14',    // Electric green
+            '#00ff88',    // Cyan-green mix
+            '#00cc00'     // Darker neon green
+        ];
     }
 
     init() {
@@ -39,7 +47,7 @@ class ArchDonut {
             this.container.innerHTML = `
                 <div class="arch-donut-wrapper">
                     <pre id="arch-donut-output" class="arch-donut-ascii"></pre>
-                    <div class="arch-donut-label">Arch Linux</div>
+                    <div class="arch-donut-label">Terminal</div>
                 </div>
             `;
             
@@ -47,6 +55,12 @@ class ArchDonut {
             headerControls.insertBefore(this.container, headerControls.firstChild);
             this.output = document.getElementById('arch-donut-output');
         }
+    }
+
+    getGlowIntensity(luminance) {
+        // Create different glow intensities based on luminance
+        const intensity = Math.max(0.3, luminance);
+        return intensity;
     }
 
     renderFrame() {
@@ -59,6 +73,9 @@ class ArchDonut {
             new Array(this.screenWidth).fill(' ')
         );
         const zbuffer = new Array(this.screenHeight).fill(null).map(() => 
+            new Array(this.screenWidth).fill(0)
+        );
+        const luminanceBuffer = new Array(this.screenHeight).fill(null).map(() => 
             new Array(this.screenWidth).fill(0)
         );
 
@@ -87,6 +104,7 @@ class ArchDonut {
                 if (L > 0 && xp >= 0 && xp < this.screenWidth && yp >= 0 && yp < this.screenHeight) {
                     if (ooz > zbuffer[yp][xp]) {
                         zbuffer[yp][xp] = ooz;
+                        luminanceBuffer[yp][xp] = L;
                         const luminanceIndex = Math.floor(L * 8);
                         output[yp][xp] = this.chars[Math.max(0, Math.min(11, luminanceIndex))];
                     }
@@ -94,12 +112,22 @@ class ArchDonut {
             }
         }
 
-        // Add Arch Linux color styling
+        // Add neon green color styling with glow effects
         const frame = output.map((row, y) => 
             row.map((char, x) => {
                 if (char !== ' ') {
-                    const colorIndex = (x + y) % this.archColors.length;
-                    return `<span style="color: ${this.archColors[colorIndex]}">${char}</span>`;
+                    const colorIndex = (x + y + Math.floor(this.A * 10)) % this.neonColors.length;
+                    const glowIntensity = this.getGlowIntensity(luminanceBuffer[y][x]);
+                    const shadowSize = Math.floor(glowIntensity * 15);
+                    
+                    return `<span style="
+                        color: ${this.neonColors[colorIndex]};
+                        text-shadow: 
+                            0 0 ${shadowSize}px ${this.neonColors[colorIndex]},
+                            0 0 ${shadowSize * 2}px ${this.neonColors[colorIndex]},
+                            0 0 ${shadowSize * 3}px ${this.neonColors[0]};
+                        font-weight: bold;
+                    ">${char}</span>`;
                 }
                 return char;
             }).join('')
