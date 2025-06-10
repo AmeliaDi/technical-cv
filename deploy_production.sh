@@ -30,6 +30,7 @@ WEB_FILES=(
     "security-scanner.js"
     "i18n.js"
     "wasm-loader.js"
+    "donut.js"
     "manifest.json"
     "service-worker.js"
     "robots.txt"

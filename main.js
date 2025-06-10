@@ -192,12 +192,32 @@ class CVApplication {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            ctx.fillStyle = '#00ff00';
             ctx.font = `${matrixConfig.fontSize}px JetBrains Mono, monospace`;
             
             matrixConfig.drops.forEach((drop, i) => {
                 const char = matrixConfig.chars[Math.floor(Math.random() * matrixConfig.chars.length)];
-                ctx.fillText(char, i * matrixConfig.fontSize, drop * matrixConfig.fontSize);
+                const x = i * matrixConfig.fontSize;
+                const y = drop * matrixConfig.fontSize;
+                
+                // Enhanced glow effect with multiple layers
+                // Outer glow
+                ctx.shadowBlur = 30;
+                ctx.shadowColor = '#00ff00';
+                ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+                ctx.fillText(char, x, y);
+                
+                // Middle glow
+                ctx.shadowBlur = 15;
+                ctx.fillStyle = 'rgba(0, 255, 0, 0.6)';
+                ctx.fillText(char, x, y);
+                
+                // Inner bright core
+                ctx.shadowBlur = 5;
+                ctx.fillStyle = '#00ff00';
+                ctx.fillText(char, x, y);
+                
+                // Reset shadow for performance
+                ctx.shadowBlur = 0;
                 
                 if (drop * matrixConfig.fontSize > canvas.height && Math.random() > 0.975) {
                     matrixConfig.drops[i] = 0;
