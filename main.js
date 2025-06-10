@@ -155,7 +155,7 @@ class CVApplication {
 
         // Update terminal title
         if (this.elements.title) {
-            this.elements.title.textContent = `amelia@systems:~/cv/${sectionId}$`;
+            this.elements.title.textContent = `amelia@archlinux:~/cv/${sectionId}$`;
         }
 
         this.state.currentSection = sectionId;

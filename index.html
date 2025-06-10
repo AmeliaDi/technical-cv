@@ -62,31 +62,46 @@
         </header>
         
         <main class="terminal-content">
-            <!-- Navigation with Donut -->
-            <div class="nav-donut-container">
-                <nav class="terminal-nav">
-                    <div class="prompt">
-                        <span class="user">amelia@systems</span>:<span class="path">~/cv</span>$ ls -la
-                    </div>
-                    <ul class="nav-list">
-                        <li><a href="#about" class="nav-link">./about.sh</a></li>
-                        <li><a href="#skills" class="nav-link">./skills.asm</a></li>
-                        <li><a href="#certifications" class="nav-link">./certifications.db</a></li>
-                        <li><a href="#algorithms" class="nav-link">./algorithms.c</a></li>
-                        <li><a href="#visualizations" class="nav-link">./math_viz.wasm</a></li>
-                        <li><a href="#projects" class="nav-link">./projects/</a></li>
-                        <li><a href="#network" class="nav-link">./network_tools.py</a></li>
-                    </ul>
-                </nav>
-                
-                <!-- ASCII Donut Animation -->
-                <div id="donut-container" class="donut-section">
-                    <pre id="donut-output" class="donut-ascii"></pre>
-                    <div class="donut-info">
-                        <p class="donut-credit">Inspired by <a href="https://www.a1k0n.net/2011/07/20/donut-math.html" target="_blank">donut.c</a> by a1k0n</p>
-                    </div>
+            <!-- Retro PC Scanner -->
+            <div id="retro-pc-container" class="retro-pc-section">
+                <pre class="retro-pc-ascii">
+┌─────────────────────────────────────────────┐
+│  ╔══════════════════════════════════════╗  │
+│  ║     ARCH LINUX SECURITY SCANNER      ║  │
+│  ║        [AMELIA OS v2.0.0]            ║  │
+│  ╚══════════════════════════════════════╝  │
+│ ┌─────────────────────────────────────────┐ │
+│ │ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │ │
+│ │ ▓ INITIALIZING VULNERABILITY SCAN... ▓ │ │
+│ │ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │ │
+│ └─────────────────────────────────────────┘ │
+│  ◣ ◢  [■■■□□] SCANNING...                   │
+└─────────────────────────────────────────────┘
+  ╱╲╱╲  ╔═══╗ ╔═══╗ ╔═══╗ ╔═══╗  ╱╲╱╲
+ ╱╱╱╱╲  ║PWR║ ║HDD║ ║NET║ ║CPU║  ╱╲╲╲╲
+╱╱╱╱╱╱╲ ╚═══╝ ╚═══╝ ╚═══╝ ╚═══╝ ╱╲╲╲╲╲╲
+                </pre>
+                <div id="scanner-output" class="scanner-terminal">
+                    <div class="scanner-line">[<span class="time">--:--:--</span>] Initializing Arch Linux Security Scanner...</div>
+                    <div class="scanner-line">[<span class="time">--:--:--</span>] Detecting system information...</div>
                 </div>
             </div>
+
+            <!-- Navigation -->
+            <nav class="terminal-nav">
+                <div class="prompt">
+                    <span class="user">amelia@archlinux</span>:<span class="path">~/cv</span>$ ls -la
+                </div>
+                <ul class="nav-list">
+                    <li><a href="#about" class="nav-link">./about.sh</a></li>
+                    <li><a href="#skills" class="nav-link">./skills.asm</a></li>
+                    <li><a href="#certifications" class="nav-link">./certifications.db</a></li>
+                    <li><a href="#algorithms" class="nav-link">./algorithms.c</a></li>
+                    <li><a href="#visualizations" class="nav-link">./math_viz.wasm</a></li>
+                    <li><a href="#projects" class="nav-link">./projects/</a></li>
+                    <li><a href="#network" class="nav-link">./network_tools.py</a></li>
+                </ul>
+            </nav>
 
             <!-- About Section -->
             <section id="about" class="section">
@@ -535,7 +550,7 @@
     <script src="network-tools.js"></script>
     <script src="security-scanner.js"></script>
     <script src="i18n.js"></script>
-    <script src="donut.js"></script>
+    <script src="vulnerability-scanner.js"></script>
     <script src="main.js"></script>
 </body>
 </html> 

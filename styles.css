@@ -1463,60 +1463,119 @@ canvas {
     }
 }
 
-/* Navigation and Donut Container */
-.nav-donut-container {
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
-
-/* ASCII Donut Animation Styles */
-.donut-section {
-    position: relative;
+/* Retro PC Scanner Styles - Arch Linux Theme */
+.retro-pc-section {
+    margin: 20px auto 30px;
     padding: 20px;
-    flex: 0 0 auto;
-    min-width: 300px;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    border: 2px solid #1793d1; /* Arch Linux blue */
+    border-radius: 10px;
+    box-shadow: 
+        0 0 20px rgba(23, 147, 209, 0.5),
+        inset 0 0 20px rgba(23, 147, 209, 0.1);
+    position: relative;
     overflow: hidden;
 }
 
-.donut-ascii {
+.retro-pc-section::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #1793d1, #333, #1793d1, #333);
+    border-radius: 10px;
+    opacity: 0.5;
+    z-index: -1;
+    animation: borderGlow 3s linear infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+.retro-pc-ascii {
     font-family: 'JetBrains Mono', monospace;
-    font-size: clamp(0.5rem, 1vw, 0.7rem);
+    font-size: clamp(0.6rem, 1vw, 0.8rem);
     line-height: 1.2;
-    color: var(--text-primary);
+    color: #1793d1;
     margin: 0;
     padding: 0;
     white-space: pre;
-    overflow: hidden;
-    background: transparent;
-    text-shadow: 0 0 5px var(--text-primary);
+    text-align: center;
+    text-shadow: 
+        0 0 5px #1793d1,
+        0 0 10px #1793d1;
+    filter: brightness(1.2);
 }
 
-.donut-info {
-    margin-top: 10px;
+.scanner-terminal {
+    margin-top: 20px;
+    padding: 15px;
+    background: #000;
+    border: 1px solid #1793d1;
+    border-radius: 5px;
+    height: 200px;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    box-shadow: inset 0 0 10px rgba(23, 147, 209, 0.2);
 }
 
-.donut-credit {
-    font-size: var(--font-size-xs);
-    color: var(--text-muted);
-    opacity: 0.8;
-}
-
-.donut-credit a {
-    color: var(--text-accent);
-    text-decoration: none;
+.scanner-line {
+    margin: 2px 0;
+    padding: 2px 5px;
     transition: all 0.3s ease;
 }
 
-.donut-credit a:hover {
-    color: var(--text-primary);
-    text-shadow: 0 0 5px var(--text-accent);
+.scanner-line.info {
+    color: #1793d1;
+}
+
+.scanner-line.success {
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.scanner-line.warning {
+    color: #ffaa00;
+    text-shadow: 0 0 5px #ffaa00;
+}
+
+.scanner-line.error {
+    color: #ff3333;
+    text-shadow: 0 0 5px #ff3333;
+}
+
+.scanner-line.divider {
+    color: #666;
+    opacity: 0.8;
+}
+
+.scanner-line .time {
+    color: #888;
+    font-size: 0.9em;
+}
+
+/* Scrollbar styling for scanner */
+.scanner-terminal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scanner-terminal::-webkit-scrollbar-track {
+    background: #111;
+    border-radius: 4px;
+}
+
+.scanner-terminal::-webkit-scrollbar-thumb {
+    background: #1793d1;
+    border-radius: 4px;
+}
+
+.scanner-terminal::-webkit-scrollbar-thumb:hover {
+    background: #2aa1df;
 }
 
 /* Enhanced Matrix Effect with More Glow */
@@ -1566,65 +1625,47 @@ canvas {
     animation: matrix-fall linear infinite, matrix-glow 1.5s ease-in-out infinite;
 }
 
-/* Responsive adjustments for nav-donut layout */
+/* Responsive adjustments for retro PC scanner */
 @media (max-width: 1024px) {
-    .nav-donut-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .terminal-nav {
-        width: 100%;
-    }
-    
-    .donut-section {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-}
-
-@media (min-width: 1025px) {
-    .terminal-nav {
-        flex: 1 1 auto;
-        min-width: 300px;
-    }
-    
-    .donut-section {
-        flex: 0 0 auto;
-        width: 400px;
-    }
-}
-
-/* Responsive adjustments for donut */
-@media (max-width: 768px) {
-    .donut-section {
+    .retro-pc-section {
+        margin: 15px auto 20px;
         padding: 15px;
-        min-width: 250px;
     }
     
-    .donut-ascii {
-        font-size: clamp(0.4rem, 1.5vw, 0.6rem);
-        line-height: 1.1;
+    .scanner-terminal {
+        height: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .retro-pc-section {
+        margin: 10px auto 15px;
+        padding: 10px;
     }
     
-    .nav-donut-container {
-        gap: 15px;
+    .retro-pc-ascii {
+        font-size: clamp(0.5rem, 1.5vw, 0.7rem);
+    }
+    
+    .scanner-terminal {
+        height: 120px;
+        font-size: clamp(0.6rem, 1.5vw, 0.75rem);
     }
 }
 
 @media (max-width: 480px) {
-    .donut-section {
-        padding: 10px;
-        min-width: 200px;
+    .retro-pc-section {
+        padding: 8px;
     }
     
-    .donut-ascii {
-        font-size: clamp(0.35rem, 2vw, 0.5rem);
+    .retro-pc-ascii {
+        font-size: clamp(0.4rem, 2vw, 0.6rem);
         line-height: 1;
     }
     
-    .nav-donut-container {
-        gap: 10px;
+    .scanner-terminal {
+        height: 100px;
+        padding: 10px;
+        font-size: clamp(0.55rem, 2vw, 0.7rem);
     }
 } 

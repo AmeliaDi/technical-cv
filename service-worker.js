@@ -12,7 +12,7 @@ const urlsToCache = [
   '/security-scanner.js',
   '/i18n.js',
   '/wasm-loader.js',
-  '/donut.js',
+  '/vulnerability-scanner.js',
   '/manifest.json',
   'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap'
 ];
