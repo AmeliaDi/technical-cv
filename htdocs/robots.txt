@@ -1,0 +1,16 @@
+# Robots.txt para Amelia CV
+# https://ameliadi.github.io/
+
+User-agent: *
+Allow: /
+Disallow: /config.php
+Disallow: /*.c
+Disallow: /*.s
+Disallow: /*.h
+Disallow: /test_*
+
+# Sitemaps
+Sitemap: https://ameliadi.github.io/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1 
