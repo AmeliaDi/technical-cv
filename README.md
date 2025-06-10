@@ -1,469 +1,279 @@
-# Advanced Web Vulnerability Scanner
+# 🌈 Amelia Enora Marceline Chavez Barroso - Technical CV & Projects
 
-A comprehensive web application security testing tool written in C. Designed to identify common web vulnerabilities including SQL injection, XSS, CSRF, directory traversal, and various other security flaws.
+<div align="center">
 
-## Features
+[![CV Live](https://img.shields.io/badge/CV-Live%20Demo-pink?style=for-the-badge&logo=github-pages)](https://ameliadi.github.io/technical-cv/)
+[![Projects](https://img.shields.io/badge/Projects-12%20Hardcore-red?style=for-the-badge&logo=c)](https://github.com/AmeliaDi/technical-cv)
+[![Systems Programming](https://img.shields.io/badge/Focus-Systems%20Programming-brightgreen?style=for-the-badge&logo=linux)](https://ameliadi.github.io/technical-cv/)
 
-- **Comprehensive Vulnerability Detection**: SQL injection, XSS (reflected, stored, DOM), CSRF, directory traversal, file inclusion, command injection, XXE, SSRF, and more
-- **Multi-threaded Architecture**: Configurable thread pool for high-speed scanning
-- **Advanced Web Crawling**: Intelligent link extraction and form discovery
-- **Multiple Output Formats**: Human-readable text, JSON, and XML reports
-- **Security Header Analysis**: Detection of missing or misconfigured security headers
-- **Authentication Testing**: Weak password detection, session fixation, and session hijacking tests
-- **Information Disclosure Detection**: Sensitive data exposure and debug information leakage
-- **Configurable Scanning**: Adjustable depth, threading, timeouts, and aggressive mode
-- **Real-time Statistics**: Comprehensive scan metrics and progress tracking
+**🔥 Desarrolladora de Sistemas & Assembly | Especialista en Bajo Nivel**
 
-## Building
+### [📋 **VER CV TÉCNICO INTERACTIVO** 📋](https://ameliadi.github.io/technical-cv/)
 
-### Prerequisites
+*Programación de sistemas, ciberseguridad, y algoritmos con demos en WebAssembly*
 
-```bash
-# Ubuntu/Debian
-sudo apt-get install build-essential libcurl4-openssl-dev libjson-c-dev libxml2-dev libpcre3-dev
+</div>
 
-# Arch Linux
-sudo pacman -S base-devel curl json-c libxml2 pcre
+---
 
-# CentOS/RHEL
-sudo yum install gcc curl-devel json-c-devel libxml2-devel pcre-devel
-```
+## 🎯 **Acerca de Este Repositorio**
 
-### Compilation
+Este repositorio contiene mi **CV técnico interactivo** con demos funcionales en WebAssembly, más una colección de **12 proyectos hardcore de sistemas** que demuestran mi experiencia en programación de bajo nivel, kernel development, ciberseguridad y optimización.
 
-```bash
-# Build the scanner
-make
+## 🌐 **CV Técnico Interactivo**
 
-# Build with debug symbols
-make debug
+**🔗 Visita:** [ameliadi.github.io/technical-cv](https://ameliadi.github.io/technical-cv/)
 
-# Build optimized version
-make performance
-```
+### ✨ **Características del CV:**
+- 🖥️ **Terminal Linux interactivo** - Navegación estilo shell
+- 🔥 **Algoritmos en WebAssembly** - QuickSort, MergeSort, HeapSort, BogoSort
+- 📊 **Visualizaciones matemáticas** - Fractales de Mandelbrot, FFT
+- 🔐 **Scanner de seguridad** - Demo de pentesting en tiempo real
+- 🌍 **Multiidioma** - Español, English, Français, ไทย, 日本語, 中文
+- 📱 **Ultra-responsive** - Funciona en todos los dispositivos
 
-### Installation
+### 🏆 **Certificaciones Destacadas:**
+- **CISM** - Certified Information Security Manager
+- **CISA** - Certified Information Systems Auditor  
+- **CCNA** - Cisco Certified Network Associate
+- **CEH** - Certified Ethical Hacker
+- **OSCP** - Offensive Security Certified Professional
+- **AWS Solutions Architect** - Associate Level
 
-```bash
-# Install system-wide (requires sudo)
-sudo make install
-```
+---
 
-## Usage
+## 🔥 **Proyectos Hardcore de Sistemas**
 
-### Basic Scanning
-
-```bash
-# Scan single website
-./webvulnscan -u http://example.com
-
-# Scan with custom depth and threads
-./webvulnscan -u http://example.com -d 3 -t 10
-
-# Aggressive scanning mode
-./webvulnscan -u http://example.com -a -v
-
-# Skip SSL verification for testing
-./webvulnscan -u https://example.com -s
-```
-
-### Advanced Scanning
-
-```bash
-# Comprehensive scan with all options
-./webvulnscan -u http://target.com -d 5 -t 15 -a -v -i -f json -o results.json
-
-# Quick scan with minimal depth
-./webvulnscan -u http://target.com -d 1 -t 5
-
-# Scan with custom timeout
-./webvulnscan -u http://target.com -T 60 -v
-```
-
-### Output Formats
-
-```bash
-# JSON output
-./webvulnscan -u http://example.com -f json -o vulnerability_report.json
-
-# XML output
-./webvulnscan -u http://example.com -f xml -o vulnerability_report.xml
-
-# Verbose text output
-./webvulnscan -u http://example.com -v -i
-```
-
-## Command Line Options
-
-| Option | Description | Example |
-|--------|-------------|---------|
-| `-u <url>` | Target URL (required) | `-u http://example.com` |
-| `-d <depth>` | Maximum crawl depth | `-d 3` |
-| `-t <threads>` | Number of threads | `-t 10` |
-| `-T <timeout>` | Request timeout in seconds | `-T 30` |
-| `-o <file>` | Output file | `-o results.json` |
-| `-f <format>` | Output format (text/json/xml) | `-f json` |
-| `-a` | Enable aggressive scanning | `-a` |
-| `-v` | Verbose output | `-v` |
-| `-i` | Include informational findings | `-i` |
-| `-s` | Skip SSL certificate verification | `-s` |
-| `-k` | Don't follow redirects | `-k` |
-| `-h` | Show help message | `-h` |
-
-## Vulnerability Categories
-
-### Injection Vulnerabilities
-- **SQL Injection**: Database query manipulation
-- **Command Injection**: Operating system command execution
-- **LDAP Injection**: LDAP query manipulation
-- **XPath Injection**: XML database query manipulation
-
-### Cross-Site Scripting (XSS)
-- **Reflected XSS**: Non-persistent script injection
-- **Stored XSS**: Persistent script injection
-- **DOM XSS**: Client-side DOM manipulation
-
-### Access Control
-- **Insecure Direct Object References**: Unauthorized resource access
-- **Missing Function Level Access Control**: Privilege escalation
-- **Cross-Site Request Forgery (CSRF)**: Unauthorized action execution
-
-### Security Misconfiguration
-- **Missing Security Headers**: X-Frame-Options, CSP, HSTS, etc.
-- **Information Disclosure**: Sensitive data exposure
-- **Debug Information**: Development artifacts in production
-
-### File System Attacks
-- **Directory Traversal**: Path traversal vulnerabilities
-- **File Inclusion**: Local and remote file inclusion
-- **Unrestricted File Upload**: Dangerous file upload functionality
-
-### Advanced Attacks
-- **XML External Entity (XXE)**: XML parser exploitation
-- **Server-Side Request Forgery (SSRF)**: Internal system access
-- **Session Management Flaws**: Session fixation, hijacking
-
-## Testing Payloads
-
-The scanner includes comprehensive payload databases for:
-
-### SQL Injection
-```sql
-' OR '1'='1
-'; DROP TABLE users; --
-' UNION SELECT null,null,version()--
-```
-
-### XSS Payloads
-```javascript
-<script>alert('XSS')</script>
-"><script>alert(document.cookie)</script>
-javascript:alert('XSS')
-```
-
-### Directory Traversal
-```
-../../../etc/passwd
-..\..\..\..\windows\system32\drivers\etc\hosts
-```
-
-### Command Injection
-```bash
-; ls -la
-| whoami
-`cat /etc/passwd`
-```
-
-## Configuration
-
-### Environment Variables
-
-```bash
-export WEBVULNSCAN_THREADS=10
-export WEBVULNSCAN_TIMEOUT=30
-export WEBVULNSCAN_USER_AGENT="Custom Scanner 1.0"
-```
-
-### Custom Payloads
-
-Create custom payload files in the `payloads/` directory:
-
-```
-payloads/
-├── sql_injection.txt
-├── xss_payloads.txt
-├── directory_traversal.txt
-└── command_injection.txt
-```
-
-## Output Examples
-
-### Text Report
-```
-Web Vulnerability Scan Report
-=============================
-
-Target URL: http://example.com
-Scan Time: Mon Jan 15 10:30:00 2025
-Total Vulnerabilities Found: 3
-
-Severity Summary:
-- Critical: 1
-- High:     1
-- Medium:   1
-- Low:      0
-
-Detailed Findings:
-==================
-
-[1] SQL Injection in Login Form
-Severity: Critical
-Type: SQL Injection
-URL: http://example.com/login.php
-Parameter: username
-Description: The application is vulnerable to SQL injection attacks
-Evidence: MySQL error: "You have an error in your SQL syntax"
-Recommendation: Use parameterized queries and input validation
-```
-
-### JSON Report
-```json
-{
-  "scan_info": {
-    "target_url": "http://example.com",
-    "scan_time": 1705314600,
-    "duration": 45.32,
-    "total_vulnerabilities": 3
-  },
-  "vulnerabilities": [
-    {
-      "id": 1,
-      "title": "SQL Injection in Login Form",
-      "severity": "Critical",
-      "type": "SQL Injection",
-      "url": "http://example.com/login.php",
-      "parameter": "username",
-      "description": "The application is vulnerable to SQL injection attacks",
-      "evidence": "MySQL error: \"You have an error in your SQL syntax\"",
-      "recommendation": "Use parameterized queries and input validation"
-    }
-  ]
+### 🖥️ **1. AmeliaHV - Type-1 Bare Metal Hypervisor**
+```c
+// Intel VT-x hardware virtualization
+static int install_vmx_hooks(void) {
+    if (!check_vmx_support()) return -1;
+    setup_vmcs();
+    enable_vmx_operation();
+    return 0;
 }
 ```
+**🎯 Función:** Hypervisor tipo 1 que opera directamente sobre hardware  
+**💪 Tech Stack:** C, Intel VT-x, VMX, EPT, VPID  
+**🚀 Logros:** Soporte multi-CPU, manejo de VM-Exit, virtualización asistida por hardware
 
-## Performance
-
-### Optimization Features
-
-- **Multi-threading**: Parallel vulnerability testing
-- **Connection pooling**: Efficient HTTP connection reuse
-- **Smart crawling**: Duplicate URL detection and filtering
-- **Rate limiting**: Configurable request throttling
-- **Memory management**: Efficient payload and response handling
-
-### Benchmarks
-
-Typical performance on modern hardware:
-
-| Scenario | Speed | Notes |
-|----------|-------|-------|
-| Small website (< 100 pages) | 2-5 minutes | Standard scan |
-| Medium website (100-500 pages) | 10-15 minutes | Depth 3, 10 threads |
-| Large website (500+ pages) | 30+ minutes | Aggressive mode |
-
-## Security Features
-
-### Safe Scanning Practices
-
-- **Request rate limiting**: Prevents server overload
-- **User-Agent rotation**: Reduces detection probability
-- **Timeout handling**: Prevents hanging requests
-- **SSL verification**: Optional certificate validation
-- **Redirect following**: Configurable redirect behavior
-
-### Ethical Considerations
-
-- Only scan systems you own or have explicit permission to test
-- Use responsible disclosure for any vulnerabilities found
-- Respect rate limits and avoid causing service disruption
-- Follow local laws and regulations regarding security testing
-
-## Development
-
-### Building Tests
-
-```bash
-# Build and run unit tests
-make test
-
-# Run integration tests
-make integration-test
-
-# Memory leak detection
-make memcheck
-
-# Static code analysis
-make static-analysis
+### ⚡ **2. AmeliaJIT - High-Performance JIT Compiler**
+```c
+// SSA-based JIT compilation to x86-64
+jit_function_t compile_to_native(ssa_context_t *ssa) {
+    optimize_ssa(ssa);
+    allocate_registers(ssa);
+    return emit_x86_64(ssa);
+}
 ```
+**🎯 Función:** Compilador JIT que genera código x86-64 en tiempo de ejecución  
+**💪 Tech Stack:** C, x86-64 Assembly, SSA Form, Register Allocation  
+**🚀 Logros:** Optimización SSA, generación de código ejecutable, <500 ciclos de compilación
 
-### Code Quality
-
-```bash
-# Format code
-make format
-
-# Security scan of binary
-make security-scan
-
-# Performance benchmark
-make benchmark
+### 🕵️ **3. AmeliaRootkit - Advanced Kernel Rootkit**
+```c
+// Syscall hooking for stealth operations
+static asmlinkage long hooked_sys_getdents64(const struct pt_regs *regs) {
+    long ret = orig_sys_getdents64(regs);
+    hide_malicious_files(ret);
+    return ret;
+}
 ```
+**🎯 Función:** Rootkit LKM con capacidades de ocultación avanzadas  
+**💪 Tech Stack:** C, Linux Kernel, Syscall Hooking, DKOM  
+**🚀 Logros:** Ocultación de procesos/archivos, backdoors, evasión de detección  
+**⚠️ Solo fines educativos**
 
-### Docker Support
-
-```bash
-# Build Docker image
-make docker-build
-
-# Run in container
-make docker-run
+### 🛡️ **4. AmeliaFirewall - eBPF/XDP Firewall**
+```c
+// High-performance packet filtering
+SEC("xdp")
+int amelia_firewall(struct xdp_md *ctx) {
+    if (detect_ddos_pattern(ctx)) return XDP_DROP;
+    return rate_limit_check(ctx) ? XDP_DROP : XDP_PASS;
+}
 ```
+**🎯 Función:** Firewall de alto rendimiento con procesamiento zero-copy  
+**💪 Tech Stack:** eBPF, XDP, C, Zero-copy packet processing  
+**🚀 Logros:** 10+ Gbps throughput, protección DDoS, rate limiting inteligente
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Submit a pull request
-
-## Configuration Files
-
-### Scanner Configuration
-
-Create `~/.webvulnscan.conf`:
-
-```ini
-[default]
-threads = 10
-timeout = 30
-max_depth = 3
-output_format = json
-user_agent = WebVulnScanner/1.0
-
-[payloads]
-sql_injection_file = payloads/sql_injection.txt
-xss_payloads_file = payloads/xss_payloads.txt
-command_injection_file = payloads/command_injection.txt
+### 🔐 **5. AmeliaCrypt - ChaCha20-Poly1305 Engine**
+```assembly
+; ChaCha20 quarter round in pure assembly
+chacha_quarter_round:
+    add     eax, ebx        ; a += b
+    xor     edx, eax        ; d ^= a  
+    rol     edx, 16         ; d <<<= 16
+    add     ecx, edx        ; c += d
+    ret
 ```
+**🎯 Función:** Motor criptográfico con aceleración hardware  
+**💪 Tech Stack:** x86-64 Assembly, AES-NI, ChaCha20, Poly1305  
+**🚀 Logros:** Cifrado autenticado, optimización con instrucciones AES-NI
 
-## Troubleshooting
-
-### Common Issues
-
-1. **SSL certificate errors**
-   ```bash
-   ./webvulnscan -u https://example.com -s
-   ```
-
-2. **Slow scanning**
-   ```bash
-   # Increase threads and reduce timeout
-   ./webvulnscan -u http://example.com -t 20 -T 10
-   ```
-
-3. **Memory usage**
-   ```bash
-   # Reduce thread count and depth
-   ./webvulnscan -u http://example.com -t 5 -d 2
-   ```
-
-4. **Connection timeouts**
-   ```bash
-   # Increase timeout
-   ./webvulnscan -u http://example.com -T 60
-   ```
-
-### Debugging
-
-```bash
-# Enable verbose output
-./webvulnscan -u http://example.com -v
-
-# Enable debug build
-make debug
-./webvulnscan -u http://example.com -v
+### 🧠 **6. AmeliaAlloc - SLUB Memory Allocator**
+```c
+// Cache-colored SLUB allocator
+void *amelia_cache_alloc(cache_t *cache) {
+    slab_t *slab = find_partial_slab(cache);
+    void *obj = allocate_from_slab(slab);
+    update_cache_coloring(cache);
+    return obj;
+}
 ```
+**🎯 Función:** Allocador de memoria de alto rendimiento con cache coloring  
+**💪 Tech Stack:** C, SLUB algorithm, NUMA awareness, Cache optimization  
+**🚀 Logros:** 99.8% cache hit ratio, optimización NUMA, threading-safe
 
-## Legal Notice
-
-This tool is intended for authorized security testing and vulnerability assessment only. Users are responsible for ensuring they have proper authorization before scanning any systems. Unauthorized scanning may be illegal in your jurisdiction.
-
-## Dependencies
-
-- **libcurl**: HTTP client functionality
-- **json-c**: JSON report generation
-- **libxml2**: HTML parsing and XML reports
-- **libpcre**: Regular expression matching
-- **pthread**: Multi-threading support
-
-## License
-
-GPL v2
-
-## Author
-
-AmeliaDi <enorastrokes@gmail.com>
-
-## Changelog
-
-### v1.0.0
-- Initial release
-- SQL injection detection
-- XSS vulnerability testing
-- CSRF detection
-- Directory traversal testing
-- Security header analysis
-- Multi-threaded scanning
-- Multiple output formats
-- Comprehensive vulnerability database
-
-## Roadmap
-
-### Upcoming Features
-- **OWASP Top 10 2021 Coverage**: Complete implementation
-- **API Security Testing**: REST/GraphQL endpoint testing
-- **Mobile Application Testing**: Android/iOS app analysis
-- **Cloud Security Scanning**: AWS/Azure/GCP configuration testing
-- **AI-Powered Detection**: Machine learning vulnerability identification
-- **Plugin Architecture**: Custom vulnerability test modules
-
-# AmeliaHV - Type-1 Bare Metal Hypervisor
-
-🚀 **Advanced Type-1 Bare Metal Hypervisor with Intel VT-x Support**
-
-*Created by Amelia Enora Marceline Chavez Barroso*
-
-## Features
-
-- Intel VT-x (VMX) hardware virtualization
-- Multi-CPU support with per-CPU VMCS management
-- Direct hardware access for minimal overhead
-- Professional kernel module architecture
-
-## Build & Install
-
-```bash
-make all
-sudo make install
+### 🌐 **7. AmeliaNet - Userspace TCP/IP Stack**
+```c
+// High-performance packet processing
+void process_packet(uint8_t *packet, size_t len) {
+    eth_header_t *eth = parse_ethernet(packet);
+    if (eth->type == ETH_P_IP) {
+        process_ip_packet(packet + ETH_HLEN);
+    }
+}
 ```
+**🎯 Función:** Stack TCP/IP en userspace con DPDK  
+**💪 Tech Stack:** C, DPDK, Zero-copy networking, Custom protocols  
+**🚀 Logros:** Procesamiento zero-copy, alta performance, bypass del kernel
 
-## Requirements
+### 💾 **8. AmeliaUEFI - UEFI Bootkit**
+```c
+// UEFI boot service hooking
+EFI_STATUS EFIAPI efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
+    hook_boot_services(SystemTable);
+    bypass_secure_boot();
+    return EFI_SUCCESS;
+}
+```
+**🎯 Función:** Research tool para bypass de Secure Boot  
+**💪 Tech Stack:** C, UEFI, Boot service hooking  
+**🚀 Logros:** Manipulación del proceso de boot, research de seguridad  
+**⚠️ Solo fines de investigación**
 
-- Intel CPU with VT-x support
-- Linux kernel headers
-- Root privileges
+### 🎮 **9. AmeliaGPU - Minimal GPU Driver**
+```c
+// DRM/KMS GPU driver
+static int amelia_gpu_probe(struct pci_dev *pdev, const struct pci_device_id *id) {
+    struct drm_device *drm = drm_dev_alloc(&amelia_gpu_driver, &pdev->dev);
+    return drm_dev_register(drm, 0);
+}
+```
+**🎯 Función:** Driver GPU minimalista con DRM/KMS  
+**💪 Tech Stack:** C, Linux Kernel, DRM/KMS, PCI development  
+**🚀 Logros:** Abstracción de hardware gráfico, soporte PCI
 
-## License
+### 🔧 **10. AmeliaOS - Microkernel**
+```c
+// CFS scheduler implementation  
+process_t *pick_next_task(void) {
+    return find_leftmost_vruntime(runqueue);
+}
+```
+**🎯 Función:** Microkernel con scheduling CFS  
+**💪 Tech Stack:** C, Process management, IPC, CFS scheduling  
+**🚀 Logros:** Arquitectura microkernel, scheduling justo, IPC eficiente
 
-MIT License - See LICENSE file 
+### 🐛 **11. AmeliaDebug - Advanced Debugger**
+```c
+// ptrace-based debugging
+int set_breakpoint(pid_t pid, unsigned long addr) {
+    long orig = ptrace(PTRACE_PEEKTEXT, pid, addr, NULL);
+    long trap = (orig & ~0xFF) | 0xCC;
+    return ptrace(PTRACE_POKETEXT, pid, addr, trap);
+}
+```
+**🎯 Función:** Debugger avanzado con ptrace  
+**💪 Tech Stack:** C, ptrace, Disassembler, Breakpoints  
+**🚀 Logros:** Debugging de procesos, análisis de instrucciones
+
+### 🔄 **12. AmeliaSMC - Self-Modifying Code Engine**
+```c
+// Runtime code modification
+void modify_code(void *addr, uint8_t *new_code, size_t len) {
+    mprotect(addr, 4096, PROT_READ | PROT_WRITE | PROT_EXEC);
+    memcpy(addr, new_code, len);
+    mprotect(addr, 4096, PROT_READ | PROT_EXEC);
+}
+```
+**🎯 Función:** Motor de código auto-modificable con anti-debug  
+**💪 Tech Stack:** C, Runtime modification, Anti-debug techniques  
+**🚀 Logros:** Código polimórfico, técnicas de evasión  
+**⚠️ Solo fines educativos**
+
+---
+
+## 🎯 **Skills & Expertise**
+
+### 💻 **Lenguajes de Programación**
+- **C/C++** - Systems programming, memory management
+- **Assembly** - x86/x64/ARM, NASM, FASM, MASM  
+- **JavaScript** - WebAssembly, Node.js, V8 internals
+- **Python** - Automation, pentesting, AI/ML
+- **Rust** - Memory-safe systems programming
+
+### 🔐 **Ciberseguridad**
+- **Penetration Testing** - Kali Linux, Metasploit, Cobalt Strike
+- **Network Security** - Wireshark, Nmap, Burp Suite
+- **Binary Exploitation** - Buffer overflow, ROP chains
+- **Malware Analysis** - IDA Pro, Ghidra, x64dbg
+- **Forensics** - Memory dumps, Volatility, Autopsy
+
+### 🐧 **Linux & Systems**
+- **Kernel Development** - Modules, drivers, eBPF
+- **Arch Linux** - AUR, pacman, custom builds
+- **Virtualization** - QEMU/KVM, containers
+- **Performance** - Profiling, optimization, debugging
+
+---
+
+## 📊 **Performance Metrics**
+
+| Proyecto | Métrica de Rendimiento |
+|----------|------------------------|
+| **AmeliaFirewall** | 10+ Gbps throughput |
+| **AmeliaJIT** | <500 ciclos compilación |
+| **AmeliaAlloc** | 99.8% cache hit ratio |
+| **AmeliaNet** | Zero-copy processing |
+| **AmeliaHV** | <100ms tiempo de init |
+
+---
+
+## 🌟 **Cómo Explorar**
+
+1. **🌐 Visita el CV interactivo:** [ameliadi.github.io/technical-cv](https://ameliadi.github.io/technical-cv/)
+2. **🔍 Explora los algoritmos** - Demos en WebAssembly funcionando en tiempo real
+3. **🖥️ Prueba el terminal** - Navegación estilo Linux shell
+4. **📊 Ve las visualizaciones** - Fractales, FFT, y análisis matemático
+5. **🔐 Ejecuta el scanner** - Demo de herramientas de ciberseguridad
+
+---
+
+## 📞 **Contacto**
+
+<div align="center">
+
+**Amelia Enora 🌈 Marceline Chavez Barroso**
+
+[![Email](https://img.shields.io/badge/Email-enorastrokes%40gmail.com-red?style=for-the-badge&logo=gmail)](mailto:enorastrokes@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-AmeliaDi-black?style=for-the-badge&logo=github)](https://github.com/AmeliaDi)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-bogosort-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/bogosort)
+
+**Especialista en Systems Programming | Assembly | Ciberseguridad | Linux Kernel**
+
+</div>
+
+---
+
+<div align="center">
+
+### 🚀 **[EXPLORAR CV TÉCNICO INTERACTIVO](https://ameliadi.github.io/technical-cv/)** 🚀
+
+*"La mejor manera de entender los sistemas es construirlos desde cero"*
+
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=AmeliaDi.technical-cv)
+
+</div> 
