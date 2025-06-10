@@ -61,30 +61,32 @@
             </div>
         </header>
         
-        <!-- ASCII Donut Animation -->
-        <div id="donut-container" class="donut-section">
-            <pre id="donut-output" class="donut-ascii"></pre>
-            <div class="donut-info">
-                <p class="donut-credit">Inspired by <a href="https://www.a1k0n.net/2011/07/20/donut-math.html" target="_blank">donut.c</a> by a1k0n</p>
-            </div>
-        </div>
-        
         <main class="terminal-content">
-            <!-- Navigation -->
-            <nav class="terminal-nav">
-                <div class="prompt">
-                    <span class="user">amelia@systems</span>:<span class="path">~/cv</span>$ ls -la
+            <!-- Navigation with Donut -->
+            <div class="nav-donut-container">
+                <nav class="terminal-nav">
+                    <div class="prompt">
+                        <span class="user">amelia@systems</span>:<span class="path">~/cv</span>$ ls -la
+                    </div>
+                    <ul class="nav-list">
+                        <li><a href="#about" class="nav-link">./about.sh</a></li>
+                        <li><a href="#skills" class="nav-link">./skills.asm</a></li>
+                        <li><a href="#certifications" class="nav-link">./certifications.db</a></li>
+                        <li><a href="#algorithms" class="nav-link">./algorithms.c</a></li>
+                        <li><a href="#visualizations" class="nav-link">./math_viz.wasm</a></li>
+                        <li><a href="#projects" class="nav-link">./projects/</a></li>
+                        <li><a href="#network" class="nav-link">./network_tools.py</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- ASCII Donut Animation -->
+                <div id="donut-container" class="donut-section">
+                    <pre id="donut-output" class="donut-ascii"></pre>
+                    <div class="donut-info">
+                        <p class="donut-credit">Inspired by <a href="https://www.a1k0n.net/2011/07/20/donut-math.html" target="_blank">donut.c</a> by a1k0n</p>
+                    </div>
                 </div>
-                <ul class="nav-list">
-                    <li><a href="#about" class="nav-link">./about.sh</a></li>
-                    <li><a href="#skills" class="nav-link">./skills.asm</a></li>
-                    <li><a href="#certifications" class="nav-link">./certifications.db</a></li>
-                    <li><a href="#algorithms" class="nav-link">./algorithms.c</a></li>
-                    <li><a href="#visualizations" class="nav-link">./math_viz.wasm</a></li>
-                    <li><a href="#projects" class="nav-link">./projects/</a></li>
-                    <li><a href="#network" class="nav-link">./network_tools.py</a></li>
-                </ul>
-            </nav>
+            </div>
 
             <!-- About Section -->
             <section id="about" class="section">
@@ -117,11 +119,13 @@
                             <h3>💻 Programming Languages</h3>
                             <ul class="skill-list">
                                 <li><span class="skill-level expert">C/C++</span> - Systems programming, memory management</li>
-                                <li><span class="skill-level expert">Assembly</span> - x86/x64/ARM, NASM, FASM</li>
-                                <li><span class="skill-level advanced">JavaScript</span> - WebAssembly integration</li>
-                                <li><span class="skill-level advanced">Python</span> - Automation, scripting, pentesting</li>
-                                <li><span class="skill-level intermediate">Rust</span> - Systems programming</li>
-                                <li><span class="skill-level advanced">COBOL</span> - Legacy systems & mainframes</li>
+                                <li><span class="skill-level expert">Assembly</span> - x86/x64/ARM, NASM, FASM, MASM</li>
+                                <li><span class="skill-level advanced">JavaScript</span> - WebAssembly, Node.js, V8 internals</li>
+                                <li><span class="skill-level advanced">Python</span> - Automation, scripting, pentesting, AI/ML</li>
+                                <li><span class="skill-level intermediate">Rust</span> - Memory-safe systems programming</li>
+                                <li><span class="skill-level advanced">COBOL</span> - Legacy systems, mainframes, banking</li>
+                                <li><span class="skill-level intermediate">Zig</span> - Low-level programming, C interop</li>
+                                <li><span class="skill-level intermediate">Fortran</span> - Scientific computing, HPC</li>
                             </ul>
                         </div>
                         
@@ -140,12 +144,14 @@
                         <div class="skill-category">
                             <h3>🔐 Cybersecurity</h3>
                             <ul class="skill-list">
-                                <li><span class="skill-level expert">Penetration Testing</span> - Kali Linux, Metasploit</li>
-                                <li><span class="skill-level expert">Network Security</span> - Wireshark, Nmap, Burp Suite</li>
-                                <li><span class="skill-level advanced">Vulnerability Assessment</span> - OWASP Top 10</li>
-                                <li><span class="skill-level advanced">Cryptanalysis</span> - Hash cracking, encryption</li>
-                                <li><span class="skill-level advanced">Forensics</span> - Digital evidence analysis</li>
-                                <li><span class="skill-level intermediate">Malware Analysis</span> - Reverse engineering</li>
+                                <li><span class="skill-level expert">Penetration Testing</span> - Kali Linux, Metasploit, Cobalt Strike</li>
+                                <li><span class="skill-level expert">Network Security</span> - Wireshark, Nmap, Burp Suite, Zap</li>
+                                <li><span class="skill-level advanced">Vulnerability Assessment</span> - OWASP Top 10, CVE analysis</li>
+                                <li><span class="skill-level advanced">Cryptanalysis</span> - Hash cracking, AES, RSA, ECC</li>
+                                <li><span class="skill-level advanced">Forensics</span> - Memory dumps, Volatility, Autopsy</li>
+                                <li><span class="skill-level advanced">Malware Analysis</span> - IDA Pro, Ghidra, x64dbg</li>
+                                <li><span class="skill-level intermediate">Cloud Security</span> - AWS, Azure pentesting</li>
+                                <li><span class="skill-level expert">Binary Exploitation</span> - Buffer overflow, ROP chains</li>
                             </ul>
                         </div>
                         
@@ -164,11 +170,14 @@
                         <div class="skill-category">
                             <h3>🔧 Systems & Tools</h3>
                             <ul class="skill-list">
-                                <li><span class="skill-level expert">Linux Kernel</span> - Module development, drivers</li>
-                                <li><span class="skill-level expert">Git/GitHub</span> - Version control, CI/CD</li>
+                                <li><span class="skill-level expert">Linux Kernel</span> - Module development, drivers, eBPF</li>
+                                <li><span class="skill-level expert">Git/GitHub</span> - Version control, CI/CD, Actions</li>
                                 <li><span class="skill-level advanced">Docker/Kubernetes</span> - Container orchestration</li>
                                 <li><span class="skill-level advanced">Ansible/Terraform</span> - Infrastructure as Code</li>
-                                <li><span class="skill-level intermediate">LLVM/GCC</span> - Compiler toolchain</li>
+                                <li><span class="skill-level advanced">LLVM/GCC</span> - Compiler toolchain, optimization</li>
+                                <li><span class="skill-level intermediate">QEMU/KVM</span> - Virtualization, emulation</li>
+                                <li><span class="skill-level advanced">GDB/Valgrind</span> - Debugging, profiling</li>
+                                <li><span class="skill-level intermediate">Jenkins/GitLab CI</span> - Continuous Integration</li>
                             </ul>
                         </div>
                         

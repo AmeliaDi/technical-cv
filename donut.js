@@ -8,8 +8,8 @@ class DonutAnimation {
     constructor() {
         this.A = 0;
         this.B = 0;
-        this.screenWidth = 80;
-        this.screenHeight = 24;
+        this.screenWidth = 50;  // Reduced width for side layout
+        this.screenHeight = 20;  // Reduced height for side layout
         this.R1 = 1;
         this.R2 = 2;
         this.K2 = 5;
