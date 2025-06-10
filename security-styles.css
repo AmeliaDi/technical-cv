@@ -1,338 +1,407 @@
 /**
- * Security Scanner Styles - Arch Linux Theme Edition
- * Consistent styling with main page theme
+ * Security Scanner Styles - Ultra Clean Pink Neon Edition
+ * Optimized & Responsive Design for Perfect Integration
  * @author Amelia Enora 🌈 Marceline Chavez Barroso
- * @version 4.0.0
+ * @version 6.0.0 - Ultra Clean
  */
 
 /* ================================
-   RETRO PC SCANNER SECTION
+   VARIABLES & MIXINS
    ================================ */
+:root {
+    --scanner-border: var(--neon-pink, #ff00ff);
+    --scanner-bg: rgba(0, 0, 0, 0.7);
+    --scanner-text: var(--text-secondary, #f6f6f6);
+    --scanner-glow: rgba(255, 0, 255, 0.3);
+    --scanner-success: #00ff88;
+    --scanner-warning: #ffaa00;
+    --scanner-error: #ff4444;
+    --scanner-info: var(--neon-light-pink, #ff44ff);
+    --scanner-muted: var(--text-muted, #888888);
+}
 
+/* ================================
+   RETRO PC SCANNER - ULTRA WIDE
+   ================================ */
 .retro-pc-section {
-    margin: 2rem 0;
-    padding: 1.5rem;
+    margin: var(--space-2xl, 3rem) 0;
+    padding: var(--space-xl, 2rem);
     background: linear-gradient(135deg, 
-        rgba(26, 26, 26, 0.9) 0%, 
-        rgba(17, 17, 17, 0.95) 50%, 
-        rgba(10, 10, 10, 0.9) 100%
+        rgba(26, 26, 26, 0.95) 0%, 
+        rgba(17, 17, 17, 0.98) 50%, 
+        rgba(10, 10, 10, 0.95) 100%
     );
-    border: 2px solid var(--arch-blue, #1793d1);
-    border-radius: 12px;
+    border: 2px solid var(--scanner-border);
+    border-radius: var(--radius-lg, 0.75rem);
     box-shadow: 
-        0 0 30px rgba(23, 147, 209, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        0 0 40px var(--scanner-glow),
+        0 0 80px rgba(255, 0, 255, 0.15),
+        inset 0 2px 0 rgba(255, 255, 255, 0.08);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
 }
 
 .retro-pc-section::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, 
-        transparent 30%, 
-        rgba(23, 147, 209, 0.05) 50%, 
-        transparent 70%
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 0, 255, 0.1), 
+        rgba(255, 20, 147, 0.08),
+        rgba(255, 0, 255, 0.1),
+        transparent
     );
-    animation: borderGlow 3s ease-in-out infinite alternate;
+    animation: scannerSweep 8s linear infinite;
     pointer-events: none;
 }
 
-@keyframes borderGlow {
-    0% { opacity: 0.3; }
-    100% { opacity: 0.7; }
+@keyframes scannerSweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
-.retro-pc-ascii {
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 0.7rem;
-    line-height: 1.1;
-    color: var(--arch-blue, #1793d1);
-    text-align: center;
-    margin: 0 0 1rem 0;
-    text-shadow: 0 0 10px rgba(23, 147, 209, 0.4);
-    white-space: pre;
-    overflow-x: auto;
-}
-
-.scanner-terminal {
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid var(--arch-gray, #333333);
-    border-radius: 8px;
-    padding: 1rem;
-    height: 200px;
-    overflow-y: auto;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 0.8rem;
-    line-height: 1.4;
-    backdrop-filter: blur(5px);
-}
-
-.scanner-line {
-    margin: 0.2rem 0;
-    color: var(--text-secondary, #f6f6f6);
-    animation: fadeIn 0.5s ease-in;
-}
-
-.scanner-line.info {
-    color: var(--arch-light-blue, #00aaff);
-}
-
-.scanner-line.success {
-    color: #00ff00;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
-}
-
-.scanner-line.warning {
-    color: var(--accent-yellow, #ffaa00);
-    text-shadow: 0 0 5px rgba(255, 170, 0, 0.3);
-}
-
-.scanner-line.error {
-    color: var(--accent-red, #ff4444);
-    text-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
-}
-
-.scanner-line.divider {
-    color: var(--arch-gray, #333333);
-    border-bottom: 1px solid var(--arch-gray, #333333);
-    padding-bottom: 0.5rem;
-    margin: 1rem 0;
-}
-
-.scanner-line .time {
-    color: var(--text-muted, #888888);
-    font-weight: 500;
-}
-
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
+.retro-pc-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 0 50px var(--scanner-glow),
+        0 0 100px rgba(255, 0, 255, 0.2),
+        0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* ================================
-   RESPONSIVE DESIGN
+   SCANNER ASCII ART - RESPONSIVE
+   ================================ */
+.retro-pc-ascii {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    color: var(--scanner-border);
+    text-align: center;
+    margin: 0 0 var(--space-lg, 1.5rem) 0;
+    text-shadow: 
+        0 0 15px var(--scanner-glow),
+        0 0 30px rgba(255, 0, 255, 0.2);
+    white-space: pre;
+    overflow-x: auto;
+    font-weight: 500;
+    animation: asciiGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes asciiGlow {
+    0% { 
+        text-shadow: 
+            0 0 15px var(--scanner-glow),
+            0 0 30px rgba(255, 0, 255, 0.2);
+    }
+    100% { 
+        text-shadow: 
+            0 0 25px var(--scanner-glow),
+            0 0 50px rgba(255, 0, 255, 0.4);
+    }
+}
+
+/* ================================
+   SCANNER TERMINAL - ENHANCED
+   ================================ */
+.scanner-terminal {
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(15, 0, 15, 0.6) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    border: 2px solid var(--scanner-border);
+    border-radius: var(--radius-md, 0.5rem);
+    padding: var(--space-lg, 1.5rem);
+    height: 250px;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: var(--text-sm, 0.875rem);
+    line-height: 1.5;
+    backdrop-filter: blur(15px);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.scanner-terminal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--scanner-border), 
+        transparent
+    );
+    animation: terminalScan 2s linear infinite;
+}
+
+@keyframes terminalScan {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.scanner-terminal:hover {
+    border-color: var(--neon-light-pink, #ff44ff);
+    box-shadow: 
+        0 0 30px var(--scanner-glow),
+        inset 0 0 20px rgba(255, 0, 255, 0.05);
+}
+
+/* ================================
+   SCANNER LINES - ENHANCED TYPES
+   ================================ */
+.scanner-line {
+    margin: var(--space-sm, 0.5rem) 0;
+    color: var(--scanner-text);
+    animation: scanLineAppear 0.6s ease-out;
+    padding: var(--space-xs, 0.25rem) 0;
+    border-radius: var(--radius-sm, 0.375rem);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+@keyframes scanLineAppear {
+    0% { 
+        opacity: 0; 
+        transform: translateY(15px) scale(0.95); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+.scanner-line:hover {
+    background: rgba(255, 0, 255, 0.05);
+    padding-left: var(--space-md, 1rem);
+    transform: translateX(4px);
+}
+
+/* Scanner Line Types */
+.scanner-line.info {
+    color: var(--scanner-info);
+    text-shadow: 0 0 8px rgba(255, 68, 255, 0.4);
+}
+
+.scanner-line.success {
+    color: var(--scanner-success);
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+}
+
+.scanner-line.warning {
+    color: var(--scanner-warning);
+    text-shadow: 0 0 8px rgba(255, 170, 0, 0.4);
+}
+
+.scanner-line.error {
+    color: var(--scanner-error);
+    text-shadow: 0 0 8px rgba(255, 68, 68, 0.4);
+}
+
+.scanner-line.divider {
+    color: var(--scanner-border);
+    border-bottom: 2px solid var(--scanner-border);
+    padding-bottom: var(--space-sm, 0.5rem);
+    margin: var(--space-lg, 1.5rem) 0;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.scanner-line .time {
+    color: var(--scanner-muted);
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* ================================
+   LOADING EFFECTS
+   ================================ */
+.loading-dots::after {
+    content: '';
+    animation: loadingDots 1.5s steps(4, end) infinite;
+}
+
+@keyframes loadingDots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+/* ================================
+   SCROLLBAR STYLING
+   ================================ */
+.scanner-terminal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scanner-terminal::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+}
+
+.scanner-terminal::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, 
+        var(--scanner-border), 
+        var(--neon-light-pink, #ff44ff)
+    );
+    border-radius: 4px;
+    box-shadow: 0 0 10px var(--scanner-glow);
+}
+
+.scanner-terminal::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, 
+        var(--neon-light-pink, #ff44ff), 
+        var(--scanner-border)
+    );
+    box-shadow: 0 0 15px var(--scanner-glow);
+}
+
+/* ================================
+   ULTRA RESPONSIVE DESIGN
    ================================ */
 
+/* Large Screens */
+@media (min-width: 1400px) {
+    .retro-pc-section {
+        padding: var(--space-2xl, 3rem);
+        margin: var(--space-3xl, 4rem) 0;
+    }
+    
+    .retro-pc-ascii {
+        font-size: 0.9rem;
+        line-height: 1.3;
+    }
+    
+    .scanner-terminal {
+        height: 300px;
+        font-size: 0.95rem;
+        padding: var(--space-xl, 2rem);
+    }
+}
+
+/* Desktop */
 @media (max-width: 1024px) {
     .retro-pc-section {
-        margin: 1.5rem 0;
-        padding: 1rem;
+        margin: var(--space-xl, 2rem) 0;
+        padding: var(--space-lg, 1.5rem);
+    }
+    
+    .retro-pc-ascii {
+        font-size: 0.7rem;
+    }
+    
+    .scanner-terminal {
+        height: 220px;
+        font-size: var(--text-sm, 0.875rem);
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .retro-pc-section {
+        margin: var(--space-lg, 1.5rem) 0;
+        padding: var(--space-md, 1rem);
+        border-radius: var(--radius-md, 0.5rem);
     }
     
     .retro-pc-ascii {
         font-size: 0.6rem;
+        line-height: 1.1;
+        overflow-x: auto;
+        white-space: pre;
+        padding: 0 var(--space-sm, 0.5rem);
     }
     
     .scanner-terminal {
         height: 180px;
-        font-size: 0.75rem;
+        font-size: var(--text-xs, 0.75rem);
+        padding: var(--space-md, 1rem);
+    }
+    
+    .scanner-line {
+        font-size: var(--text-xs, 0.75rem);
+        line-height: 1.4;
+        margin: var(--space-xs, 0.25rem) 0;
     }
 }
 
-@media (max-width: 768px) {
+/* Mobile */
+@media (max-width: 480px) {
     .retro-pc-section {
-        margin: 1rem 0;
-        padding: 0.8rem;
-        border-radius: 8px;
+        margin: var(--space-md, 1rem) 0;
+        padding: var(--space-sm, 0.5rem);
+        border-radius: var(--radius-sm, 0.375rem);
     }
     
     .retro-pc-ascii {
         font-size: 0.5rem;
         line-height: 1;
-        overflow-x: scroll;
-        white-space: nowrap;
+        transform: scale(0.9);
+        transform-origin: center;
+        margin-bottom: var(--space-md, 1rem);
     }
     
     .scanner-terminal {
         height: 150px;
         font-size: 0.7rem;
-        padding: 0.8rem;
+        padding: var(--space-sm, 0.5rem);
+        line-height: 1.3;
     }
     
     .scanner-line {
         font-size: 0.7rem;
-        line-height: 1.3;
+        margin: 0.2rem 0;
+        padding: 0.1rem 0;
+    }
+    
+    .scanner-line:hover {
+        padding-left: var(--space-sm, 0.5rem);
     }
 }
 
-@media (max-width: 480px) {
+/* Extra Small Mobile */
+@media (max-width: 360px) {
     .retro-pc-section {
-        margin: 0.5rem 0;
-        padding: 0.5rem;
-        border-radius: 6px;
+        margin: var(--space-sm, 0.5rem) 0;
+        padding: var(--space-xs, 0.25rem);
     }
     
     .retro-pc-ascii {
         font-size: 0.4rem;
-        line-height: 0.9;
         transform: scale(0.8);
-        transform-origin: center;
     }
     
     .scanner-terminal {
         height: 120px;
         font-size: 0.65rem;
-        padding: 0.5rem;
-        line-height: 1.2;
-    }
-    
-    .scanner-line {
-        font-size: 0.65rem;
-        margin: 0.1rem 0;
+        padding: var(--space-xs, 0.25rem);
     }
 }
 
 /* ================================
-   TERMINAL SCROLLBAR STYLING
+   ACCESSIBILITY & PERFORMANCE
    ================================ */
 
-.scanner-terminal::-webkit-scrollbar {
-    width: 6px;
-}
-
-.scanner-terminal::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
-}
-
-.scanner-terminal::-webkit-scrollbar-thumb {
-    background: var(--arch-blue, #1793d1);
-    border-radius: 3px;
-}
-
-.scanner-terminal::-webkit-scrollbar-thumb:hover {
-    background: var(--arch-light-blue, #00aaff);
-}
-
-/* ================================
-   ARCH DONUT STYLING UPDATES
-   ================================ */
-
-.arch-donut-container {
-    margin-right: 0.8rem;
-    display: flex;
-    align-items: center;
-}
-
-.arch-donut-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0.3rem;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid #00ff00;
-    border-radius: 6px;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-}
-
-.arch-donut-ascii {
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 0.4rem;
-    line-height: 0.7;
-    margin: 0;
-    padding: 0.2rem;
-    text-align: center;
-    white-space: pre;
-    overflow: hidden;
-}
-
-.arch-donut-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.5rem;
-    color: #00ff00;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    margin-top: 0.1rem;
-    font-weight: 600;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
-}
-
-/* ================================
-   RESPONSIVE DONUT
-   ================================ */
-
-@media (max-width: 768px) {
-    .arch-donut-container {
-        margin-right: 0.4rem;
-    }
-    
-    .arch-donut-wrapper {
-        padding: 0.2rem;
-    }
-    
-    .arch-donut-ascii {
-        font-size: 0.3rem;
-        line-height: 0.6;
-        padding: 0.1rem;
-    }
-    
-    .arch-donut-label {
-        font-size: 0.4rem;
-        margin-top: 0.1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .arch-donut-container {
-        display: none; /* Hide on very small screens to save space */
-    }
-}
-
-/* ================================
-   ENHANCED VISUAL EFFECTS
-   ================================ */
-
-.retro-pc-section:hover {
-    box-shadow: 
-        0 0 40px rgba(23, 147, 209, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
-
-.scanner-line:hover {
-    background: rgba(23, 147, 209, 0.1);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    margin: 0.2rem -0.5rem;
-    transition: all 0.2s ease;
-}
-
-/* ================================
-   LOADING ANIMATIONS
-   ================================ */
-
-.loading-dots::after {
-    content: '';
-    animation: loadingDots 1.5s infinite;
-}
-
-@keyframes loadingDots {
-    0%, 20% { content: '.'; }
-    40% { content: '..'; }
-    60% { content: '...'; }
-    80%, 100% { content: ''; }
-}
-
-/* ================================
-   HIGH CONTRAST ACCESSIBILITY
-   ================================ */
-
+/* High Contrast Mode */
 @media (prefers-contrast: high) {
     .retro-pc-section {
-        border: 3px solid var(--arch-blue, #1793d1);
-        background: #000000;
+        border-width: 3px;
+        background: rgba(0, 0, 0, 0.95);
     }
     
     .scanner-line {
-        color: #ffffff;
+        font-weight: 600;
     }
     
     .scanner-line.success {
@@ -346,20 +415,38 @@
     }
 }
 
-/* ================================
-   REDUCED MOTION ACCESSIBILITY
-   ================================ */
-
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
     .retro-pc-section::before,
-    .scanner-line,
-    .retro-pc-section:hover {
-        animation: none;
-        transition: none;
-    }
-    
+    .scanner-terminal::before,
+    .retro-pc-ascii,
     .loading-dots::after {
         animation: none;
-        content: '...';
+    }
+    
+    .scanner-line {
+        animation: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .retro-pc-section {
+        background: white;
+        color: black;
+        border: 2px solid black;
+        box-shadow: none;
+    }
+    
+    .scanner-terminal {
+        background: white;
+        border: 1px solid black;
+        height: auto;
+        max-height: 200px;
+    }
+    
+    .scanner-line {
+        color: black;
+        text-shadow: none;
     }
 } 
