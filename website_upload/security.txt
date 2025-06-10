@@ -1,5 +1,0 @@
-Contact: mailto:enorastrokes@gmail.com
-Expires: 2025-01-01T00:00:00.000Z
-Acknowledgments: https://github.com/AmeliaDi/security/thanks
-Preferred-Languages: es, en
-Canonical: https://ameliadi.github.io/security.txt 

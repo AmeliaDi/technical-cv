@@ -453,123 +453,292 @@
             <!-- Projects Section -->
             <section id="projects" class="section">
                 <div class="prompt">
-                    <span class="user">amelia@archlinux</span>:<span class="path">~/cv</span>$ ls -la projects/
+                    <span class="user">amelia@archlinux</span>:<span class="path">~/cv</span>$ ls -la portfolio/
                 </div>
                 <div class="output">
-                    <div class="project-list">
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2024-01-20</span>
-                            <span class="file-name">hypervisor.c</span>
-                            <span class="file-desc">Type-1 Bare Metal Hypervisor con Intel VT-x</span>
+                    <h3>🚀 Portafolio de Proyectos Técnicos</h3>
+                    <div class="portfolio-grid">
+                        <!-- Featured Project: ARM Neural Network -->
+                        <div class="portfolio-category featured">
+                            <h4>🏆 Proyecto Destacado: Machine Learning en ARM Assembly</h4>
+                            <div class="project-item expert featured-project">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-25</span>
+                                <span class="file-name">arm_neural_network.s</span>
+                                <span class="file-desc">Red neuronal completa en ARM Assembly AArch64 con NEON SIMD</span>
+                                <div class="project-details">
+                                    <p>Red neuronal de 3 capas (784→128→64→10) implementada en Assembly puro para ARM. Incluye multiplicación de matrices optimizada con NEON, funciones de activación ReLU/Softmax, y inference en tiempo real para MNIST. Precisión del 97.8% con solo 0.3ms por imagen en Raspberry Pi 4.</p>
+                                    <div class="tech-stack">
+                                        <span class="tech-tag">ARM Assembly</span>
+                                        <span class="tech-tag">NEON SIMD</span>
+                                        <span class="tech-tag">Machine Learning</span>
+                                        <span class="tech-tag">Performance</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2024-01-18</span>
-                            <span class="file-name">jit_compiler.c</span>
-                            <span class="file-desc">JIT Compiler x86-64 con optimización SSA</span>
+
+                        <!-- Systems Programming -->
+                        <div class="portfolio-category">
+                            <h4>🔧 Systems Programming & Low-Level</h4>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-20</span>
+                                <span class="file-name">hypervisor.c</span>
+                                <span class="file-desc">Type-1 Bare Metal Hypervisor con Intel VT-x y EPT</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">Intel VT-x</span>
+                                    <span class="tech-tag">Virtualization</span>
+                                </div>
+                            </div>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-18</span>
+                                <span class="file-name">jit_compiler.c</span>
+                                <span class="file-desc">JIT Compiler x86-64 con optimización SSA y code generation</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">x86-64</span>
+                                    <span class="tech-tag">Compiler Design</span>
+                                </div>
+                            </div>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-25</span>
+                                <span class="file-name">os_kernel.bin</span>
+                                <span class="file-desc">Microkernel con IPC asíncrono y CFS scheduler</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">Assembly</span>
+                                    <span class="tech-tag">OS Development</span>
+                                </div>
+                            </div>
+                            <div class="project-item advanced">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-08</span>
+                                <span class="file-name">memory_allocator.c</span>
+                                <span class="file-desc">High-performance allocator con SLUB y cache-coloring</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">Memory Management</span>
+                                    <span class="tech-tag">Performance</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2024-01-15</span>
-                            <span class="file-name">kernel_rootkit.ko</span>
-                            <span class="file-desc">Rootkit LKM con syscall hooking y DKOM</span>
+
+                        <!-- Security & Exploitation -->
+                        <div class="portfolio-category">
+                            <h4>🔐 Cybersecurity & Exploitation</h4>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-15</span>
+                                <span class="file-name">kernel_rootkit.ko</span>
+                                <span class="file-desc">Rootkit LKM con syscall hooking, DKOM y stealth techniques</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">Linux Kernel</span>
+                                    <span class="tech-tag">Rootkit</span>
+                                </div>
+                            </div>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-02</span>
+                                <span class="file-name">uefi_bootkit.efi</span>
+                                <span class="file-desc">UEFI bootkit con secure boot bypass y persistence</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">UEFI</span>
+                                    <span class="tech-tag">Boot Security</span>
+                                </div>
+                            </div>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-15</span>
+                                <span class="file-name">smc_patcher.c</span>
+                                <span class="file-desc">Self-modifying code engine con anti-debug y evasion</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">Anti-Debug</span>
+                                    <span class="tech-tag">Code Obfuscation</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-item advanced">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2024-01-12</span>
-                            <span class="file-name">ebpf_firewall.c</span>
-                            <span class="file-desc">Firewall XDP/eBPF con 10Gbps throughput</span>
+
+                        <!-- Network & Performance -->
+                        <div class="portfolio-category">
+                            <h4>🌐 Network & High-Performance Computing</h4>
+                            <div class="project-item advanced">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-12</span>
+                                <span class="file-name">ebpf_firewall.c</span>
+                                <span class="file-desc">eBPF/XDP firewall con 10Gbps throughput y DPI</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">eBPF</span>
+                                    <span class="tech-tag">Networking</span>
+                                </div>
+                            </div>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-05</span>
+                                <span class="file-name">network_stack.c</span>
+                                <span class="file-desc">TCP/IP stack userspace con DPDK y zero-copy I/O</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">DPDK</span>
+                                    <span class="tech-tag">TCP/IP</span>
+                                </div>
+                            </div>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-02</span>
+                                <span class="file-name">zero_copy_io.c</span>
+                                <span class="file-desc">Zero-copy I/O framework con io_uring y SPDK</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">io_uring</span>
+                                    <span class="tech-tag">Performance</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2024-01-10</span>
-                            <span class="file-name">crypto_engine.s</span>
-                            <span class="file-desc">ChaCha20-Poly1305 en ASM con AES-NI</span>
+
+                        <!-- Cryptography & Math -->
+                        <div class="portfolio-category">
+                            <h4>🔢 Cryptography & Advanced Mathematics</h4>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2024-01-10</span>
+                                <span class="file-name">crypto_engine.s</span>
+                                <span class="file-desc">ChaCha20-Poly1305 implementation en Assembly con AES-NI</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Assembly</span>
+                                    <span class="tech-tag">Cryptography</span>
+                                    <span class="tech-tag">AES-NI</span>
+                                </div>
+                            </div>
+                            <div class="project-item advanced">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-10</span>
+                                <span class="file-name">quantum_crypto.c</span>
+                                <span class="file-desc">Post-quantum cryptography con lattice-based schemes</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">Quantum Crypto</span>
+                                    <span class="tech-tag">Lattice Crypto</span>
+                                </div>
+                            </div>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-11-25</span>
+                                <span class="file-name">homomorphic_crypto.cpp</span>
+                                <span class="file-desc">Fully homomorphic encryption con CKKS scheme</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C++</span>
+                                    <span class="tech-tag">FHE</span>
+                                    <span class="tech-tag">CKKS</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-item advanced">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2024-01-08</span>
-                            <span class="file-name">memory_allocator.c</span>
-                            <span class="file-desc">Allocator con SLUB y cache-coloring</span>
+
+                        <!-- Tools & Development -->
+                        <div class="portfolio-category">
+                            <h4>🛠️ Development Tools & Debugging</h4>
+                            <div class="project-item advanced">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-20</span>
+                                <span class="file-name">debugger.c</span>
+                                <span class="file-desc">Advanced debugger con ptrace, disassembler y scripting</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">ptrace</span>
+                                    <span class="tech-tag">Debugging</span>
+                                </div>
+                            </div>
+                            <div class="project-item advanced">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-28</span>
+                                <span class="file-name">gpu_driver.ko</span>
+                                <span class="file-desc">GPU driver minimalista con DRM/KMS y memory management</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">Linux Kernel</span>
+                                    <span class="tech-tag">GPU</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2024-01-05</span>
-                            <span class="file-name">network_stack.c</span>
-                            <span class="file-desc">TCP/IP stack userspace con DPDK</span>
+
+                        <!-- Distributed Systems -->
+                        <div class="portfolio-category">
+                            <h4>⚡ Distributed Systems & Blockchain</h4>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-12</span>
+                                <span class="file-name">distributed_consensus.c</span>
+                                <span class="file-desc">Raft consensus con Byzantine fault tolerance</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">C</span>
+                                    <span class="tech-tag">Consensus</span>
+                                    <span class="tech-tag">Distributed</span>
+                                </div>
+                            </div>
+                            <div class="project-item advanced">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-11-28</span>
+                                <span class="file-name">blockchain_consensus.rs</span>
+                                <span class="file-desc">Proof-of-Stake consensus con slashing conditions</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Rust</span>
+                                    <span class="tech-tag">Blockchain</span>
+                                    <span class="tech-tag">PoS</span>
+                                </div>
+                            </div>
+                            <div class="project-item advanced">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-05</span>
+                                <span class="file-name">distributed_storage.go</span>
+                                <span class="file-desc">Distributed storage con consistent hashing y erasure coding</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Go</span>
+                                    <span class="tech-tag">Storage</span>
+                                    <span class="tech-tag">Erasure Coding</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2024-01-02</span>
-                            <span class="file-name">uefi_bootkit.efi</span>
-                            <span class="file-desc">UEFI bootkit con secure boot bypass</span>
+
+                        <!-- Hardware & FPGA -->
+                        <div class="portfolio-category">
+                            <h4>⚙️ Hardware & FPGA Development</h4>
+                            <div class="project-item expert">
+                                <span class="file-perms">-rwxr-xr-x</span>
+                                <span class="file-date">2023-12-08</span>
+                                <span class="file-name">ml_accelerator.v</span>
+                                <span class="file-desc">FPGA ML accelerator con systolic arrays en Verilog</span>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Verilog</span>
+                                    <span class="tech-tag">FPGA</span>
+                                    <span class="tech-tag">ML Hardware</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-item advanced">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-28</span>
-                            <span class="file-name">gpu_driver.ko</span>
-                            <span class="file-desc">Driver GPU minimalista con DRM/KMS</span>
+                    </div>
+
+                    <div class="portfolio-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">18+</span>
+                            <span class="stat-label">Proyectos Completos</span>
                         </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-25</span>
-                            <span class="file-name">os_kernel.bin</span>
-                            <span class="file-desc">Microkernel con IPC y scheduling CFS</span>
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Lenguajes de Programación</span>
                         </div>
-                        <div class="project-item advanced">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-20</span>
-                            <span class="file-name">debugger.c</span>
-                            <span class="file-desc">Debugger con ptrace y disassembler</span>
+                        <div class="stat-item">
+                            <span class="stat-number">50,000+</span>
+                            <span class="stat-label">Líneas de Código</span>
                         </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-15</span>
-                            <span class="file-name">smc_patcher.c</span>
-                            <span class="file-desc">Self-modifying code engine con anti-debug</span>
-                        </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-12</span>
-                            <span class="file-name">distributed_consensus.c</span>
-                            <span class="file-desc">Raft consensus algorithm con Byzantine fault tolerance</span>
-                        </div>
-                        <div class="project-item advanced">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-10</span>
-                            <span class="file-name">quantum_crypto.c</span>
-                            <span class="file-desc">Post-quantum cryptography con lattice-based schemes</span>
-                        </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-08</span>
-                            <span class="file-name">ml_accelerator.v</span>
-                            <span class="file-desc">FPGA ML accelerator con systolic arrays (Verilog)</span>
-                        </div>
-                        <div class="project-item advanced">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-05</span>
-                            <span class="file-name">distributed_storage.go</span>
-                            <span class="file-desc">Distributed storage con consistent hashing y erasure coding</span>
-                        </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-12-02</span>
-                            <span class="file-name">zero_copy_io.c</span>
-                            <span class="file-desc">Zero-copy I/O framework con io_uring y SPDK</span>
-                        </div>
-                        <div class="project-item advanced">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-11-28</span>
-                            <span class="file-name">blockchain_consensus.rs</span>
-                            <span class="file-desc">Proof-of-Stake consensus con slashing conditions</span>
-                        </div>
-                        <div class="project-item expert">
-                            <span class="file-perms">-rwxr-xr-x</span>
-                            <span class="file-date">2023-11-25</span>
-                            <span class="file-name">homomorphic_crypto.cpp</span>
-                            <span class="file-desc">Fully homomorphic encryption con CKKS scheme</span>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Código Original</span>
                         </div>
                     </div>
                 </div>
