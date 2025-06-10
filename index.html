@@ -388,30 +388,40 @@
                                 <p>Elige un algoritmo de la lista para ver su descripción detallada y características de rendimiento.</p>
                             </div>
                             <div class="controls">
-                                <select id="algorithm-selector" class="algorithm-select">
-                                    <option value="quicksort">⚡ QuickSort (O(n log n)) - Divide y vencerás</option>
-                                    <option value="mergesort">🔀 MergeSort (O(n log n)) - Estable y eficiente</option>
-                                    <option value="heapsort">🏔️ HeapSort (O(n log n)) - In-place garantizado</option>
-                                    <option value="radixsort">📊 RadixSort (O(kn)) - No comparativo</option>
-                                    <option value="countingsort">📈 CountingSort (O(n+k)) - Rango limitado</option>
-                                    <option value="shellsort">🐚 ShellSort (O(n²)) - Gap sequence</option>
-                                    <option value="cocktailsort">🍸 CocktailSort (O(n²)) - Bidireccional</option>
-                                    <option value="gnomesort">🧙 GnomeSort (O(n²)) - Gnomo del jardín</option>
-                                    <option value="pancakesort">🥞 PancakeSort (O(n²)) - Voltear panqueques</option>
-                                    <option value="bogosort">🎲 BogoSort (O(∞)) - ¡La locura pura!</option>
-                                </select>
-                                <div class="control-buttons">
-                                    <button id="start-btn" class="btn-demo primary">▶️ Start</button>
-                                    <button id="pause-btn" class="btn-demo">⏸️ Pause</button>
-                                    <button id="reset-btn" class="btn-demo">🔄 Reset</button>
-                                    <button id="random-btn" class="btn-demo">🎲 Random</button>
+                                <div class="control-group">
+                                    <label for="algorithm-selector">Seleccionar Algoritmo:</label>
+                                    <select id="algorithm-selector" class="algorithm-select">
+                                        <option value="quicksort">⚡ QuickSort (O(n log n)) - Divide y vencerás</option>
+                                        <option value="mergesort">🔀 MergeSort (O(n log n)) - Estable y eficiente</option>
+                                        <option value="heapsort">🏔️ HeapSort (O(n log n)) - In-place garantizado</option>
+                                        <option value="radixsort">📊 RadixSort (O(kn)) - No comparativo</option>
+                                        <option value="countingsort">📈 CountingSort (O(n+k)) - Rango limitado</option>
+                                        <option value="shellsort">🐚 ShellSort (O(n²)) - Gap sequence</option>
+                                        <option value="cocktailsort">🍸 CocktailSort (O(n²)) - Bidireccional</option>
+                                        <option value="gnomesort">🧙 GnomeSort (O(n²)) - Gnomo del jardín</option>
+                                        <option value="pancakesort">🥞 PancakeSort (O(n²)) - Voltear panqueques</option>
+                                        <option value="bogosort">🎲 BogoSort (O(∞)) - ¡La locura pura!</option>
+                                    </select>
                                 </div>
+                                
+                                <div class="control-group">
+                                    <span class="control-label">Controles de Ejecución:</span>
+                                    <div class="control-buttons">
+                                        <button id="start-btn" class="btn-demo primary">▶️ Start</button>
+                                        <button id="pause-btn" class="btn-demo">⏸️ Pause</button>
+                                        <button id="reset-btn" class="btn-demo">🔄 Reset</button>
+                                        <button id="random-btn" class="btn-demo">🎲 Random</button>
+                                    </div>
+                                </div>
+                                
                                 <div class="speed-controls">
                                     <label>Speed: <input type="range" id="speed-control" min="1" max="100" value="50"></label>
                                     <label>Size: <input type="range" id="size-control" min="10" max="100" value="50"></label>
                                 </div>
                             </div>
-                            <canvas id="algorithm-canvas" width="800" height="400"></canvas>
+                            <div class="canvas-container">
+                                <canvas id="algorithm-canvas" width="800" height="400"></canvas>
+                            </div>
                             <div id="algorithm-stats" class="stats"></div>
                         </div>
                     </div>
@@ -429,55 +439,81 @@
                         <div class="demo-card">
                             <h4>Fractales de Mandelbrot</h4>
                             <div class="controls">
-                                <label>Zoom: <input type="range" id="mandel-zoom" min="1" max="100" value="1"></label>
-                                <label>Iteraciones: <input type="range" id="mandel-iter" min="50" max="500" value="100"></label>
+                                <div class="speed-controls">
+                                    <label>Zoom: <input type="range" id="mandel-zoom" min="1" max="100" value="1"></label>
+                                    <label>Iteraciones: <input type="range" id="mandel-iter" min="50" max="500" value="100"></label>
+                                </div>
                             </div>
-                            <canvas id="mandelbrot-canvas" width="400" height="400"></canvas>
+                            <div class="canvas-container">
+                                <canvas id="mandelbrot-canvas" width="400" height="400"></canvas>
+                            </div>
                             <div id="mandelbrot-stats" class="stats"></div>
                         </div>
                         
                         <div class="demo-card">
                             <h4>Transformada de Fourier</h4>
                             <div class="controls">
-                                <button id="sine-wave" class="btn-demo">Onda Seno</button>
-                                <button id="square-wave" class="btn-demo">Onda Cuadrada</button>
-                                <button id="sawtooth-wave" class="btn-demo">Diente de Sierra</button>
+                                <div class="control-group">
+                                    <span class="control-label">Tipo de Onda:</span>
+                                    <div class="control-buttons">
+                                        <button id="sine-wave" class="btn-demo">Onda Seno</button>
+                                        <button id="square-wave" class="btn-demo">Onda Cuadrada</button>
+                                        <button id="sawtooth-wave" class="btn-demo">Diente de Sierra</button>
+                                    </div>
+                                </div>
                             </div>
-                            <canvas id="fft-canvas" width="600" height="300"></canvas>
+                            <div class="canvas-container">
+                                <canvas id="fft-canvas" width="600" height="300"></canvas>
+                            </div>
                             <div id="fft-stats" class="stats"></div>
                         </div>
                         
                         <div class="demo-card">
                             <h4>🧠 Red Neuronal Interactiva</h4>
                             <div class="controls">
-                                <label>Arquitectura: 
-                                    <select id="nn-architecture" class="nn-select">
-                                        <option value="4-3-2">Clasificación (4→3→2)</option>
-                                        <option value="8-6-4-2">Deep Network (8→6→4→2)</option>
-                                        <option value="10-8-6-3">Perceptrón Multicapa (10→8→6→3)</option>
-                                        <option value="6-12-8-4">Wide Network (6→12→8→4)</option>
-                                    </select>
-                                </label>
-                                <label>Función de Activación:
-                                    <select id="activation-function" class="nn-select">
-                                        <option value="relu">ReLU</option>
-                                        <option value="sigmoid">Sigmoid</option>
-                                        <option value="tanh">Tanh</option>
-                                        <option value="leaky_relu">Leaky ReLU</option>
-                                    </select>
-                                </label>
-                                <label>Velocidad de Aprendizaje: 
-                                    <input type="range" id="learning-rate" min="0.01" max="0.5" step="0.01" value="0.1">
-                                    <span id="lr-value">0.1</span>
-                                </label>
-                                <div class="control-buttons">
-                                    <button id="nn-train" class="btn-demo primary">🎯 Entrenar</button>
-                                    <button id="nn-predict" class="btn-demo">🔮 Predecir</button>
-                                    <button id="nn-reset" class="btn-demo">🔄 Reset</button>
-                                    <button id="nn-animate" class="btn-demo">⚡ Animar</button>
+                                <div class="nn-controls-grid">
+                                    <div class="nn-control-group">
+                                        <label for="nn-architecture">Arquitectura de Red:</label>
+                                        <select id="nn-architecture" class="nn-select">
+                                            <option value="4-3-2">Clasificación (4→3→2)</option>
+                                            <option value="8-6-4-2">Deep Network (8→6→4→2)</option>
+                                            <option value="10-8-6-3">Perceptrón Multicapa (10→8→6→3)</option>
+                                            <option value="6-12-8-4">Wide Network (6→12→8→4)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="nn-control-group">
+                                        <label for="activation-function">Función de Activación:</label>
+                                        <select id="activation-function" class="nn-select">
+                                            <option value="relu">ReLU</option>
+                                            <option value="sigmoid">Sigmoid</option>
+                                            <option value="tanh">Tanh</option>
+                                            <option value="leaky_relu">Leaky ReLU</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="nn-control-group">
+                                        <label for="learning-rate">Velocidad de Aprendizaje:</label>
+                                        <div class="control-row">
+                                            <input type="range" id="learning-rate" min="0.01" max="0.5" step="0.01" value="0.1">
+                                            <span id="lr-value">0.1</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <span class="control-label">Controles de Entrenamiento:</span>
+                                    <div class="control-buttons">
+                                        <button id="nn-train" class="btn-demo primary">🎯 Entrenar</button>
+                                        <button id="nn-predict" class="btn-demo">🔮 Predecir</button>
+                                        <button id="nn-reset" class="btn-demo">🔄 Reset</button>
+                                        <button id="nn-animate" class="btn-demo">⚡ Animar</button>
+                                    </div>
                                 </div>
                             </div>
-                            <canvas id="neural-network-canvas" width="800" height="500"></canvas>
+                            <div class="canvas-container">
+                                <canvas id="neural-network-canvas" width="800" height="500"></canvas>
+                            </div>
                             <div id="nn-stats" class="stats">
                                 <div class="stat-row">
                                     <span>Épocas: <strong id="epochs">0</strong></span>
@@ -796,8 +832,13 @@
                         <div class="demo-card">
                             <h4>Analizador de Paquetes</h4>
                             <div class="controls">
-                                <button id="packet-capture" class="btn-demo">Iniciar Captura</button>
-                                <button id="packet-stop" class="btn-demo">Detener</button>
+                                <div class="control-group">
+                                    <span class="control-label">Control de Captura:</span>
+                                    <div class="control-buttons">
+                                        <button id="packet-capture" class="btn-demo primary">Iniciar Captura</button>
+                                        <button id="packet-stop" class="btn-demo">Detener</button>
+                                    </div>
+                                </div>
                             </div>
                             <div id="packet-display" class="packet-output"></div>
                         </div>
@@ -805,9 +846,17 @@
                         <div class="demo-card">
                             <h4>Port Scanner</h4>
                             <div class="controls">
-                                <input type="text" id="scan-target" placeholder="127.0.0.1" value="127.0.0.1">
-                                <input type="text" id="port-range" placeholder="1-1000" value="1-100">
-                                <button id="port-scan" class="btn-demo">Escanear</button>
+                                <div class="control-group">
+                                    <label for="scan-target">Target IP:</label>
+                                    <input type="text" id="scan-target" placeholder="127.0.0.1" value="127.0.0.1" class="network-input">
+                                </div>
+                                <div class="control-group">
+                                    <label for="port-range">Port Range:</label>
+                                    <div class="control-row">
+                                        <input type="text" id="port-range" placeholder="1-1000" value="1-100" class="network-input">
+                                        <button id="port-scan" class="btn-demo primary">Escanear</button>
+                                    </div>
+                                </div>
                             </div>
                             <div id="scan-results" class="scan-output"></div>
                         </div>

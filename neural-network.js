@@ -39,28 +39,28 @@ class NeuralNetworkVisualization {
         this.renderCache = new Map();
         this.lastRenderHash = '';
         
-        // Colors - Neon Pink Theme
+        // Colors - Neon Pink Theme REFINED & SUBTLE
         this.colors = {
             background: '#0f0520',
-            primary: '#ff0099',
-            secondary: '#ff66cc',
-            accent: '#ff33bb',
-            success: '#00ff88',
-            warning: '#ffaa00',
-            error: '#ff1744',
+            primary: '#ff3399',        // Más suave que #ff0099
+            secondary: '#ff99cc',      // Más suave que #ff66cc
+            accent: '#ff66bb',         // Más suave que #ff33bb
+            success: '#66ff99',        // Verde menta suave
+            warning: '#ffaa44',
+            error: '#ff4466',
             text: '#ffffff',
             
-            // Gradients
-            neuronActive: ['#ff0099', '#ff66cc'],
+            // Gradients - Más sutiles
+            neuronActive: ['#ff3399', '#ff99cc'],
             neuronInactive: ['#2d1b3d', '#1a0628'],
-            connectionPositive: '#ff66cc',
-            connectionNegative: '#ff0099',
-            connectionActive: '#00ff88',
+            connectionPositive: '#ff99cc',
+            connectionNegative: '#ff3399',
+            connectionActive: '#66ff99',
             
-            // Glows
-            glowPrimary: 'rgba(255, 0, 153, 0.6)',
-            glowSecondary: 'rgba(255, 102, 204, 0.4)',
-            glowAccent: 'rgba(255, 51, 187, 0.3)'
+            // Glows - Más sutiles
+            glowPrimary: 'rgba(255, 51, 153, 0.4)',     // Reducido de 0.6
+            glowSecondary: 'rgba(255, 153, 204, 0.3)',  // Reducido de 0.4
+            glowAccent: 'rgba(255, 102, 187, 0.25)'     // Reducido de 0.3
         };
         
         this.initialize();
@@ -765,10 +765,10 @@ class NeuralNetworkVisualization {
     
     renderGrid() {
         const rect = this.canvas.getBoundingClientRect();
-        const gridSize = 50;
+        const gridSize = 60;                    // Ligeramente más grande
         
-        this.ctx.strokeStyle = 'rgba(255, 0, 153, 0.05)';
-        this.ctx.lineWidth = 0.5;
+        this.ctx.strokeStyle = 'rgba(255, 51, 153, 0.03)';  // Más sutil
+        this.ctx.lineWidth = 0.3;               // Líneas más finas
         this.ctx.beginPath();
         
         for (let x = 0; x < rect.width; x += gridSize) {
