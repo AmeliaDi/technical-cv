@@ -1,0 +1,42 @@
+📁 ARCHIVOS PARA SUBIR AL SERVIDOR WEB
+==========================================
+
+🎯 ARCHIVOS PRINCIPALES:
+- index.html          (41KB) - Página principal
+- styles.css           (24KB) - Estilos principales  
+- security-styles.css  (10KB) - Estilos de seguridad
+
+🔧 JAVASCRIPT (9 archivos):
+- algorithms.js        (23KB) - Algoritmos de ordenamiento
+- visualizations.js    (21KB) - Visualizaciones matemáticas
+- network-tools.js     (15KB) - Herramientas de red
+- security-scanner.js  (17KB) - Scanner de seguridad
+- i18n.js             (23KB) - Internacionalización
+- vulnerability-scanner.js (9KB) - Scanner de vulnerabilidades
+- donut-arch.js       (15KB) - Animación Arch Linux
+- main.js             (15KB) - JavaScript principal
+- wasm-loader.js      (11KB) - Cargador WebAssembly
+
+🖼️ ICONOS Y IMÁGENES (5 archivos):
+- favicon-16.png      (450B) - Favicon 16x16
+- favicon-32.png      (632B) - Favicon 32x32
+- icon-192.png        (1.5KB) - Icono PWA 192x192
+- icon-512.png        (3.5KB) - Icono PWA 512x512
+- og-image.png        (13KB) - Imagen Open Graph
+
+⚙️ CONFIGURACIÓN (6 archivos):
+- manifest.json       (1.3KB) - Manifiesto PWA
+- robots.txt          (257B) - Robots para SEO
+- sitemap.xml         (1.5KB) - Mapa del sitio
+- service-worker.js   (2.1KB) - Service Worker PWA
+- security.txt        (213B) - Información de seguridad
+
+TOTAL: 22 archivos
+TAMAÑO TOTAL: ~202KB
+
+🚀 TODOS ESTOS ARCHIVOS ESTÁN LISTOS PARA SUBIR AL SERVIDOR!
+
+⚠️ IMPORTANTE: 
+- Subir TODOS los archivos a la raíz del servidor web
+- Mantener los nombres exactos
+- No modificar la estructura 
