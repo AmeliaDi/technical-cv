@@ -11,10 +11,10 @@
 
 | **Category** | **Achievement** | **Performance** |
 |--------------|----------------|-----------------|
-| 🚀 **Projects** | 23+ Advanced Systems | 80,000+ lines of code |
+| 🚀 **Projects** | 24+ Advanced Systems | 82,000+ lines of code |
 | 💾 **Networking** | TCP/IP Stack & eBPF | 40+ Gbps throughput |
 | 🔒 **Security** | Kernel Rootkit | 99.9% stealth effectiveness |
-| 🛡️ **Cryptography** | Post-Quantum Suite | 22+ GB/s encryption speed |
+| 🛡️ **Cryptography** | Post-Quantum Suite + Quantum | 22+ GB/s encryption speed |
 | 🧠 **AI/ML** | ARM LLM Runtime | 234+ tokens/sec inference |
 | ⚡ **Performance** | Memory Allocator | 50M+ operations/sec |
 
@@ -44,6 +44,7 @@
 - **[Custom Memory Allocator](core-projects/memory-allocator/)** - Advanced memory management (50M+ ops/sec)
 - **[ChaCha20-Poly1305 Engine](core-projects/crypto-engine/)** - Hardware-accelerated cryptography
 - **[ARM Cryptography Suite](core-projects/arm-cryptography/)** - Post-quantum algorithms with homomorphic encryption
+- **[Quantum Cryptography QASM](core-projects/quantum-cryptography-qasm/)** - Revolutionary quantum protocols in OpenQASM 3.0
 - **[ARM Neural Network](core-projects/arm-neural-network/)** - Pure Assembly ML implementation
 
 #### 🖥️ **Operating Systems**
