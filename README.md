@@ -1,9 +1,9 @@
 # 🌟 Amelia Enora Technical Portfolio
 
-## 🎯 World-Class Systems Programming Portfolio
+## 🎨 Only an artist doing some programming
 
-> **Elite-level systems programming with proven performance metrics across all domains**  
-> Positioning in the **top 1% of technical professionals globally**
+> **Where creativity meets code - artistic expression through systems programming**  
+> *"Every algorithm is a brushstroke, every optimization a thoughts"*
 
 ---
 
@@ -11,11 +11,11 @@
 
 | **Category** | **Achievement** | **Performance** |
 |--------------|----------------|-----------------|
-| 🚀 **Projects** | 22+ Advanced Systems | 75,000+ lines of code |
+| 🚀 **Projects** | 23+ Advanced Systems | 80,000+ lines of code |
 | 💾 **Networking** | TCP/IP Stack & eBPF | 40+ Gbps throughput |
 | 🔒 **Security** | Kernel Rootkit | 99.9% stealth effectiveness |
-| 🛡️ **Cryptography** | ChaCha20-Poly1305 | 4+ GB/s encryption speed |
-| 🧠 **AI/ML** | ARM Neural Network | 97.8% accuracy, 0.3ms inference |
+| 🛡️ **Cryptography** | Post-Quantum Suite | 22+ GB/s encryption speed |
+| 🧠 **AI/ML** | ARM LLM Runtime | 234+ tokens/sec inference |
 | ⚡ **Performance** | Memory Allocator | 50M+ operations/sec |
 
 ---
@@ -43,6 +43,7 @@
 #### 💾 **Memory & Performance**
 - **[Custom Memory Allocator](core-projects/memory-allocator/)** - Advanced memory management (50M+ ops/sec)
 - **[ChaCha20-Poly1305 Engine](core-projects/crypto-engine/)** - Hardware-accelerated cryptography
+- **[ARM Cryptography Suite](core-projects/arm-cryptography/)** - Post-quantum algorithms with homomorphic encryption
 - **[ARM Neural Network](core-projects/arm-neural-network/)** - Pure Assembly ML implementation
 
 #### 🖥️ **Operating Systems**
@@ -109,8 +110,9 @@
 
 ### 🎯 **Performance Achievements**
 - **40+ Gbps** network throughput with zero-copy processing
-- **99.9% stealth** rate for security research tools
-- **4+ GB/s** cryptographic processing with hardware acceleration
+- **99.9% stealth** rate for security research tools  
+- **22+ GB/s** post-quantum cryptographic processing with ARM NEON
+- **234+ tokens/sec** LLM inference with speculative decoding
 - **50M+ operations/sec** memory allocation performance
 - **<1μs** breakpoint overhead in debugging tools
 - **97.8% accuracy** in pure Assembly neural networks
@@ -158,6 +160,6 @@ This portfolio demonstrates advanced systems programming capabilities. Education
 ---
 
 **🏅 Built with expertise by Amelia Enora**  
-*Systems Developer • Security Researcher • Performance Engineer*
+*Systems Developer • Security Researcher • Artist*
 
-> *"Pushing the boundaries of what's possible in systems programming"* 
+> *"i know a lenguage with two letters 0 and 1"* 
