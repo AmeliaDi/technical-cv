@@ -1,0 +1,230 @@
+# ARM LLM Runtime Default Configuration
+# This file contains the default settings for the ARM LLM Runtime
+
+# Runtime Configuration
+runtime:
+  # Memory pool size in bytes (8GB default)
+  memory_pool_size: 8589934592
+  
+  # Enable memory mapping for large models
+  enable_mmap: true
+  
+  # Enable KV cache compression to save memory
+  enable_kv_cache_compression: true
+  
+  # Number of threads for parallel processing (0 = auto-detect)
+  num_threads: 0
+  
+  # Use thread pool for parallel operations
+  use_thread_pool: true
+  
+  # Model cache directory
+  cache_dir: "./models"
+  
+  # Maximum cache size in bytes (50GB default)
+  max_cache_size: 53687091200
+  
+  # Maximum batch size for inference
+  max_batch_size: 1
+  
+  # Maximum context length
+  max_context_length: 4096
+
+# Optimization Settings
+optimization:
+  # Enable ARM NEON SIMD optimizations
+  use_neon: true
+  
+  # Enable Flash Attention for improved memory efficiency
+  use_flash_attention: true
+  
+  # Enable speculative decoding for faster generation
+  enable_speculative_decoding: false
+
+# Default Generation Parameters
+generation:
+  # Maximum tokens to generate
+  max_tokens: 100
+  
+  # Temperature for sampling (higher = more random)
+  temperature: 0.7
+  
+  # Top-k sampling (0 = disabled)
+  top_k: 50
+  
+  # Top-p (nucleus) sampling
+  top_p: 0.9
+  
+  # Repetition penalty
+  repetition_penalty: 1.1
+  
+  # Default stop sequences
+  stop_sequences:
+    - "</s>"
+    - "<|endoftext|>"
+    - "<|im_end|>"
+  
+  # Random seed (-1 = random)
+  seed: -1
+
+# Quantization Settings
+quantization:
+  # Default quantization method
+  default_method: "Q4_K"
+  
+  # Quantization-specific settings
+  q4_k:
+    bits: 4
+    group_size: 128
+    symmetric: false
+  
+  q8_0:
+    bits: 8
+    group_size: 32
+    symmetric: true
+  
+  custom:
+    bits: 4
+    group_size: 64
+    symmetric: false
+    scale_factor: 1.0
+    calibration_dataset: "wikitext"
+
+# Model-specific overrides
+models:
+  # Example overrides for specific models
+  "meta-llama/Llama-2-7b-chat-hf":
+    quantization: "Q4_K"
+    max_context_length: 4096
+    memory_pool_size: 6442450944  # 6GB
+  
+  "microsoft/DialoGPT-medium":
+    quantization: "Q8_0"
+    max_context_length: 1024
+    memory_pool_size: 2147483648  # 2GB
+  
+  "mistralai/Mistral-7B-v0.1":
+    quantization: "Q4_K"
+    max_context_length: 8192
+    use_flash_attention: true
+
+# HuggingFace Hub Settings
+huggingface:
+  # Use authentication token for private models
+  use_auth_token: false
+  
+  # Custom HuggingFace Hub URL
+  hub_url: "https://huggingface.co"
+  
+  # Download timeout in seconds
+  download_timeout: 300
+  
+  # Retry attempts for failed downloads
+  max_retries: 3
+  
+  # User agent for requests
+  user_agent: "ARM-LLM-Runtime/1.0.0"
+
+# Logging Configuration
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  
+  # Enable performance logging
+  enable_performance_logging: true
+  
+  # Log file path (empty = console only)
+  log_file: ""
+  
+  # Maximum log file size in bytes
+  max_log_size: 10485760  # 10MB
+  
+  # Number of log files to keep
+  max_log_files: 5
+
+# Performance Monitoring
+monitoring:
+  # Enable metrics collection
+  enable_metrics: true
+  
+  # Metrics collection interval in seconds
+  metrics_interval: 60
+  
+  # Export metrics to file
+  export_metrics: false
+  
+  # Metrics export file
+  metrics_file: "metrics.json"
+  
+  # Enable memory profiling
+  enable_memory_profiling: false
+  
+  # Memory profiling interval in seconds
+  memory_profiling_interval: 10
+
+# Android-specific Settings (when building for Android)
+android:
+  # Use Android asset manager for model loading
+  use_asset_manager: false
+  
+  # Android app data directory
+  app_data_dir: "/data/data/com.example.app"
+  
+  # Use Android Neural Networks API (if available)
+  use_nnapi: false
+  
+  # Power management settings
+  power_mode: "balanced"  # performance, balanced, power_save
+
+# Security Settings
+security:
+  # Enable secure model verification
+  verify_model_signatures: false
+  
+  # Allowed model sources
+  allowed_sources:
+    - "huggingface.co"
+    - "github.com"
+  
+  # Maximum model size in bytes (10GB)
+  max_model_size: 10737418240
+  
+  # Enable sandboxing for model execution
+  enable_sandboxing: false
+
+# Experimental Features
+experimental:
+  # Enable experimental CUDA support
+  enable_cuda: false
+  
+  # Enable experimental OpenCL support
+  enable_opencl: false
+  
+  # Enable experimental Metal support (macOS)
+  enable_metal: false
+  
+  # Enable experimental Vulkan compute support
+  enable_vulkan: false
+  
+  # Enable model compilation optimizations
+  enable_model_compilation: false
+
+# Development Settings
+development:
+  # Enable debug mode
+  debug_mode: false
+  
+  # Enable verbose output
+  verbose: false
+  
+  # Enable profiling
+  enable_profiling: false
+  
+  # Enable assertions
+  enable_assertions: true
+  
+  # Dump intermediate tensors for debugging
+  dump_tensors: false
+  
+  # Tensor dump directory
+  tensor_dump_dir: "./debug_tensors" 
